@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <DataTable :value="personas" :paginator="true" :rows="3">
+  <div width='80%'>
+    <DataTable :value="personas" :paginator="true" :rows="5">
       <Column field="id" header="Documento"></Column>
       <Column field="email" header="Correo"></Column>
       <Column field="password" header="Contaseña"></Column>
