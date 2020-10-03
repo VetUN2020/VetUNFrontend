@@ -1,15 +1,15 @@
 <template>
-  <div width='80%'>
+  <div width="80%">
     <DataTable :value="personas" :paginator="true" :rows="5">
-      <Column field="id" header="Documento"></Column>
-      <Column field="email" header="Correo"></Column>
-      <Column field="password" header="Contaseña"></Column>
+      <Column field="cedulaDueno" header="Documento"></Column>
+      <Column field="nombreDueno" header="Nombre"></Column>
+      <Column field="apellidoDueno" header="Apellido"></Column>
     </DataTable>
   </div>
 </template>
 
 <script>
-import UsuarioService from "../service/UsuarioService";
+import DuenoService from "../service/DuenoService";
 export default {
   name: "CrudApp",
   data() {
@@ -17,12 +17,12 @@ export default {
       personas: null,
     };
   },
-  usuarioService: null,
+  duenoService: null,
   created() {
-    this.usuarioService = new UsuarioService();
+    this.duenoService = new DuenoService();
   },
   mounted() {
-    this.usuarioService.getAll().then((data) => {
+    this.duenoService.getAll().then((data) => {
       this.personas = data.data;
     });
   },
