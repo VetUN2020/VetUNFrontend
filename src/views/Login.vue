@@ -18,7 +18,7 @@
               v-model="value1"
               style="width: 100%"
             />
-            <label for="username">Cedula</label>
+            <label for="username">Usuario</label>
           </span>
         </div>
         <br />

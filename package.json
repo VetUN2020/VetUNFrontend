@@ -17,6 +17,7 @@
     "primevue": "^2.0.9",
     "vue": "^2.6.12",
     "vue-router": "^3.4.5",
+    "vuex": "^3.5.1",
     "vue-sweetalert2": "^3.0.8"
   },
   "devDependencies": {
