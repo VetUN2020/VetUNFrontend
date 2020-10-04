@@ -24,7 +24,12 @@
         <br />
         <div class="p-field p-grid">
           <span class="p-float-label">
-            <Password id="username" v-model="form.contraseniaDueno" style="width: 100%" />
+            <InputText
+              id="password"
+              type="password"
+              v-model="form.contraseniaDueno"
+              style="width: 100%"
+            />
             <label for="contrasenia">Contraseña</label>
           </span>
         </div>
@@ -32,7 +37,6 @@
       <template slot="footer">
         <Button label="Iniciar sesión" @click="login" icon="pi pi-check" />
       </template>
-
     </Card>
   </div>
 </template>
@@ -46,15 +50,10 @@ export default {
   name: "Login",
   data() {
     return {
-      form : {
-        cedulaDueno: null,
-        nombreDueno: null,
-        apellidoDueno: null,
-        telefonoDueno: null,
-        direccionCasa: null,
+      form: {
         correoElectronico: null,
-        contraseniaDueno: null
-      }
+        contraseniaDueno: null,
+      },
     };
   },
   duenoService: null,
@@ -62,10 +61,10 @@ export default {
     this.duenoService = new DuenoService();
   },
   methods: {
-     async login(){
+    async login() {
       await this.$store.dispatch("signIn", this.form);
       //console.log(this.$store.state.userD);
-    }
-  }
+    },
+  },
 };
 </script>

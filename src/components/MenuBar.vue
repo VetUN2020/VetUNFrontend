@@ -18,11 +18,12 @@
           <template v-if="$store.state.authD">
             <b-nav-form>
               <b-dropdown
-                id="dropdown-1"
+                id="dropdown-right"
                 v-bind:text="$store.state.userD.nombreDueno"
                 size="sm"
                 variant="success"
                 class="my-2 mr-2 my-sm-3"
+                right
               >
                 <b-dropdown-item>Perfil</b-dropdown-item>
                 <b-dropdown-item>Cerrar sesion</b-dropdown-item>
@@ -33,11 +34,12 @@
           <template v-else>
             <b-nav-form>
               <b-dropdown
-                id="dropdown-1"
+                id="dropdown-right"
                 text="Registrarse"
                 size="sm"
                 variant="success"
                 class="my-2 mr-2 my-sm-3"
+                right
               >
                 <b-dropdown-item @click="registrarseDueno"
                   >Dueño</b-dropdown-item
@@ -47,29 +49,15 @@
             </b-nav-form>
             <b-nav-form>
               <b-dropdown
-                id="dropdown-1"
-                text="Inicar sesion"
+                id="dropdown-right"
+                text="Iniciar sesion"
                 size="sm"
                 variant="success"
                 class="my-2 mr-2 my-sm-3"
+                right
               >
                 <b-dropdown-item @click="loginDueno">Dueño</b-dropdown-item>
                 <b-dropdown-item>Medico veterinario</b-dropdown-item>
-              </b-dropdown>
-            </b-nav-form>
-          </template>
-
-          <template>
-            <b-nav-form>
-              <b-dropdown
-                id="dropdown-1"
-                text="Dropdown Button"
-                size="sm"
-                variant="success"
-                class="my-2 mr-2 my-sm-3"
-              >
-                <b-dropdown-item>Perfil</b-dropdown-item>
-                <b-dropdown-item>Cerrar sesion</b-dropdown-item>
               </b-dropdown>
             </b-nav-form>
           </template>
