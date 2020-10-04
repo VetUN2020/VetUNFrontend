@@ -10,10 +10,18 @@ import Button from 'primevue/button';
 import Card from 'primevue/card';
 import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
+import InputNumber from 'primevue/inputnumber';
 
-import {BootstrapVue,  IconsPlugin} from 'bootstrap-vue'
-import {BNavbar} from 'bootstrap-vue'
-import {BForm} from 'bootstrap-vue'
+import {
+  BootstrapVue,
+  IconsPlugin
+} from 'bootstrap-vue'
+import {
+  BNavbar
+} from 'bootstrap-vue'
+import {
+  BForm
+} from 'bootstrap-vue'
 
 
 import VueSweetalert2 from 'vue-sweetalert2';
@@ -34,6 +42,7 @@ Vue.component('InputText', InputText)
 Vue.component('Password', Password)
 Vue.component('Button', Button)
 Vue.component('Card', Card)
+Vue.component('InputNumber', InputNumber)
 
 Vue.component('b-navbar', BNavbar)
 Vue.component('b-form', BForm)

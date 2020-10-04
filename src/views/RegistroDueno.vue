@@ -1,5 +1,5 @@
 <template>
-  <div class="registro">
+  <div class="registroDueno">
     <Card
       style="
         margin: 0 auto;
@@ -12,10 +12,11 @@
       <template slot="content">
         <div class="p-field p-grid">
           <span class="p-float-label">
-            <InputText
-              id="cedula"
-              type="text"
-              v-model="dueno.cedulaDueno"
+            <InputNumber
+              id="telefono"
+              v-model="dueno.telefonoDueno"
+              mode="decimal"
+              :useGrouping="false"
               style="width: 100%"
             />
             <label for="username">Cedula</label>
@@ -110,7 +111,7 @@
 import DuenoService from "../service/DuenoService";
 
 export default {
-  name: "Registro",
+  name: "RegistroDueno",
   data() {
     return {
       dueno: {
