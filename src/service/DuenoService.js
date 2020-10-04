@@ -2,13 +2,15 @@ import axios from 'axios';
 
 export default class DuenoService {
 
-    url = "http://localhost:9000/api/";
-
     getAll() {
-        return axios.get(this.url + "duenos");
+        return axios.get("duenos");
     }
 
     agregarDueno(dueno) {
-        return axios.post(this.url + "duenos", dueno);
+        return axios.post("duenos", dueno);
+    }
+
+    login(dueno){
+        return axios.post("duenos/login", dueno);
     }
 }
