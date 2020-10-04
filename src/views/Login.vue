@@ -15,7 +15,7 @@
             <InputText
               id="cedula"
               type="text"
-              v-model="value"
+              v-model="value1"
               style="width: 100%"
             />
             <label for="username">Usuario</label>
@@ -24,7 +24,7 @@
         <br />
         <div class="p-field p-grid">
           <span class="p-float-label">
-            <Password id="username" v-model="value" style="width: 100%" />
+            <Password id="username" v-model="value2" style="width: 100%" />
             <label for="contrasenia">Contraseña</label>
           </span>
         </div>
@@ -41,6 +41,12 @@
 
 export default {
   name: "Login",
+  data() {
+    return {
+      value1: null,
+      value2: null,
+    };
+  },
   components: {},
 };
 </script>

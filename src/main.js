@@ -16,11 +16,14 @@ import {BNavbar} from 'bootstrap-vue'
 import {BForm} from 'bootstrap-vue'
 
 
+import VueSweetalert2 from 'vue-sweetalert2';
+
 import 'primevue/resources/themes/saga-blue/theme.css';
 import 'primevue/resources/primevue.min.css';
 import 'primeicons/primeicons.css';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 Vue.config.productionTip = false
 
@@ -36,6 +39,7 @@ Vue.component('b-navbar', BNavbar)
 Vue.component('b-form', BForm)
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
+Vue.use(VueSweetalert2);
 
 new Vue({
   router,

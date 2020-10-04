@@ -94,12 +94,12 @@
         </div>
       </template>
       <template slot="footer">
-         <router-link to="/"><Button
-          label="Registrarse"
-          class="p-button-rounded p-button-success"
-          @click="save"
-        /> </router-link
-            >     
+        <router-link to="/login"
+          ><Button
+            label="Registrarse"
+            class="p-button-rounded p-button-success"
+            @click="save"
+        /></router-link>
       </template>
     </Card>
   </div>
@@ -142,6 +142,13 @@ export default {
             contraseniaDueno: null,
           };
         }
+      });
+      this.$swal({
+        position: "top-end",
+        icon: "success",
+        title: "Te has registrado correctamente",
+        showConfirmButton: false,
+        timer: 1500,
       });
     },
   },
