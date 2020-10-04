@@ -15,7 +15,17 @@
         <!-- Right aligned nav items -->
         
           <b-navbar-nav class="ml-auto">
-            <template>
+            
+            <template v-if="$store.state.authD">
+              <b-nav-form>
+              <b-dropdown id="dropdown-1" v-bind:text="$store.state.userD.nombreDueno" size="sm" variant="success" class="my-2 mr-2 my-sm-3">
+                <b-dropdown-item>Perfil</b-dropdown-item>
+                <b-dropdown-item>Cerrar sesion</b-dropdown-item>
+              </b-dropdown>
+              </b-nav-form>
+            </template>
+
+            <template v-else>
             <b-nav-form>
               <router-link to="/registro"
                 ><b-button
@@ -39,15 +49,6 @@
               </router-link>
             </b-nav-form>
             </template>
-            
-            <template>
-              <b-nav-form>
-              <b-dropdown id="dropdown-1" text="Dropdown Button" size="sm" variant="success" class="my-2 mr-2 my-sm-3">
-                <b-dropdown-item>Perfil</b-dropdown-item>
-                <b-dropdown-item>Cerrar sesion</b-dropdown-item>
-              </b-dropdown>
-              </b-nav-form>
-            </template>
           </b-navbar-nav>
   
       </b-collapse>
@@ -57,6 +58,10 @@
 
 <script>
 export default {
-  data() {},
+  data() {
+    return {
+        usuario : null,
+    }
+  },
 };
 </script>

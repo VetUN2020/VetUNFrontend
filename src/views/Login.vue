@@ -15,7 +15,7 @@
             <InputText
               id="cedula"
               type="text"
-              v-model="value1"
+              v-model="form.correoElectronico"
               style="width: 100%"
             />
             <label for="username">Usuario</label>
@@ -24,14 +24,15 @@
         <br />
         <div class="p-field p-grid">
           <span class="p-float-label">
-            <Password id="username" v-model="value2" style="width: 100%" />
+            <Password id="username" v-model="form.contraseniaDueno" style="width: 100%" />
             <label for="contrasenia">Contraseña</label>
           </span>
         </div>
       </template>
       <template slot="footer">
-        <Button label="Iniciar sesión" icon="pi pi-check" />
+        <Button label="Iniciar sesión" @click="login" icon="pi pi-check" />
       </template>
+
     </Card>
   </div>
 </template>
@@ -39,14 +40,32 @@
 <script>
 // @ is an alias to /src
 
+import DuenoService from "../service/DuenoService";
+
 export default {
   name: "Login",
   data() {
     return {
-      value1: null,
-      value2: null,
+      form : {
+        cedulaDueno: null,
+        nombreDueno: null,
+        apellidoDueno: null,
+        telefonoDueno: null,
+        direccionCasa: null,
+        correoElectronico: null,
+        contraseniaDueno: null
+      }
     };
   },
-  components: {},
+  duenoService: null,
+  created() {
+    this.duenoService = new DuenoService();
+  },
+  methods: {
+     async login(){
+      await this.$store.dispatch("signIn", this.form);
+      //console.log(this.$store.state.userD);
+    }
+  }
 };
 </script>
