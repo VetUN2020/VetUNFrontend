@@ -94,11 +94,12 @@
         </div>
       </template>
       <template slot="footer">
-        <Button
+         <router-link to="/"><Button
           label="Registrarse"
           class="p-button-rounded p-button-success"
           @click="save"
-        />
+        /> </router-link
+            >     
       </template>
     </Card>
   </div>

@@ -1,23 +1,20 @@
 import Vue from 'vue'
 import App from './App.vue'
+import store from './store'
+import router from './router'
+
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
-import router from './router'
 import Menubar from 'primevue/menubar';
-import {
-  BootstrapVue,
-  IconsPlugin
-} from 'bootstrap-vue'
-import {
-  BNavbar
-} from 'bootstrap-vue'
-import InputText from 'primevue/inputtext';
-import Password from 'primevue/password';
-import {
-  BForm
-} from 'bootstrap-vue'
 import Button from 'primevue/button';
 import Card from 'primevue/card';
+import InputText from 'primevue/inputtext';
+import Password from 'primevue/password';
+
+import {BootstrapVue,  IconsPlugin} from 'bootstrap-vue'
+import {BNavbar} from 'bootstrap-vue'
+import {BForm} from 'bootstrap-vue'
+
 
 import 'primevue/resources/themes/saga-blue/theme.css';
 import 'primevue/resources/primevue.min.css';
@@ -30,17 +27,18 @@ Vue.config.productionTip = false
 Vue.component('DataTable', DataTable)
 Vue.component('Column', Column)
 Vue.component('Menubar', Menubar)
-Vue.component('b-navbar', BNavbar)
 Vue.component('InputText', InputText)
 Vue.component('Password', Password)
-Vue.component('b-form', BForm)
 Vue.component('Button', Button)
 Vue.component('Card', Card)
 
+Vue.component('b-navbar', BNavbar)
+Vue.component('b-form', BForm)
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
 new Vue({
   router,
+  store,
   render: h => h(App),
 }).$mount('#app')
