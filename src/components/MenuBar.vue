@@ -13,9 +13,25 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <!-- Right aligned nav items -->
+<<<<<<< HEAD
 
         <b-navbar-nav class="ml-auto">
           <template>
+=======
+        
+          <b-navbar-nav class="ml-auto">
+            
+            <template v-if="$store.state.authD">
+              <b-nav-form>
+              <b-dropdown id="dropdown-1" v-bind:text="$store.state.userD.nombreDueno" size="sm" variant="success" class="my-2 mr-2 my-sm-3">
+                <b-dropdown-item>Perfil</b-dropdown-item>
+                <b-dropdown-item>Cerrar sesion</b-dropdown-item>
+              </b-dropdown>
+              </b-nav-form>
+            </template>
+
+            <template v-else>
+>>>>>>> 13e0e92bb48c0e5c8a291511f545995ea2a185ba
             <b-nav-form>
               <b-dropdown
                 id="dropdown-1"
