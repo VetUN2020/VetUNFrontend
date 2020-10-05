@@ -2,9 +2,12 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Table from '../views/Table.vue'
-import Registro from '../views/Registro.vue'
-import Login from '../views/Login.vue'
+import RegistroDueno from '../views/RegistroDueno.vue'
+import Veterinary from '../views/Register/Veterinary.vue'
+import LoginDueno from '../views/LoginDueno.vue'
+import RegistroMedico from '../views/RegistroMedico.vue'
 import RegistroMascota from '../views/RegistroMascota.vue'
+
 
 Vue.use(VueRouter)
 
@@ -20,19 +23,28 @@ export default new VueRouter({
             component: Table
         },
         {
-            path: '/registro',
-            name: 'registro',
-            component: Registro
-        },
-        {
-            path: '/login',
-            name: 'login',
-            component: Login
+            path: '/registroDueno',
+            name: 'registroDueno',
+            component: RegistroDueno
         },
         {
             path: '/mascotaRegistro',
             name: 'registroMascota',
             component: RegistroMascota
+        },
+        {
+            path: '/loginDueno',
+            name: 'loginDueno',
+            component: LoginDueno
+        },
+        {
+            path: '/registroMedico',
+            name: 'registroMedico',
+            component: RegistroMedico
+        },{
+            path: '/regvet',
+            name: 'veterinary',
+            component: Veterinary 
         }
     ]
 })

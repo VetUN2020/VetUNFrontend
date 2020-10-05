@@ -5,8 +5,6 @@
   </div>
 </template>
 
-
-
 <script>
 import MenuBar from "./components/MenuBar.vue";
 
@@ -15,6 +13,9 @@ export default {
   components: {
     MenuBar,
   },
+  created(){      
+    console.log("Creado");
+  }
 };
 </script>
 

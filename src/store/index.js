@@ -10,27 +10,38 @@ export default new Vuex.Store({
   state: {
     userD : null,
     authD : false,
+    userNF : false,
   },
   mutations: {
     SET_USER(state, user){
       state.userD = user;
       state.authD = true;
+      state.userNF = false;
+    },
+    OUT_USER(state){
+      state.userD = null;
+      state.authD = false;
+      state.userNF = false;
     }
   },
   actions: {
-    
-    async signIn({dispatch}, credentials){
+    async signInDueno({dispatch}, credentials){
       await axios.post("duenos/login", credentials).then(res =>{
-        dispatch('setUser', res.data);
+        dispatch('setUserDueno', res.data);
       }).catch(() => {
-        dispatch('setUser', null);
+        dispatch('setUserDueno', null);
+        this.state.userNF = true;
       })      
     },
-
-    async setUser({commit}, user){
+    async setUserDueno({commit}, user){
       commit('SET_USER', user)
+    },
+    async signOutDueno({dispatch}){
+      dispatch('outUserDueno');
+    },
+    async outUserDueno({commit}){
+      commit('OUT_USER');
     }
-
   },
   modules: {
   }

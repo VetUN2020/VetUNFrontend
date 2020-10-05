@@ -1,5 +1,5 @@
 <template>
-  <div class="registro">
+  <div class="registroDueno">
     <Card
       style="
         margin: 0 auto;
@@ -12,10 +12,11 @@
       <template slot="content">
         <div class="p-field p-grid">
           <span class="p-float-label">
-            <InputText
+            <InputNumber
               id="cedula"
-              type="text"
               v-model="dueno.cedulaDueno"
+              mode="decimal"
+              :useGrouping="false"
               style="width: 100%"
             />
             <label for="username">Cedula</label>
@@ -48,10 +49,11 @@
         <br />
         <div class="p-field p-grid">
           <span class="p-float-label">
-            <InputText
+            <InputNumber
               id="telefono"
-              type="text"
               v-model="dueno.telefonoDueno"
+              mode="decimal"
+              :useGrouping="false"
               style="width: 100%"
             />
             <label for="username">Telefono</label>
@@ -78,14 +80,14 @@
               v-model="dueno.correoElectronico"
               style="width: 100%"
             />
-            <label for="username">Correo electronico</label>
+            <label for="correo">Correo electronico</label>
           </span>
         </div>
         <br />
         <div class="p-field p-grid">
           <span class="p-float-label">
             <Password
-              id="username"
+              id="contrasenia"
               v-model="dueno.contraseniaDueno"
               style="width: 100%"
             />
@@ -94,14 +96,23 @@
         </div>
       </template>
       <template slot="footer">
-        <router-link to="/login"
-          ><Button
-            label="Registrarse"
-            class="p-button-rounded p-button-success"
-            @click="save"
-        /></router-link>
+        <Button
+          label="Registrarse"
+          class="p-button-rounded p-button-success"
+          @click="save"
+        />
       </template>
     </Card>
+    <Message severity="error" :life="3000" :sticky="false" v-if="error">{{
+      error
+    }}</Message>
+    <Message
+      severity="error"
+      :life="3000"
+      :sticky="false"
+      v-if="correoExistente"
+      >{{ correoExistente }}</Message
+    >
   </div>
 </template>
 
@@ -110,7 +121,7 @@
 import DuenoService from "../service/DuenoService";
 
 export default {
-  name: "Registro",
+  name: "RegistroDueno",
   data() {
     return {
       dueno: {
@@ -122,6 +133,8 @@ export default {
         correoElectronico: null,
         contraseniaDueno: null,
       },
+      error: null,
+      correoExistente: null,
     };
   },
   duenoService: null,
@@ -130,26 +143,45 @@ export default {
   },
   methods: {
     save() {
-      this.duenoService.agregarDueno(this.dueno).then((data) => {
-        if (data.status === 200) {
-          this.dueno = {
-            cedulaDueno: null,
-            nombreDueno: null,
-            apellidoDueno: null,
-            telefonoDueno: null,
-            direccionCasa: null,
-            correoElectronico: null,
-            contraseniaDueno: null,
-          };
-        }
-      });
-      this.$swal({
-        position: "top-end",
-        icon: "success",
-        title: "Te has registrado correctamente",
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      if (
+        this.dueno.cedulaDueno &&
+        this.dueno.nombreDueno &&
+        this.dueno.apellidoDueno &&
+        this.dueno.telefonoDueno &&
+        this.dueno.direccionCasa &&
+        this.dueno.correoElectronico &&
+        this.dueno.contraseniaDueno
+      ) {
+        this.duenoService.verificarCorreo(this.dueno).then((data) => {
+          if (data.data === true) {
+            this.correoExistente = "Ya hay un usuario con este correo";
+          } else {
+            this.duenoService.agregarDueno(this.dueno).then((data) => {
+              if (data.status === 200) {
+                this.dueno = {
+                  cedulaDueno: null,
+                  nombreDueno: null,
+                  apellidoDueno: null,
+                  telefonoDueno: null,
+                  direccionCasa: null,
+                  correoElectronico: null,
+                  contraseniaDueno: null,
+                };
+                this.$swal({
+                  position: "top-end",
+                  icon: "success",
+                  title: "Te has registrado correctamente",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                this.$router.push("/loginDueno");
+              }
+            });
+          }
+        });
+      } else {
+        this.error = "Todos los campos son obligatorios";
+      }
     },
   },
 };
