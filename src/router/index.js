@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Table from '../views/Table.vue'
 import RegistroDueno from '../views/RegistroDueno.vue'
+import Veterinary from '../views/Register/Veterinary.vue'
 import LoginDueno from '../views/LoginDueno.vue'
 import RegistroMedico from '../views/RegistroMedico.vue'
 
@@ -33,6 +34,10 @@ export default new VueRouter({
             path: '/registroMedico',
             name: 'registroMedico',
             component: RegistroMedico
+        },{
+            path: '/regvet',
+            name: 'veterinary',
+            component: Veterinary 
         }
     ]
 })
