@@ -10,7 +10,11 @@ export default class DuenoService {
         return axios.post("duenos", dueno);
     }
 
-    login(dueno){
+    login(dueno) {
         return axios.post("duenos/login", dueno);
+    }
+
+    verificarCorreo(dueno) {
+        return axios.post("duenos/registro", dueno);
     }
 }

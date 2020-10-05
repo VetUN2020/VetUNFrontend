@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Table from '../views/Table.vue'
-import Registro from '../views/Registro.vue'
+import RegistroDueno from '../views/RegistroDueno.vue'
 import Login from '../views/Login.vue'
 import Veterinary from '../views/Register/Veterinary.vue'
 
@@ -20,9 +20,9 @@ export default new VueRouter({
             component: Table
         },
         {
-            path: '/registro',
-            name: 'registro',
-            component: Registro
+            path: '/registroDueno',
+            name: 'registroDueno',
+            component: RegistroDueno
         },
         {
             path: '/login',

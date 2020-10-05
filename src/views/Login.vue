@@ -24,7 +24,12 @@
         <br />
         <div class="p-field p-grid">
           <span class="p-float-label">
-            <Password id="username" v-model="form.contraseniaDueno" style="width: 100%" />
+            <InputText
+              id="password"
+              type="password"
+              v-model="form.contraseniaDueno"
+              style="width: 100%"
+            />
             <label for="contrasenia">Contraseña</label>
           </span>
         </div>
@@ -32,8 +37,8 @@
       <template slot="footer">
         <Button label="Iniciar sesión" @click="login" icon="pi pi-check" />
       </template>
-
     </Card>
+    <Message severity="error" v-if="datosIncorrectos">{{datosIncorrectos}}</Message>
   </div>
 </template>
 
@@ -46,15 +51,11 @@ export default {
   name: "Login",
   data() {
     return {
-      form : {
-        cedulaDueno: null,
-        nombreDueno: null,
-        apellidoDueno: null,
-        telefonoDueno: null,
-        direccionCasa: null,
+      form: {
         correoElectronico: null,
-        contraseniaDueno: null
-      }
+        contraseniaDueno: null,
+      },
+      datosIncorrectos : null,
     };
   },
   duenoService: null,
@@ -62,10 +63,19 @@ export default {
     this.duenoService = new DuenoService();
   },
   methods: {
-     async login(){
-      await this.$store.dispatch("signIn", this.form);
+    async login() {
+      await this.$store.dispatch("signInDueno", this.form);
+      this.form = {
+        correoElectronico: null,
+        contraseniaDueno: null,
+      };
+      if(!this.$store.state.userNF){
+        this.$router.push("/");
+      }else{
+        this.datosIncorrectos = "Datos incorrectos";
+      }
       //console.log(this.$store.state.userD);
-    }
-  }
+    },
+  },
 };
 </script>
