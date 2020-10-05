@@ -45,6 +45,7 @@
                   >Dueño</b-dropdown-item
                 >
                 <b-dropdown-item>Medico veterinario</b-dropdown-item>
+                <b-dropdown-item @click="registerVeterinary">Veterinaria</b-dropdown-item>
               </b-dropdown>
             </b-nav-form>
             <b-nav-form>
@@ -80,6 +81,9 @@ export default {
     },
     loginDueno() {
       this.$router.push("/login");
+    },
+    registerVeterinary(){
+      this.$router.push("/regvet")
     },
     async signOutDueno(){
       await this.$store.dispatch("signOutDueno");

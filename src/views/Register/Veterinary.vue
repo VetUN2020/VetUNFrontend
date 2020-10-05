@@ -8,29 +8,18 @@
         margin-bottom: 2em;
       "
     >
-      <template slot="title"> Registro </template>
+      <template slot="title"> Registra tu Veterinaria</template>
       <template slot="content">
-        <div class="p-field p-grid">
-          <span class="p-float-label">
-            <InputText
-              id="cedula"
-              type="text"
-              v-model="dueno.cedulaDueno"
-              style="width: 100%"
-            />
-            <label for="username">Cedula</label>
-          </span>
-        </div>
-        <br />
+  
         <div class="p-field p-grid">
           <span class="p-float-label">
             <InputText
               id="nombre"
               type="text"
-              v-model="dueno.nombreDueno"
+              v-model="veterinaria.nombreVeterinaria"
               style="width: 100%"
             />
-            <label for="username">Nombre</label>
+            <label for="username">Nombre Veterinaria</label>
           </span>
         </div>
         <br />
@@ -39,10 +28,10 @@
             <InputText
               id="apellido"
               type="text"
-              v-model="dueno.apellidoDueno"
+              v-model="veterinaria.dirVeterinaria"
               style="width: 100%"
             />
-            <label for="username">Apellido</label>
+            <label for="username">Direccion</label>
           </span>
         </div>
         <br />
@@ -51,7 +40,7 @@
             <InputText
               id="telefono"
               type="text"
-              v-model="dueno.telefonoDueno"
+              v-model="veterinaria.telVeterinaria"
               style="width: 100%"
             />
             <label for="username">Telefono</label>
@@ -63,41 +52,17 @@
             <InputText
               id="direccion"
               type="text"
-              v-model="dueno.direccionCasa"
+              v-model="veterinaria.tipoVeterinaria"
               style="width: 100%"
             />
-            <label for="username">Direccion</label>
-          </span>
-        </div>
-        <br />
-        <div class="p-field p-grid">
-          <span class="p-float-label">
-            <InputText
-              id="correo"
-              type="text"
-              v-model="dueno.correoElectronico"
-              style="width: 100%"
-            />
-            <label for="username">Correo electronico</label>
-          </span>
-        </div>
-        <br />
-        <div class="p-field p-grid">
-          <span class="p-float-label">
-            <Password
-              id="username"
-              v-model="dueno.contraseniaDueno"
-              style="width: 100%"
-            />
-            <label for="contrasenia">Contraseña</label>
+            <label for="username">Tipo de Veterinaria</label>
           </span>
         </div>
       </template>
       <template slot="footer">
         <Button
-          label="Registrarse"
+          label="Registrar"
           class="p-button-rounded p-button-success"
-          @click="save"
         />
       </template>
     </Card>
@@ -110,14 +75,11 @@ export default {
   name: "Veterinary",
   data() {
     return {
-        dueno: {
-        cedulaDueno: null,
-        nombreDueno: null,
-        apellidoDueno: null,
-        telefonoDueno: null,
-        direccionCasa: null,
-        correoElectronico: null,
-        contraseniaDueno: null,
+        veterinaria: {
+        nombreVeterinaria: null,
+        dirVeterinaria: null,
+        telVeterinaria: null,
+        tipoVeterinaria: null,
       },
     };
   },
