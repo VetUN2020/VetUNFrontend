@@ -13,11 +13,8 @@ export default {
   components: {
     MenuBar,
   },
-  created(){      
+  created() {
     console.log("Creado");
-  }
+  },
 };
 </script>
-
-<style>
-</style>
