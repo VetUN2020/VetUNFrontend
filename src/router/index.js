@@ -6,6 +6,8 @@ import RegistroDueno from '../views/RegistroDueno.vue'
 import Veterinary from '../views/Register/Veterinary.vue'
 import LoginDueno from '../views/LoginDueno.vue'
 import RegistroMedico from '../views/RegistroMedico.vue'
+import RegistroMascota from '../views/RegistroMascota.vue'
+
 
 Vue.use(VueRouter)
 
@@ -24,6 +26,11 @@ export default new VueRouter({
             path: '/registroDueno',
             name: 'registroDueno',
             component: RegistroDueno
+        },
+        {
+            path: '/mascotaRegistro',
+            name: 'registroMascota',
+            component: RegistroMascota
         },
         {
             path: '/loginDueno',

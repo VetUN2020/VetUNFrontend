@@ -61,8 +61,21 @@
                 <b-dropdown-item>Medico veterinario</b-dropdown-item>
               </b-dropdown>
             </b-nav-form>
-          </template>
-        </b-navbar-nav>
+
+            <b-nav-form>
+              <router-link to="/mascotaRegistro"
+                ><b-button
+                  variant="success"
+                  size="sm"
+                  class="my-2 mr-2 my-sm-3"
+                  type="submit"
+                  >Mis mascotas</b-button
+                ></router-link
+              >
+            </b-nav-form>
+            </template>
+          </b-navbar-nav>
+          
       </b-collapse>
     </b-navbar>
   </div>
