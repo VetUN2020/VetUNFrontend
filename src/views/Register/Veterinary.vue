@@ -10,11 +10,10 @@
     >
       <template slot="title"> Registra tu Veterinaria</template>
       <template slot="content">
-  
         <div class="p-field p-grid">
           <span class="p-float-label">
             <InputText
-              id="nombre"
+              id="nombreVeterinaria"
               type="text"
               v-model="veterinaria.nombreVeterinaria"
               style="width: 100%"
@@ -26,9 +25,9 @@
         <div class="p-field p-grid">
           <span class="p-float-label">
             <InputText
-              id="apellido"
+              id="direccion"
               type="text"
-              v-model="veterinaria.dirVeterinaria"
+              v-model="veterinaria.direccionVeterinaria"
               style="width: 100%"
             />
             <label for="username">Direccion</label>
@@ -40,7 +39,7 @@
             <InputText
               id="telefono"
               type="text"
-              v-model="veterinaria.telVeterinaria"
+              v-model="veterinaria.telefonoVeterinaria"
               style="width: 100%"
             />
             <label for="username">Telefono</label>
@@ -50,7 +49,19 @@
         <div class="p-field p-grid">
           <span class="p-float-label">
             <InputText
-              id="direccion"
+              id="localizacion"
+              type="text"
+              v-model="veterinaria.localizacion"
+              style="width: 100%"
+            />
+            <label for="username">Localizacion</label>
+          </span>
+        </div>
+        <br />
+        <div class="p-field p-grid">
+          <span class="p-float-label">
+            <InputText
+              id="tipo"
               type="text"
               v-model="veterinaria.tipoVeterinaria"
               style="width: 100%"
@@ -71,47 +82,49 @@
 </template>
 
 <script>
-
 import VeterinariaService from "../../service/VeterinariaService";
 
 export default {
-  veterinariaService : null,
+  veterinariaService: null,
   created() {
     this.veterinariaService = new VeterinariaService();
   },
   name: "Veterinary",
   data() {
     return {
-        veterinaria: {
+      veterinaria: {
         nombreVeterinaria: null,
-        dirVeterinaria: null,
-        telVeterinaria: null,
+        direccionVeterinaria: null,
+        telefonoVeterinaria: null,
+        localizacion: null,
         tipoVeterinaria: null,
       },
     };
   },
   components: {},
   methods: {
-        save() {
-
-            this.veterinariaService.agregarVeterinaria(this.veterinaria).then((data) => {
-                if (data.status === 200) {
-                    this.veterinaria = {
-                        nombreVeterinaria:  null,
-                        dirVeterinaria:        null,
-                        telVeterinaria:           null,
-                        tipoVeterinaria:        null
-                    };
-                }
-            });
-            this.$swal({
-                position: "top-end",
-                icon: "success",
-                title: "Has registrado correctamente tu veterinaria",
-                showConfirmButton: false,
-                timer: 1500,
-            })
-        }
-    }
+    save() {
+      this.veterinariaService
+        .agregarVeterinaria(this.veterinaria)
+        .then((data) => {
+          if (data.status === 200) {
+            this.veterinaria = {
+              nombreVeterinaria: null,
+              direccionVeterinaria: null,
+              telefonoVeterinaria: null,
+              localizacion: null,
+              tipoVeterinaria: null,
+            };
+          }
+        });
+      this.$swal({
+        position: "top-end",
+        icon: "success",
+        title: "Has registrado correctamente tu veterinaria",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    },
+  },
 };
 </script>
