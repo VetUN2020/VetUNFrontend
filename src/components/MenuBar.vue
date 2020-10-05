@@ -44,7 +44,7 @@
                 <b-dropdown-item @click="registrarseDueno"
                   >Dueño</b-dropdown-item
                 >
-                <b-dropdown-item>Medico veterinario</b-dropdown-item>
+                <b-dropdown-item @click="registrarseMedico">Medico veterinario</b-dropdown-item>
                 <b-dropdown-item @click="registerVeterinary">Veterinaria</b-dropdown-item>
               </b-dropdown>
             </b-nav-form>
@@ -80,7 +80,7 @@ export default {
       this.$router.push("/registroDueno");
     },
     loginDueno() {
-      this.$router.push("/login");
+      this.$router.push("/loginDueno");
     },
     registerVeterinary(){
       this.$router.push("/regvet")
@@ -88,6 +88,9 @@ export default {
     async signOutDueno(){
       await this.$store.dispatch("signOutDueno");
       this.$router.push("/");
+    },
+    registrarseMedico() {
+      this.$router.push("/registroMedico");
     },
   },
   
