@@ -34,7 +34,7 @@
           <template v-else>
             <b-nav-form>
               <b-dropdown
-                id="dropdown-right"
+                id="sesionInactiva"
                 text="Registrarse"
                 size="sm"
                 variant="success"
