@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="loginDueno">
     <Card
       style="
         margin: 0 auto;
@@ -48,7 +48,7 @@
 import DuenoService from "../service/DuenoService";
 
 export default {
-  name: "Login",
+  name: "LoginDueno",
   data() {
     return {
       form: {

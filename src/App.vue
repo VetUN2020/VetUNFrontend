@@ -13,9 +13,8 @@ export default {
   components: {
     MenuBar,
   },
-  created(){
+  created(){      
     console.log("Creado");
-    console.log(this.$store.state.userD);
   }
 };
 </script>

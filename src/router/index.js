@@ -3,7 +3,8 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Table from '../views/Table.vue'
 import RegistroDueno from '../views/RegistroDueno.vue'
-import Login from '../views/Login.vue'
+import LoginDueno from '../views/LoginDueno.vue'
+import RegistroMedico from '../views/RegistroMedico.vue'
 
 Vue.use(VueRouter)
 
@@ -24,9 +25,14 @@ export default new VueRouter({
             component: RegistroDueno
         },
         {
-            path: '/login',
-            name: 'login',
-            component: Login
+            path: '/loginDueno',
+            name: 'loginDueno',
+            component: LoginDueno
+        },
+        {
+            path: '/registroMedico',
+            name: 'registroMedico',
+            component: RegistroMedico
         }
     ]
 })
