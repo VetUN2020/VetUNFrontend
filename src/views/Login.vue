@@ -38,6 +38,7 @@
         <Button label="Iniciar sesión" @click="login" icon="pi pi-check" />
       </template>
     </Card>
+    <Message severity="error" v-if="datosIncorrectos">{{datosIncorrectos}}</Message>
   </div>
 </template>
 
@@ -54,6 +55,7 @@ export default {
         correoElectronico: null,
         contraseniaDueno: null,
       },
+      datosIncorrectos : null,
     };
   },
   duenoService: null,
@@ -62,7 +64,16 @@ export default {
   },
   methods: {
     async login() {
-      await this.$store.dispatch("signIn", this.form);
+      await this.$store.dispatch("signInDueno", this.form);
+      this.form = {
+        correoElectronico: null,
+        contraseniaDueno: null,
+      };
+      if(!this.$store.state.userNF){
+        this.$router.push("/");
+      }else{
+        this.datosIncorrectos = "Datos incorrectos";
+      }
       //console.log(this.$store.state.userD);
     },
   },
