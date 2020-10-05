@@ -63,6 +63,7 @@
         <Button
           label="Registrar"
           class="p-button-rounded p-button-success"
+          @click="save"
         />
       </template>
     </Card>
@@ -71,7 +72,13 @@
 
 <script>
 
+import VeterinariaService from "../../service/VeterinariaService";
+
 export default {
+  veterinariaService : null,
+  created() {
+    this.veterinariaService = new VeterinariaService();
+  },
   name: "Veterinary",
   data() {
     return {
@@ -84,5 +91,27 @@ export default {
     };
   },
   components: {},
+  methods: {
+        save() {
+
+            this.veterinariaService.agregarVeterinaria(this.veterinaria).then((data) => {
+                if (data.status === 200) {
+                    this.veterinaria = {
+                        nombreVeterinaria:  null,
+                        dirVeterinaria:        null,
+                        telVeterinaria:           null,
+                        tipoVeterinaria:        null
+                    };
+                }
+            });
+            this.$swal({
+                position: "top-end",
+                icon: "success",
+                title: "Has registrado correctamente tu veterinaria",
+                showConfirmButton: false,
+                timer: 1500,
+            })
+        }
+    }
 };
 </script>
