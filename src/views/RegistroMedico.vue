@@ -1,5 +1,5 @@
 <template>
-  <div class="registroDueno">
+  <div class="registroMedico">
     <Card
       style="
         margin: 0 auto;
@@ -14,7 +14,7 @@
           <span class="p-float-label">
             <InputNumber
               id="cedula"
-              v-model="dueno.cedulaDueno"
+              v-model="medico.cedulaMedico"
               mode="decimal"
               :useGrouping="false"
               style="width: 100%"
@@ -28,7 +28,7 @@
             <InputText
               id="nombre"
               type="text"
-              v-model="dueno.nombreDueno"
+              v-model="medico.nombreMedico"
               style="width: 100%"
             />
             <label for="username">Nombre</label>
@@ -40,7 +40,7 @@
             <InputText
               id="apellido"
               type="text"
-              v-model="dueno.apellidoDueno"
+              v-model="medico.apellidoMedico"
               style="width: 100%"
             />
             <label for="username">Apellido</label>
@@ -51,7 +51,7 @@
           <span class="p-float-label">
             <InputNumber
               id="telefono"
-              v-model="dueno.telefonoDueno"
+              v-model="medico.telefonoMedico"
               mode="decimal"
               :useGrouping="false"
               style="width: 100%"
@@ -63,9 +63,21 @@
         <div class="p-field p-grid">
           <span class="p-float-label">
             <InputText
+              id="correo"
+              type="text"
+              v-model="medico.matriculaProfesional"
+              style="width: 100%"
+            />
+            <label for="correo">Tarjeta profesional</label>
+          </span>
+        </div>
+        <br />
+        <div class="p-field p-grid">
+          <span class="p-float-label">
+            <InputText
               id="direccion"
               type="text"
-              v-model="dueno.direccionCasa"
+              v-model="medico.direccionResidencia"
               style="width: 100%"
             />
             <label for="username">Direccion</label>
@@ -75,12 +87,12 @@
         <div class="p-field p-grid">
           <span class="p-float-label">
             <InputText
-              id="correo"
+              id="matricula"
               type="text"
-              v-model="dueno.correoElectronico"
+              v-model="medico.correoMedico"
               style="width: 100%"
             />
-            <label for="correo">Correo electronico</label>
+            <label for="matricula">Correo electronico</label>
           </span>
         </div>
         <br />
@@ -88,7 +100,7 @@
           <span class="p-float-label">
             <Password
               id="contrasenia"
-              v-model="dueno.contraseniaDueno"
+              v-model="medico.contraseniaMedico"
               style="width: 100%"
             />
             <label for="contrasenia">Contraseña</label>
@@ -118,54 +130,58 @@
 
 <script>
 // @ is an alias to /src
-import DuenoService from "../service/DuenoService";
+import MedicoService from "../service/MedicoService";
 
 export default {
-  name: "RegistroDueno",
+  name: "registroMedico",
   data() {
     return {
-      dueno: {
-        cedulaDueno: null,
-        nombreDueno: null,
-        apellidoDueno: null,
-        telefonoDueno: null,
-        direccionCasa: null,
-        correoElectronico: null,
-        contraseniaDueno: null,
+      medico: {
+        cedulaMedico: null,
+        nombreMedico: null,
+        apellidoMedico: null,
+        direccionResidencia: null,
+        telefonoMedico: null,
+        matriculaProfesional: null,
+        correoMedico: null,
+        contraseniaMedico: null,
       },
       error: null,
       correoExistente: null,
     };
   },
-  duenoService: null,
+  medicoService: null,
   created() {
-    this.duenoService = new DuenoService();
+    this.medicoService = new MedicoService();
   },
   methods: {
     save() {
       if (
-        this.dueno.cedulaDueno &&
-        this.dueno.nombreDueno &&
-        this.dueno.apellidoDueno &&
-        this.dueno.telefonoDueno &&
-        this.dueno.direccionCasa &&
-        this.dueno.correoElectronico &&
-        this.dueno.contraseniaDueno
+        this.medico.cedulaMedico &&
+        this.medico.nombreMedico &&
+        this.medico.apellidoMedico &&
+        this.medico.direccionResidencia &&
+        this.medico.telefonoMedico &&
+        this.medico.matriculaProfesional &&
+        this.medico.correoMedico && 
+        this.medico.contraseniaMedico
       ) {
-        this.duenoService.verificarCorreo(this.dueno).then((data) => {
+        
+        this.medicoService.verificarCorreo(this.medico).then((data) => {
           if (data.data === true) {
             this.correoExistente = "Ya hay un usuario con este correo";
           } else {
-            this.duenoService.agregarDueno(this.dueno).then((data) => {
+             this.medicoService.agregarMedico(this.medico).then((data) => {
               if (data.status === 200) {
-                this.dueno = {
-                  cedulaDueno: null,
-                  nombreDueno: null,
-                  apellidoDueno: null,
-                  telefonoDueno: null,
-                  direccionCasa: null,
-                  correoElectronico: null,
-                  contraseniaDueno: null,
+                this.medico = {
+                  cedulaMedico: null,
+                  nombreMedico: null,
+                  apellidoMedico: null,
+                  direccionResidencia: null,
+                  telefonoMedico: null,
+                  matriculaProfesional: null,
+                  correoMedico: null,
+                  contraseniaMedico: null,
                 };
                 this.$swal({
                   position: "top-end",
