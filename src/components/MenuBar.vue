@@ -18,15 +18,15 @@
           <template v-if="$store.state.authD">
             <b-nav-form>
               <b-dropdown
-                id="sesionActiva"
-                v-bind:text="$store.state.userD.nombreDueno"
+                id="dropdown-right"
+                text="Dueno"
                 size="sm"
                 variant="success"
                 class="my-2 mr-2 my-sm-3"
                 right
               >
                 <b-dropdown-item>Perfil</b-dropdown-item>
-                <b-dropdown-item>Cerrar sesion</b-dropdown-item>
+                <b-dropdown-item @click="signOutDueno">Cerrar sesion</b-dropdown-item>
               </b-dropdown>
             </b-nav-form>
           </template>
@@ -69,6 +69,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      nombre: '',
+    };
+  },
   methods: {
     registrarseDueno() {
       this.$router.push("/registroDueno");
@@ -76,6 +81,11 @@ export default {
     loginDueno() {
       this.$router.push("/login");
     },
+    async signOutDueno(){
+      await this.$store.dispatch("signOutDueno");
+      this.$router.push("/");
+    },
   },
+  
 };
 </script>

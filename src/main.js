@@ -53,7 +53,8 @@ Vue.use(IconsPlugin)
 Vue.use(VueSweetalert2);
 
 new Vue({
-  router,
-  store,
-  render: h => h(App),
-}).$mount('#app')
+    router,
+    store,
+    render: h => h(App),
+  }).$mount('#app')
+
