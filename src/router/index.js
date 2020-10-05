@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Table from '../views/Table.vue'
 import Registro from '../views/Registro.vue'
 import Login from '../views/Login.vue'
+import Veterinary from '../views/Register/Veterinary.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ export default new VueRouter({
             path: '/login',
             name: 'login',
             component: Login
+        },
+        {
+            path: '/regvet',
+            name: 'veterinary',
+            component: Veterinary 
         }
     ]
 })
