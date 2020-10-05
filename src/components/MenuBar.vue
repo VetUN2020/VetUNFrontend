@@ -18,7 +18,7 @@
           <template v-if="$store.state.authD">
             <b-nav-form>
               <b-dropdown
-                id="dropdown-right"
+                id="sesionActiva"
                 v-bind:text="$store.state.userD.nombreDueno"
                 size="sm"
                 variant="success"
@@ -34,7 +34,7 @@
           <template v-else>
             <b-nav-form>
               <b-dropdown
-                id="dropdown-right"
+                id="sesionInactiva"
                 text="Registrarse"
                 size="sm"
                 variant="success"
@@ -69,7 +69,6 @@
 
 <script>
 export default {
-  data() {},
   methods: {
     registrarseDueno() {
       this.$router.push("/registroDueno");

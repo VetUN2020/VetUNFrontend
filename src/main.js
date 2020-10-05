@@ -11,6 +11,7 @@ import Card from 'primevue/card';
 import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
 import InputNumber from 'primevue/inputnumber';
+import Message from 'primevue/message';
 
 import {
   BootstrapVue,
@@ -43,6 +44,7 @@ Vue.component('Password', Password)
 Vue.component('Button', Button)
 Vue.component('Card', Card)
 Vue.component('InputNumber', InputNumber)
+Vue.component('Message', Message)
 
 Vue.component('b-navbar', BNavbar)
 Vue.component('b-form', BForm)
