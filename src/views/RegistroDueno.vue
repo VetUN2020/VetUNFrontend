@@ -1,5 +1,6 @@
 <template>
   <div class="registroDueno">
+    <br />
     <Card
       style="
         margin: 0 auto;

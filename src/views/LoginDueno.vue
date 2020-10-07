@@ -1,5 +1,6 @@
 <template>
   <div class="loginDueno">
+    <br />
     <Card
       style="
         margin: 0 auto;
@@ -79,3 +80,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  .p-card-body{
+    margin-top:50px;
+  }
+</style>
