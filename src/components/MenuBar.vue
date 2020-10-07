@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="navBarGeneral">
     <b-navbar toggleable="lg" type="dark" variant="primary">
       <router-link to="/"
         ><b-navbar-brand>
@@ -26,7 +26,9 @@
                 right
               >
                 <b-dropdown-item>Perfil</b-dropdown-item>
+                <b-dropdown-item @click="registrarMascota">Registrar Mascota</b-dropdown-item>
                 <b-dropdown-item @click="signOutDueno">Cerrar sesion</b-dropdown-item>
+
               </b-dropdown>
             </b-nav-form>
           </template>
@@ -62,7 +64,7 @@
               </b-dropdown>
             </b-nav-form>
 
-            <b-nav-form>
+            <!-- <b-nav-form>
               <router-link to="/mascotaRegistro"
                 ><b-button
                   variant="success"
@@ -72,7 +74,7 @@
                   >Mis mascotas</b-button
                 ></router-link
               >
-            </b-nav-form>
+            </b-nav-form> -->
             </template>
           </b-navbar-nav>
           
@@ -105,7 +107,18 @@ export default {
     registrarseMedico() {
       this.$router.push("/registroMedico");
     },
+    registrarMascota(){
+      this.$router.push("/mascotaRegistro")
+    }
   },
   
 };
 </script>
+
+<style>
+  #navBarGeneral{
+     position: fixed;
+     width: 100%;
+     z-index: 100;
+  }
+</style>

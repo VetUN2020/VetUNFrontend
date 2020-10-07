@@ -1,5 +1,6 @@
 <template>
-  <div class="home"></div>
+  <div class="home">  
+  </div>
 </template>
 
 <script>
@@ -10,3 +11,11 @@ export default {
   components: {},
 };
 </script>
+
+<style scoped>
+  .home{
+    padding-bottom: 625px;
+    background-image: url("../assets/fondo.png");
+    background-size: cover;
+  }
+</style>

@@ -1,7 +1,13 @@
 <template>
   <div id="app">
     <MenuBar />
+    <div id="router">
+    <!-- <br />
+    <br />
+    <br />
+    <br /> -->
     <router-view />
+    </div>
   </div>
 </template>
 
@@ -18,3 +24,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  #router{
+    padding-top: 80px;
+  }
+</style>

@@ -12,6 +12,7 @@ import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
 import InputNumber from 'primevue/inputnumber';
 import Message from 'primevue/message';
+import Dropdown from 'primevue/dropdown';
 
 import {
   BootstrapVue,
@@ -45,12 +46,20 @@ Vue.component('Button', Button)
 Vue.component('Card', Card)
 Vue.component('InputNumber', InputNumber)
 Vue.component('Message', Message)
+Vue.component('Dropdown', Dropdown)
 
 Vue.component('b-navbar', BNavbar)
 Vue.component('b-form', BForm)
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(VueSweetalert2);
+
+
+Vue.component('v-style', {
+  render: function (createElement) {
+    return createElement('style', this.$slots.default)
+  }
+});
 
 new Vue({
     router,

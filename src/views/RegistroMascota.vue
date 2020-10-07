@@ -1,5 +1,6 @@
 <template>
   <div class="registroMascota">
+    <br />
     <Card
       style="
         margin: 0 auto;
@@ -9,11 +10,10 @@
       "
     >
       <template slot="title"> Registra tu mascota </template>
-      <h4>Danos los siguientes datos:</h4>
       <template slot="content">
         <h6 style="text-align: left">Diligencia los siguientes datos:</h6>
-        <br />
-        <div class="p-field p-grid">
+        <!--<br />
+         <div class="p-field p-grid">
           <span class="p-float-label">
             <InputText
               id="idDueno"
@@ -23,7 +23,7 @@
             />
             <label for="username">Cedula</label>
           </span>
-        </div>
+        </div> -->
         <br />
         <div class="p-field p-grid">
           <span class="p-float-label">
@@ -37,8 +37,8 @@
           </span>
         </div>
         <br />
-        <h6 style="text-align: center">Especie</h6>
-        <select v-model="mascota.especie" style="width: 370px">
+         <h6 style="text-align: left">Especie</h6>
+        <!--<select v-model="mascota.especie" style="width: 370px">
           <option disabled value="">Selecciona una raza</option>
           <option>Perro</option>
           <option>Gato</option>
@@ -46,6 +46,10 @@
           <option>pejelagarto</option>
           <option>Otra raza</option>
         </select>
+        <br /> -->
+        
+            <Dropdown v-model="mascota.especie" :options="tiposMascotas" optionLabel="name" placeholder="Seleccione una mascota" />
+        
         <br />
         <br />
         <div class="p-field p-grid">
@@ -59,8 +63,7 @@
             <label for="username">Raza</label>
           </span>
         </div>
-        <br />
-
+        
         <!-- <h6 style="text-align: center">Vacunas</h6>
         <div id="example-3" style="text-align: left">
           <input
@@ -132,14 +135,14 @@
         </div> -->
       </template>
       <template slot="footer">
-        <router-link to="/"
-          ><Button
+          <Button
             label="Registrarse"
             class="p-button-rounded p-button-success"
             @click="save"
-        /></router-link>
+        />
       </template>
     </Card>
+    <Message severity="error" v-if="datosFaltantes" >{{datosFaltantes}}</Message>
   </div>
 </template>
 
@@ -152,14 +155,18 @@ export default {
   data() {
     return {
       mascota: {
-        idDueno: {
-          idDueno: null,
-        },
+        idDueno: null,
         nombreMascota: null,
         especie: null,
         raza: null,
       },
-
+      tiposMascotas: [
+        {name : 'Perro'},
+        {name : 'Gato'},
+        {name : 'Caballo'},
+        {name : 'Pejelagarto'},
+      ],      
+      datosFaltantes: null,
       //   checkedNames: [],
       //   checkedNames2: [],
     };
@@ -167,34 +174,53 @@ export default {
   mascotaServ: null,
   created() {
     this.mascotaServ = new MascotaService();
+    this.datosFaltantes = null;
   },
   methods: {
     save() {
-      this.mascotaServ.agregarMascota(this.mascota).then((data) => {
-        if (data.status === 200) {
-          this.mascota = {
-            idDueno: {
-              idDueno: null,
-            },
-            nombreMascota: null,
-            especie: null,
-            raza: null,
-          };
-        }
-      });
-      this.$swal({
-        position: "top-end",
-        icon: "success",
-        title: "Mascota registrada correctamente",
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      console.log(this.mascota)
+      if(this.mascota.especie && this.mascota.nombreMascota && this.mascota.raza){
+        this.mascota.especie = this.mascota.especie.name;
+        this.mascota.idDueno = this.$store.state.userD;
+        this.mascotaServ.agregarMascota(this.mascota).then((data) => {
+          if (data.status === 200) {
+            this.mascota = {
+              idDueno: {
+                idDueno: null,
+              },
+              nombreMascota: null,
+              especie: null,
+              raza: null,
+              
+            };
+            this.datosFaltantes = null;
+          }
+        });
+        this.$swal({
+          position: "top-end",
+          icon: "success",
+          title: "Mascota registrada correctamente",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        this.$router.push("/")
+      }else{
+        this.datosFaltantes = "Datos faltantes, no sea manco";
+      }
+      
     },
   },
 };
 </script>
 
 <style scoped>
+  .p-dropdown {
+    width: 23rem;
+    margin-left: 0;
+    padding-left: 0;
+    margin-bottom: 15px;
+    text-align: left;
+}
 </style>
 
 
