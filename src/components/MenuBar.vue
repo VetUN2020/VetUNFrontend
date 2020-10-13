@@ -17,6 +17,7 @@
         <b-navbar-nav class="ml-auto">
           <template v-if="$store.state.authD">
             <b-nav-form>
+              
               <b-dropdown
                 id="dropdown-right"
                 text="Dueno"
@@ -25,6 +26,7 @@
                 class="my-2 mr-2 my-sm-3"
                 right
               >
+
                 <b-dropdown-item>Perfil</b-dropdown-item>
                 <b-dropdown-item @click="registrarMascota">Registrar Mascota</b-dropdown-item>
                 <b-dropdown-item @click="signOutDueno">Cerrar sesion</b-dropdown-item>

@@ -26,7 +26,7 @@ export default new Vuex.Store({
   },
   actions: {
     async signInDueno({dispatch}, credentials){
-      await axios.post("duenos/login", credentials).then(res =>{
+      await axios.post("duenos/login/", credentials).then(res =>{
         dispatch('setUserDueno', res.data);
       }).catch(() => {
         dispatch('setUserDueno', null);

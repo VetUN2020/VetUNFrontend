@@ -65,6 +65,7 @@ export default {
   },
   methods: {
     async login() {
+      console.log(this.form);
       await this.$store.dispatch("signInDueno", this.form);
       this.form = {
         correoElectronico: null,
