@@ -1,5 +1,6 @@
 <template>
-  <div class="home">  
+  <div class="home">
+    <img id="fondo" src="../assets/fondo.png" alt="" />
   </div>
 </template>
 
@@ -13,9 +14,14 @@ export default {
 </script>
 
 <style scoped>
-  .home{
-    padding-bottom: 625px;
-    background-image: url("../assets/fondo.png");
-    background-size: cover;
-  }
+#fondo {
+  /* padding-bottom: 625px;
+  background-image: url("../assets/fondo.png");
+  background-size: cover; */
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
 </style>
