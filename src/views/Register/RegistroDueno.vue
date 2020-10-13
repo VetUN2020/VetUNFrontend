@@ -119,7 +119,7 @@
 
 <script>
 // @ is an alias to /src
-import DuenoService from "../service/DuenoService";
+import DuenoService from "@/service/DuenoService";
 
 export default {
   name: "RegistroDueno",

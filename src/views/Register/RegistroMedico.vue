@@ -130,7 +130,7 @@
 
 <script>
 // @ is an alias to /src
-import MedicoService from "../service/MedicoService";
+import MedicoService from "@/service/MedicoService";
 
 export default {
   name: "registroMedico",
@@ -163,15 +163,14 @@ export default {
         this.medico.direccionResidencia &&
         this.medico.telefonoMedico &&
         this.medico.matriculaProfesional &&
-        this.medico.correoMedico && 
+        this.medico.correoMedico &&
         this.medico.contraseniaMedico
       ) {
-        
         this.medicoService.verificarCorreo(this.medico).then((data) => {
           if (data.data === true) {
             this.correoExistente = "Ya hay un usuario con este correo";
           } else {
-             this.medicoService.agregarMedico(this.medico).then((data) => {
+            this.medicoService.agregarMedico(this.medico).then((data) => {
               if (data.status === 200) {
                 this.medico = {
                   cedulaMedico: null,
@@ -190,7 +189,7 @@ export default {
                   showConfirmButton: false,
                   timer: 1500,
                 });
-                this.$router.push("/loginDueno");
+                this.$router.push("/loginMedico");
               }
             });
           }

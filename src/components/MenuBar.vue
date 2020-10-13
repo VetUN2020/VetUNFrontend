@@ -15,12 +15,16 @@
         <!-- Right aligned nav items -->
 
         <b-navbar-nav class="ml-auto">
-          <template v-if="$store.state.authD">
+          <template v-if="$store.state.Dueno.authD">
             <b-nav-form>
               
               <b-dropdown
                 id="dropdown-right"
-                text="Dueno"
+                v-bind:text="
+                  $store.state.Dueno.userD.nombreDueno +
+                  ' ' +
+                  $store.state.Dueno.userD.apellidoDueno
+                "
                 size="sm"
                 variant="success"
                 class="my-2 mr-2 my-sm-3"
@@ -28,9 +32,35 @@
               >
 
                 <b-dropdown-item>Perfil</b-dropdown-item>
-                <b-dropdown-item @click="registrarMascota">Registrar Mascota</b-dropdown-item>
-                <b-dropdown-item @click="signOutDueno">Cerrar sesion</b-dropdown-item>
+                <b-dropdown-item @click="registrarMascota"
+                  >Registrar Mascota</b-dropdown-item
+                >
+                <b-dropdown-item @click="signOutDueno"
+                  >Cerrar sesion</b-dropdown-item
+                >
+              </b-dropdown>
+            </b-nav-form>
+          </template>
 
+          <template v-else-if="$store.state.Medico.authM">
+            <b-nav-form>
+              <b-button variant="success" size="sm">Mis citas</b-button>
+              <b-dropdown
+                id="dropdown-right"
+                v-bind:text="
+                  $store.state.Medico.userM.nombreMedico +
+                  ' ' +
+                  $store.state.Medico.userM.apellidoMedico
+                "
+                size="sm"
+                variant="success"
+                class="my-2 mr-2 my-sm-3"
+                right
+              >
+                <b-dropdown-item>Perfil</b-dropdown-item>
+                <b-dropdown-item @click="signOutMedico"
+                  >Cerrar sesion</b-dropdown-item
+                >
               </b-dropdown>
             </b-nav-form>
           </template>
@@ -48,8 +78,12 @@
                 <b-dropdown-item @click="registrarseDueno"
                   >Dueño</b-dropdown-item
                 >
-                <b-dropdown-item @click="registrarseMedico">Medico veterinario</b-dropdown-item>
-                <b-dropdown-item @click="registerVeterinary">Veterinaria</b-dropdown-item>
+                <b-dropdown-item @click="registrarseMedico"
+                  >Medico veterinario</b-dropdown-item
+                >
+                <b-dropdown-item @click="registerVeterinary"
+                  >Veterinaria</b-dropdown-item
+                >
               </b-dropdown>
             </b-nav-form>
             <b-nav-form>
@@ -62,7 +96,9 @@
                 right
               >
                 <b-dropdown-item @click="loginDueno">Dueño</b-dropdown-item>
-                <b-dropdown-item>Medico veterinario</b-dropdown-item>
+                <b-dropdown-item @click="loginMedico"
+                  >Medico veterinario</b-dropdown-item
+                >
               </b-dropdown>
             </b-nav-form>
 
@@ -77,9 +113,8 @@
                 ></router-link
               >
             </b-nav-form> -->
-            </template>
-          </b-navbar-nav>
-          
+          </template>
+        </b-navbar-nav>
       </b-collapse>
     </b-navbar>
   </div>
@@ -89,7 +124,7 @@
 export default {
   data() {
     return {
-      nombre: '',
+      nombre: "",
     };
   },
   methods: {
@@ -99,28 +134,34 @@ export default {
     loginDueno() {
       this.$router.push("/loginDueno");
     },
-    registerVeterinary(){
-      this.$router.push("/regvet")
+    loginMedico() {
+      this.$router.push("/loginMedico");
     },
-    async signOutDueno(){
-      await this.$store.dispatch("signOutDueno");
+    registerVeterinary() {
+      this.$router.push("/regvet");
+    },
+    async signOutDueno() {
+      await this.$store.dispatch("Dueno/signOutDueno");
+      this.$router.push("/");
+    },
+    async signOutMedico() {
+      await this.$store.dispatch("Medico/signOutMedico");
       this.$router.push("/");
     },
     registrarseMedico() {
       this.$router.push("/registroMedico");
     },
-    registrarMascota(){
-      this.$router.push("/mascotaRegistro")
-    }
+    registrarMascota() {
+      this.$router.push("/mascotaRegistro");
+    },
   },
-  
 };
 </script>
 
 <style>
-  #navBarGeneral{
-     position: fixed;
-     width: 100%;
-     z-index: 100;
-  }
+#navBarGeneral {
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+}
 </style>

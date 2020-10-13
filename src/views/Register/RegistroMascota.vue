@@ -37,7 +37,7 @@
           </span>
         </div>
         <br />
-         <h6 style="text-align: left">Especie</h6>
+        <h6 style="text-align: left">Especie</h6>
         <!--<select v-model="mascota.especie" style="width: 370px">
           <option disabled value="">Selecciona una raza</option>
           <option>Perro</option>
@@ -47,9 +47,14 @@
           <option>Otra raza</option>
         </select>
         <br /> -->
-        
-            <Dropdown v-model="mascota.especie" :options="tiposMascotas" optionLabel="name" placeholder="Seleccione una mascota" />
-        
+
+        <Dropdown
+          v-model="mascota.especie"
+          :options="tiposMascotas"
+          optionLabel="name"
+          placeholder="Seleccione una mascota"
+        />
+
         <br />
         <br />
         <div class="p-field p-grid">
@@ -63,7 +68,7 @@
             <label for="username">Raza</label>
           </span>
         </div>
-        
+
         <!-- <h6 style="text-align: center">Vacunas</h6>
         <div id="example-3" style="text-align: left">
           <input
@@ -135,20 +140,22 @@
         </div> -->
       </template>
       <template slot="footer">
-          <Button
-            label="Registrarse"
-            class="p-button-rounded p-button-success"
-            @click="save"
+        <Button
+          label="Registrarse"
+          class="p-button-rounded p-button-success"
+          @click="save"
         />
       </template>
     </Card>
-    <Message severity="error" v-if="datosFaltantes" >{{datosFaltantes}}</Message>
+    <Message severity="error" v-if="datosFaltantes">{{
+      datosFaltantes
+    }}</Message>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import MascotaService from "../service/MascotaService";
+import MascotaService from "@/service/MascotaService";
 
 export default {
   name: "RegistroMascota",
@@ -161,11 +168,11 @@ export default {
         raza: null,
       },
       tiposMascotas: [
-        {name : 'Perro'},
-        {name : 'Gato'},
-        {name : 'Caballo'},
-        {name : 'Pejelagarto'},
-      ],      
+        { name: "Perro" },
+        { name: "Gato" },
+        { name: "Caballo" },
+        { name: "Pejelagarto" },
+      ],
       datosFaltantes: null,
       //   checkedNames: [],
       //   checkedNames2: [],
@@ -178,8 +185,12 @@ export default {
   },
   methods: {
     save() {
-      console.log(this.mascota)
-      if(this.mascota.especie && this.mascota.nombreMascota && this.mascota.raza){
+      console.log(this.mascota);
+      if (
+        this.mascota.especie &&
+        this.mascota.nombreMascota &&
+        this.mascota.raza
+      ) {
         this.mascota.especie = this.mascota.especie.name;
         this.mascota.idDueno = this.$store.state.userD;
         this.mascotaServ.agregarMascota(this.mascota).then((data) => {
@@ -191,7 +202,6 @@ export default {
               nombreMascota: null,
               especie: null,
               raza: null,
-              
             };
             this.datosFaltantes = null;
           }
@@ -203,23 +213,22 @@ export default {
           showConfirmButton: false,
           timer: 1500,
         });
-        this.$router.push("/")
-      }else{
+        this.$router.push("/");
+      } else {
         this.datosFaltantes = "Datos faltantes, no sea manco";
       }
-      
     },
   },
 };
 </script>
 
 <style scoped>
-  .p-dropdown {
-    width: 23rem;
-    margin-left: 0;
-    padding-left: 0;
-    margin-bottom: 15px;
-    text-align: left;
+.p-dropdown {
+  width: 23rem;
+  margin-left: 0;
+  padding-left: 0;
+  margin-bottom: 15px;
+  text-align: left;
 }
 </style>
 
