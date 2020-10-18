@@ -17,6 +17,7 @@
         <b-navbar-nav class="ml-auto">
           <template v-if="$store.state.Dueno.authD">
             <b-nav-form>
+              
               <b-dropdown
                 id="dropdown-right"
                 v-bind:text="
@@ -29,6 +30,7 @@
                 class="my-2 mr-2 my-sm-3"
                 right
               >
+
                 <b-dropdown-item>Perfil</b-dropdown-item>
                 <b-dropdown-item @click="registrarMascota"
                   >Registrar Mascota</b-dropdown-item
@@ -42,7 +44,7 @@
 
           <template v-else-if="$store.state.Medico.authM">
             <b-nav-form>
-              <b-button variant="success" size="sm">Mis citas</b-button>
+              <b-button variant="success" size="sm" class="my-2 mr-2 my-sm-3">Mis citas</b-button>
               <b-dropdown
                 id="dropdown-right"
                 v-bind:text="
@@ -140,6 +142,7 @@ export default {
     },
     async signOutDueno() {
       await this.$store.dispatch("Dueno/signOutDueno");
+      localStorage.clear();
       this.$router.push("/");
     },
     async signOutMedico() {

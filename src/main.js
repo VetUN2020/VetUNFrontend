@@ -64,6 +64,12 @@ Vue.component('v-style', {
 new Vue({
     router,
     store,
+    created(){   
+      if(localStorage.getItem('UsuarioDueno')){   
+        this.$store.state.Dueno.userD = JSON.parse(localStorage.getItem('UsuarioDueno'));
+        this.$store.state.Dueno.authD = true;
+      }
+    },
     render: h => h(App),
   }).$mount('#app')
 
