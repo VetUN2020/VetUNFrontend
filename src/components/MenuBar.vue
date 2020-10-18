@@ -44,7 +44,7 @@
 
           <template v-else-if="$store.state.Medico.authM">
             <b-nav-form>
-              <b-button variant="success" size="sm">Mis citas</b-button>
+              <b-button variant="success" size="sm" class="my-2 mr-2 my-sm-3">Mis citas</b-button>
               <b-dropdown
                 id="dropdown-right"
                 v-bind:text="
@@ -142,6 +142,7 @@ export default {
     },
     async signOutDueno() {
       await this.$store.dispatch("Dueno/signOutDueno");
+      localStorage.clear();
       this.$router.push("/");
     },
     async signOutMedico() {
