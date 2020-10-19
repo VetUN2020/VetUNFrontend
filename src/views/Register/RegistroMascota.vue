@@ -12,18 +12,6 @@
       <template slot="title"> Registra tu mascota </template>
       <template slot="content">
         <h6 style="text-align: left">Diligencia los siguientes datos:</h6>
-        <!--<br />
-         <div class="p-field p-grid">
-          <span class="p-float-label">
-            <InputText
-              id="idDueno"
-              type="text"
-              v-model="mascota.idDueno.idDueno"
-              style="width: 100%"
-            />
-            <label for="username">Cedula</label>
-          </span>
-        </div> -->
         <br />
         <div class="p-field p-grid">
           <span class="p-float-label">
@@ -38,15 +26,6 @@
         </div>
         <br />
         <h6 style="text-align: left">Especie</h6>
-        <!--<select v-model="mascota.especie" style="width: 370px">
-          <option disabled value="">Selecciona una raza</option>
-          <option>Perro</option>
-          <option>Gato</option>
-          <option>Caballo</option>
-          <option>pejelagarto</option>
-          <option>Otra raza</option>
-        </select>
-        <br /> -->
 
         <Dropdown
           v-model="mascota.especie"
@@ -68,76 +47,6 @@
             <label for="username">Raza</label>
           </span>
         </div>
-
-        <!-- <h6 style="text-align: center">Vacunas</h6>
-        <div id="example-3" style="text-align: left">
-          <input
-            type="checkbox"
-            id="Moquillo"
-            value="Moquillo"
-            v-model="checkedNames"
-          />
-          <label for="Moquillo">_Moquillo</label>
-          <br />
-          <input
-            type="checkbox"
-            id="adenovirus"
-            value="adenovirus"
-            v-model="checkedNames"
-          />
-          <label for="adenovirus">_Adenovirus</label>
-          <br />
-          <input
-            type="checkbox"
-            id="parvovirus"
-            value="parvovirus"
-            v-model="checkedNames"
-          />
-          <label for="parvovirus">_Parvovirus</label>
-          <br />
-          <input
-            type="checkbox"
-            id="adenovirus2"
-            value="adenovirus2"
-            v-model="checkedNames"
-          />
-          <label for="adenovirus2">_Adenovirus2</label>
-        </div>
-
-        <h6 style="text-align: center">Citas</h6>
-        <div id="example-3" style="text-align: left">
-          <input
-            type="checkbox"
-            id="Lunes"
-            value="Lunes"
-            v-model="checkedNames2"
-          />
-          <label for="Lunes">_Lunes</label>
-          <br />
-          <input
-            type="checkbox"
-            id="Martes"
-            value="Martes"
-            v-model="checkedNames2"
-          />
-          <label for="Martes">_Martes</label>
-          <br />
-          <input
-            type="checkbox"
-            id="Miercoles"
-            value="Miercoles"
-            v-model="checkedNames2"
-          />
-          <label for="Miercoles">_Miercoles</label>
-          <br />
-          <input
-            type="checkbox"
-            id="Jueves"
-            value="Jueves"
-            v-model="checkedNames2"
-          />
-          <label for="Jueves">_Jueves</label>
-        </div> -->
       </template>
       <template slot="footer">
         <Button
@@ -174,8 +83,6 @@ export default {
         { name: "Pejelagarto" },
       ],
       datosFaltantes: null,
-      //   checkedNames: [],
-      //   checkedNames2: [],
     };
   },
   mascotaServ: null,
@@ -231,5 +138,3 @@ export default {
   text-align: left;
 }
 </style>
-
-

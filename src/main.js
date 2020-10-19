@@ -13,6 +13,7 @@ import Password from 'primevue/password';
 import InputNumber from 'primevue/inputnumber';
 import Message from 'primevue/message';
 import Dropdown from 'primevue/dropdown';
+import Calendar from 'primevue/calendar';
 
 import {
   BootstrapVue,
@@ -47,6 +48,7 @@ Vue.component('Card', Card)
 Vue.component('InputNumber', InputNumber)
 Vue.component('Message', Message)
 Vue.component('Dropdown', Dropdown)
+Vue.component('Calendar', Calendar)
 
 Vue.component('b-navbar', BNavbar)
 Vue.component('b-form', BForm)

@@ -35,6 +35,7 @@
                 <b-dropdown-item @click="registrarMascota"
                   >Registrar Mascota</b-dropdown-item
                 >
+                <b-dropdown-item @click="agendarCita">Agendar Cita</b-dropdown-item>
                 <b-dropdown-item @click="signOutDueno"
                   >Cerrar sesion</b-dropdown-item
                 >
@@ -154,6 +155,9 @@ export default {
     },
     registrarMascota() {
       this.$router.push("/mascotaRegistro");
+    },
+    agendarCita() {
+      this.$router.push("/agendarCita");
     },
   },
 };
