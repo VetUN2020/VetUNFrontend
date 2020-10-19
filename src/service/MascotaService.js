@@ -10,4 +10,11 @@ export default class MascotaService {
         return axios.post("mascotas", mascota);
     }
 
+    getByIdDueno(idDueno) {
+        return axios.get("mascotas/byIdDueno/" + idDueno);
+    }
+
+    getMascotaById(idMascota) {
+        return axios.get("mascotas/" + idMascota);
+    }
 }
