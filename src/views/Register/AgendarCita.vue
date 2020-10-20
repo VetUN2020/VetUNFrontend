@@ -27,6 +27,7 @@
           optionLabel="name"
           placeholder="Selecciona una veterinaria"
         />
+        <br><br>
         <h6 style="text-align: left">Elegir mascota</h6>
         <br>
         <button type="button" class="btn btn-primary" @click="cargarMascotas">Cargar mis mascotas</button>
@@ -39,7 +40,7 @@
         />
         <br><br>
         <h6 style="text-align: left">Elegir tipo de consulta</h6>
-        <br>
+        <br><br>
         <Dropdown
           v-model="cita.tipoCita"
           :options="tiposCitas"
