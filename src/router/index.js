@@ -9,6 +9,7 @@ import LoginMedico from '../views/Login/LoginMedico.vue'
 import RegistroMedico from '../views/Register/RegistroMedico.vue'
 import RegistroMascota from '../views/Register/RegistroMascota.vue'
 import AgendarCita from '../views/Register/AgendarCita.vue'
+import VetProfile from '../views/Profile/VetProfile.vue'
 
 
 Vue.use(VueRouter)
@@ -56,6 +57,10 @@ export default new VueRouter({
             path: '/agendarCita',
             name: 'agendarCita',
             component: AgendarCita
+        }, {
+            path: '/vetProfile',
+            name: 'vetProfile',
+            component: VetProfile
         }
     ]
 })

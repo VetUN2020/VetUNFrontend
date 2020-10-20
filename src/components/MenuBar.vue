@@ -58,7 +58,7 @@
                 class="my-2 mr-2 my-sm-3"
                 right
               >
-                <b-dropdown-item>Perfil</b-dropdown-item>
+                <b-dropdown-item @click="vetProfile">Perfil</b-dropdown-item>
                 <b-dropdown-item @click="signOutMedico"
                   >Cerrar sesion</b-dropdown-item
                 >
@@ -158,6 +158,9 @@ export default {
     },
     agendarCita() {
       this.$router.push("/agendarCita");
+    },
+    vetProfile() {
+      this.$router.push("/vetProfile");
     },
   },
 };
