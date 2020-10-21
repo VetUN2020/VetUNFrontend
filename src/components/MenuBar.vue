@@ -30,8 +30,7 @@
                 class="my-2 mr-2 my-sm-3"
                 right
               >
-
-                <b-dropdown-item>Perfil</b-dropdown-item>
+                <b-dropdown-item @click="perfilDueno">Perfil</b-dropdown-item>
                 <b-dropdown-item @click="registrarMascota"
                   >Registrar Mascota</b-dropdown-item
                 >
@@ -161,6 +160,9 @@ export default {
     },
     vetProfile() {
       this.$router.push("/vetProfile");
+    },
+    perfilDueno() {
+      this.$router.push("/DuenoProfile");
     },
   },
 };
