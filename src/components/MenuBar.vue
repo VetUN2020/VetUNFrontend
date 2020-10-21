@@ -44,8 +44,26 @@
 
           <template v-else-if="$store.state.Medico.authM">
             <b-nav-form>
-              <b-button variant="success" size="sm" class="my-2 mr-2 my-sm-3">Mis citas</b-button>
-              <b-dropdown
+              
+              <b-button  @click="dates" variant="success" size="sm" class="my-2 mr-2 my-sm-3">Mis citas</b-button>
+
+               <b-button @click="registerVeterinary" variant="success" size="sm" class="my-2 mr-2 my-sm-3">Registrar Veterinaria</b-button>
+               <b-button @click="profileVeterinary" variant="success" size="sm" class="my-2 mr-2 my-sm-3">Perfil Veterinaria</b-button>
+
+                <b-dropdown
+                id="dropdown-right"
+                text="Veterinaria"
+                size="sm"
+                variant="success"
+                class="my-2 mr-2 my-sm-3"
+                right
+              >
+                <b-dropdown-item  @click="profileVeterinary">Perfil</b-dropdown-item>
+                <b-dropdown-item  @click="registerVeterinary">Registrar</b-dropdown-item>               
+              
+              </b-dropdown>
+
+               <b-dropdown
                 id="dropdown-right"
                 v-bind:text="
                   $store.state.Medico.userM.nombreMedico +
@@ -62,6 +80,7 @@
                   >Cerrar sesion</b-dropdown-item
                 >
               </b-dropdown>
+             
             </b-nav-form>
           </template>
 
@@ -81,9 +100,7 @@
                 <b-dropdown-item @click="registrarseMedico"
                   >Medico veterinario</b-dropdown-item
                 >
-                <b-dropdown-item @click="registerVeterinary"
-                  >Veterinaria</b-dropdown-item
-                >
+                
               </b-dropdown>
             </b-nav-form>
             <b-nav-form>
@@ -96,23 +113,10 @@
                 right
               >
                 <b-dropdown-item @click="loginDueno">Dueño</b-dropdown-item>
-                <b-dropdown-item @click="loginMedico"
-                  >Medico veterinario</b-dropdown-item
-                >
+                <b-dropdown-item @click="loginMedico">Medico veterinario</b-dropdown-item>
               </b-dropdown>
             </b-nav-form>
-
-            <!-- <b-nav-form>
-              <router-link to="/mascotaRegistro"
-                ><b-button
-                  variant="success"
-                  size="sm"
-                  class="my-2 mr-2 my-sm-3"
-                  type="submit"
-                  >Mis mascotas</b-button
-                ></router-link
-              >
-            </b-nav-form> -->
+           
           </template>
         </b-navbar-nav>
       </b-collapse>
@@ -164,6 +168,11 @@ export default {
     perfilDueno() {
       this.$router.push("/DuenoProfile");
     },
+    profileVeterinary(){
+      this.$router.push("/veterinariaProfile");
+    },dates(){
+      this.$router.push("/misCitas");
+    }
   },
 };
 </script>
