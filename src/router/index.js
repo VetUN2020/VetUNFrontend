@@ -12,11 +12,16 @@ import RegistroMascota from '../views/Register/RegistroMascota.vue'
 
 Vue.use(VueRouter)
 
+
 export default new VueRouter({
+
     routes: [{
             path: '/',
             name: 'Home',
-            component: Home
+            component: Home,
+            meta: {
+                title: 'homePage'
+            }
         },
         {
             path: '/crud',

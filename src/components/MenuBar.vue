@@ -42,7 +42,9 @@
 
           <template v-else-if="$store.state.Medico.authM">
             <b-nav-form>
-              <b-button variant="success" size="sm">Mis citas</b-button>
+              <b-button variant="success" class="my-2 mr-2 my-sm-3" size="sm"
+                >Mis citas</b-button
+              >
               <b-dropdown
                 id="dropdown-right"
                 v-bind:text="
