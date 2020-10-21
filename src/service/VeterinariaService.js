@@ -17,7 +17,6 @@ export default class VeterinariaService {
     }
 
     getVeterinaryNames() {
-
         return axios.get("veterinarias/name");
     }
 

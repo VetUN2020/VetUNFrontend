@@ -26,6 +26,10 @@ export default class CitasService {
         return axios.get("citas/ByVeterinaryAndDate/", idVeterinary, "/", fecha);
     }
 
+    findByVeterinary(idVeterinary){
+        return axios.get("citas/ByVeterinary/", idVeterinary);
+    }
+
     checkAvailabilityByDateAndIdVeterinary(fecha, idVeterinary){
 
         return axios.get("/citas/Availability/"+ fecha + "/" + idVeterinary);

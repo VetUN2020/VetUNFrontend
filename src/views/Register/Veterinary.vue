@@ -84,6 +84,7 @@
 <script>
 import VeterinariaService from "../../service/VeterinariaService";
 
+
 export default {
   veterinariaService: null,
   created() {
@@ -98,7 +99,7 @@ export default {
         telefonoVeterinaria: null,
         localizacion: null,
         tipoVeterinaria: null,
-      },
+      }
     };
   },
   components: {},
@@ -117,6 +118,7 @@ export default {
             };
           }
         });
+
       this.$swal({
         position: "top-end",
         icon: "success",
@@ -124,7 +126,7 @@ export default {
         showConfirmButton: false,
         timer: 1500,
       });
-    },
-  },
+    }
+  }
 };
 </script>
