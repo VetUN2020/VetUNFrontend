@@ -63,15 +63,13 @@ export default new VueRouter({
             name: 'vetProfile',
             component: VetProfile
         }, {
-<<<<<<< HEAD
             path: '/DuenoProfile',
             name: 'DuenoProfile',
             component: DuenoProfile
-=======
+        }, {
             path: '/veterinariaProfile',
             name: 'veterinariaProfile',
             component: VeterinariaProfile
->>>>>>> fb2c026ef7282aeb19218cbb93658832169aef12
         }
     ]
 })
