@@ -6,7 +6,7 @@
           <img
             src="../assets/Icono.png"
             class="d-inline-block align-top"
-            height="50px" /></b-navbar-brand
+            height="50px"/></b-navbar-brand
       ></router-link>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -21,8 +21,8 @@
                 id="dropdown-right"
                 v-bind:text="
                   $store.state.Dueno.userD.nombreDueno +
-                  ' ' +
-                  $store.state.Dueno.userD.apellidoDueno
+                    ' ' +
+                    $store.state.Dueno.userD.apellidoDueno
                 "
                 size="sm"
                 variant="success"
@@ -33,6 +33,9 @@
                 <b-dropdown-item @click="registrarMascota"
                   >Registrar Mascota</b-dropdown-item
                 >
+                <b-dropdown-item @click="agendarCita"
+                  >Agendar Cita</b-dropdown-item
+                >
                 <b-dropdown-item @click="signOutDueno"
                   >Cerrar sesion</b-dropdown-item
                 >
@@ -42,22 +45,58 @@
 
           <template v-else-if="$store.state.Medico.authM">
             <b-nav-form>
-              <b-button variant="success" class="my-2 mr-2 my-sm-3" size="sm"
+              <b-button
+                @click="dates"
+                variant="success"
+                size="sm"
+                class="my-2 mr-2 my-sm-3"
                 >Mis citas</b-button
               >
+
+              <b-button
+                @click="registerVeterinary"
+                variant="success"
+                size="sm"
+                class="my-2 mr-2 my-sm-3"
+                >Registrar Veterinaria</b-button
+              >
+              <b-button
+                @click="profileVeterinary"
+                variant="success"
+                size="sm"
+                class="my-2 mr-2 my-sm-3"
+                >Perfil Veterinaria</b-button
+              >
+
+              <b-dropdown
+                id="dropdown-right"
+                text="Veterinaria"
+                size="sm"
+                variant="success"
+                class="my-2 mr-2 my-sm-3"
+                right
+              >
+                <b-dropdown-item @click="profileVeterinary"
+                  >Perfil</b-dropdown-item
+                >
+                <b-dropdown-item @click="registerVeterinary"
+                  >Registrar</b-dropdown-item
+                >
+              </b-dropdown>
+
               <b-dropdown
                 id="dropdown-right"
                 v-bind:text="
                   $store.state.Medico.userM.nombreMedico +
-                  ' ' +
-                  $store.state.Medico.userM.apellidoMedico
+                    ' ' +
+                    $store.state.Medico.userM.apellidoMedico
                 "
                 size="sm"
                 variant="success"
                 class="my-2 mr-2 my-sm-3"
                 right
               >
-                <b-dropdown-item>Perfil</b-dropdown-item>
+                <b-dropdown-item @click="vetProfile">Perfil</b-dropdown-item>
                 <b-dropdown-item @click="signOutMedico"
                   >Cerrar sesion</b-dropdown-item
                 >
@@ -81,9 +120,6 @@
                 <b-dropdown-item @click="registrarseMedico"
                   >Medico veterinario</b-dropdown-item
                 >
-                <b-dropdown-item @click="registerVeterinary"
-                  >Veterinaria</b-dropdown-item
-                >
               </b-dropdown>
             </b-nav-form>
             <b-nav-form>
@@ -101,18 +137,6 @@
                 >
               </b-dropdown>
             </b-nav-form>
-
-            <!-- <b-nav-form>
-              <router-link to="/mascotaRegistro"
-                ><b-button
-                  variant="success"
-                  size="sm"
-                  class="my-2 mr-2 my-sm-3"
-                  type="submit"
-                  >Mis mascotas</b-button
-                ></router-link
-              >
-            </b-nav-form> -->
           </template>
         </b-navbar-nav>
       </b-collapse>
@@ -142,6 +166,7 @@ export default {
     },
     async signOutDueno() {
       await this.$store.dispatch("Dueno/signOutDueno");
+      localStorage.clear();
       this.$router.push("/");
     },
     async signOutMedico() {
@@ -153,6 +178,18 @@ export default {
     },
     registrarMascota() {
       this.$router.push("/mascotaRegistro");
+    },
+    agendarCita() {
+      this.$router.push("/agendarCita");
+    },
+    vetProfile() {
+      this.$router.push("/vetProfile");
+    },
+    profileVeterinary() {
+      this.$router.push("/veterinariaProfile");
+    },
+    dates() {
+      this.$router.push("/misCitas");
     },
   },
 };

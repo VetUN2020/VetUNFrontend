@@ -74,6 +74,7 @@ export default {
       };
       if (!this.$store.state.Dueno.userNF) {
         this.$router.push("/");
+        localStorage.setItem('UsuarioDueno', JSON.stringify(this.$store.state.Dueno.userD));
       } else {
         this.datosIncorrectos = "Datos incorrectos";
       }

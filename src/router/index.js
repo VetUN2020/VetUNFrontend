@@ -8,6 +8,10 @@ import LoginDueno from '../views/Login/LoginDueno.vue'
 import LoginMedico from '../views/Login/LoginMedico.vue'
 import RegistroMedico from '../views/Register/RegistroMedico.vue'
 import RegistroMascota from '../views/Register/RegistroMascota.vue'
+import AgendarCita from '../views/Register/AgendarCita.vue'
+import CitasVet from '../views/Agenda/Veterinario.vue'
+import VetProfile from '../views/Profile/VetProfile.vue'
+import VeterinariaProfile from '../views/Profile/Veterinaria.vue'
 
 
 Vue.use(VueRouter)
@@ -16,46 +20,52 @@ Vue.use(VueRouter)
 export default new VueRouter({
 
     routes: [{
-            path: '/',
-            name: 'Home',
-            component: Home,
-            meta: {
-                title: 'homePage'
-            }
-        },
-        {
-            path: '/crud',
-            name: 'CrudApp',
-            component: Table
-        },
-        {
-            path: '/registroDueno',
-            name: 'registroDueno',
-            component: RegistroDueno
-        },
-        {
-            path: '/mascotaRegistro',
-            name: 'registroMascota',
-            component: RegistroMascota
-        },
-        {
-            path: '/loginDueno',
-            name: 'loginDueno',
-            component: LoginDueno
-        },
-        {
-            path: '/loginMedico',
-            name: 'loginMedico',
-            component: LoginMedico
-        },
-        {
-            path: '/registroMedico',
-            name: 'registroMedico',
-            component: RegistroMedico
-        }, {
-            path: '/regvet',
-            name: 'veterinary',
-            component: Veterinary
-        }
-    ]
+        path: '/',
+        name: 'Home',
+        component: Home
+    }, {
+        path: '/crud',
+        name: 'CrudApp',
+        component: Table
+    }, {
+        path: '/registroDueno',
+        name: 'registroDueno',
+        component: RegistroDueno
+    }, {
+        path: '/mascotaRegistro',
+        name: 'registroMascota',
+        component: RegistroMascota
+    }, {
+        path: '/loginDueno',
+        name: 'loginDueno',
+        component: LoginDueno
+    }, {
+        path: '/loginMedico',
+        name: 'loginMedico',
+        component: LoginMedico
+    }, {
+        path: '/registroMedico',
+        name: 'registroMedico',
+        component: RegistroMedico
+    }, {
+        path: '/regvet',
+        name: 'veterinary',
+        component: Veterinary
+    }, {
+        path: '/agendarCita',
+        name: 'agendarCita',
+        component: AgendarCita
+    }, {
+        path: '/misCitas',
+        name: 'citasVet',
+        component: CitasVet
+    }, {
+        path: '/vetProfile',
+        name: 'vetProfile',
+        component: VetProfile
+    }, {
+        path: '/veterinariaProfile',
+        name: 'veterinariaProfile',
+        component: VeterinariaProfile
+    }]
 })
