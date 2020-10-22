@@ -92,14 +92,13 @@ export default {
   },
   methods: {
     save() {
-      console.log(this.mascota);
       if (
         this.mascota.especie &&
         this.mascota.nombreMascota &&
         this.mascota.raza
       ) {
         this.mascota.especie = this.mascota.especie.name;
-        this.mascota.idDueno = this.$store.state.userD;
+        this.mascota.idDueno = this.$store.state.Dueno.userD;
         this.mascotaServ.agregarMascota(this.mascota).then((data) => {
           if (data.status === 200) {
             this.mascota = {

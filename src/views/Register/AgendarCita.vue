@@ -11,45 +11,67 @@
     >
       <template slot="title"> Agendar cita </template>
       <template slot="content">
-        <h6 style="text-align: left">Diligencia los siguientes datos para obtener tu cita:</h6>
+        <h6 style="text-align: left">
+          Diligencia los siguientes datos para obtener tu cita:
+        </h6>
         <br />
         <h6 style="text-align: left">Fecha</h6>
-        <br>
-        <Calendar v-model="cita.fechaCita" :showTime="true" :minDate="hoy" dateFormat="dd.mm.yy" hourFormat="12" />
-        <br><br>
+        <br />
+        <Calendar
+          v-model="cita.fechaCita"
+          :showTime="true"
+          :minDate="hoy"
+          dateFormat="dd.mm.yy"
+          hourFormat="12"
+        />
+        <br /><br />
         <h6 style="text-align: left">Elegir veterinaria</h6>
-        <br>
-        <button type="button" class="btn btn-primary" @click="cargarVeterinarias">Cargar Veterinarias</button>
-        <br><br><br>
+        <br />
+        <button
+          type="button"
+          class="btn btn-primary"
+          @click="cargarVeterinarias"
+        >
+          Cargar Veterinarias
+        </button>
+        <br /><br /><br />
         <Dropdown
           v-model="idVeterinariaAux"
           :options="vetDisp"
           optionLabel="name"
           placeholder="Selecciona una veterinaria"
         />
-        <br><br>
+        <br /><br />
         <h6 style="text-align: left">Elegir mascota</h6>
-        <br>
-        <button type="button" class="btn btn-primary" @click="cargarMascotas">Cargar mis mascotas</button>
-        <br><br><br>
+        <br />
+        <button type="button" class="btn btn-primary" @click="cargarMascotas">
+          Cargar mis mascotas
+        </button>
+        <br /><br /><br />
         <Dropdown
           v-model="idMascotaAux"
           :options="misMascotas"
           optionLabel="name"
           placeholder="Selecciona una de tus mascotas"
         />
-        <br><br>
+        <br /><br />
         <h6 style="text-align: left">Elegir tipo de consulta</h6>
-        <br><br>
+        <br /><br />
         <Dropdown
           v-model="cita.tipoCita"
           :options="tiposCitas"
           optionLabel="name"
           placeholder="Selecciona tipo de consulta"
         />
-        <br><br><br>
-        <button type="button" class="btn btn-outline-info" @click="verificarDisponibilidad">Verificar disponibilidad</button>
-        <br><br>
+        <br /><br /><br />
+        <button
+          type="button"
+          class="btn btn-outline-info"
+          @click="verificarDisponibilidad"
+        >
+          Verificar disponibilidad
+        </button>
+        <br /><br />
       </template>
       <template slot="footer">
         <Button
@@ -59,7 +81,7 @@
         />
       </template>
     </Card>
-  <Message severity="error" v-if="datosFaltantes">{{
+    <Message severity="error" v-if="datosFaltantes">{{
       datosFaltantes
     }}</Message>
   </div>
@@ -68,8 +90,8 @@
 <script>
 // @ is an alias to /src
 import CitasService from "@/service/CitasService";
-import VeterinariaService from "@/service/VeterinariaService"
-import MascotaService from "@/service/MascotaService"
+import VeterinariaService from "@/service/VeterinariaService";
+import MascotaService from "@/service/MascotaService";
 
 export default {
   name: "agendarCita",
@@ -80,11 +102,11 @@ export default {
     this.citaService = new CitasService();
     this.veterinariaService = new VeterinariaService();
     this.mascotaService = new MascotaService();
-    this.veterinariaService.getVeterinaryNames().then(response => {
-        this.veterinariasDisponibles = response.data;
+    this.veterinariaService.getVeterinaryNames().then((response) => {
+      this.veterinariasDisponibles = response.data;
     });
-    this.mascotaService.getByIdDueno(this.idDueno).then(response => {
-        this.misMascotasAux = response.data;
+    this.mascotaService.getByIdDueno(this.idDueno).then((response) => {
+      this.misMascotasAux = response.data;
     });
   },
   data() {
@@ -94,78 +116,89 @@ export default {
       disp: new Boolean(false),
       idDueno: this.$store.state.Dueno.userD.idDueno,
       hoy: new Date(),
-      idVeterinariaAux: null, 
-      idVeterinariaAux2:null,
+      idVeterinariaAux: null,
+      idVeterinariaAux2: null,
       idMascotaAux: null,
       idMascotaAux2: null,
       cita: {
         fechaCita: null,
         idVeterinaria: {
-            idVeterinaria: null,
-            nombreVeterinaria: null,
-            direccionVeterinaria: null,
-            telefonoVeterinaria: null,
-            localizacion: null,
-            tipoVeterinaria: null
+          idVeterinaria: null,
+          nombreVeterinaria: null,
+          direccionVeterinaria: null,
+          telefonoVeterinaria: null,
+          localizacion: null,
+          tipoVeterinaria: null,
         },
         tipoCita: null,
         idMascota: {
           idMascota: null,
-            idDueno: {
-                idDueno: null,
-                cedulaDueno: null,
-                nombreDueno: null,
-                apellidoDueno: null,
-                telefonoDueno: null,
-                direccionCasa: null,
-                correoElectronico: null,
-                contraseniaDueno: null
-            },
-            nombreMascota: null,
-            especie: null,
-            raza: null
+          idDueno: {
+            idDueno: null,
+            cedulaDueno: null,
+            nombreDueno: null,
+            apellidoDueno: null,
+            telefonoDueno: null,
+            direccionCasa: null,
+            correoElectronico: null,
+            contraseniaDueno: null,
+          },
+          nombreMascota: null,
+          especie: null,
+          raza: null,
         },
       },
-      tiposCitas:[
-        {name: "Consulta"},
-        {name: "Cirugia"}
-      ],
+      tiposCitas: [{ name: "Consulta" }, { name: "Cirugia" }],
       datosFaltantes: null,
       error: null,
       correoExistente: null,
       veterinariasDisponibles: [],
-      vetDisp: []
+      vetDisp: [],
     };
   },
   methods: {
-    cargarVeterinarias(){
+    cargarVeterinarias() {
       var i = 0;
-      this.veterinariasDisponibles.forEach(element => {
-        this.vetDisp[i] = {name: element};
+      this.veterinariasDisponibles.forEach((element) => {
+        this.vetDisp[i] = { name: element };
         i = i + 1;
       });
     },
-    cargarMascotas(){
+    cargarMascotas() {
       var i = 0;
-      this.misMascotasAux.forEach(element => {
-        this.misMascotas[i] = {name: element};
+      this.misMascotasAux.forEach((element) => {
+        this.misMascotas[i] = { name: element };
         i = i + 1;
       });
     },
-    verificarDisponibilidad(){
-      if(this.cita.fechaCita != null && this.idVeterinariaAux != null){
-        this.disp = this.citaService.checkAvailabilityByDateAndIdVeterinary(this.cita.fechaCita, (Object.values(this.idVeterinariaAux).toString().split(" ")[0]))
-        .then(response => {
+    verificarDisponibilidad() {
+      if (this.cita.fechaCita != null && this.idVeterinariaAux != null) {
+        this.disp = this.citaService
+          .checkAvailabilityByDateAndIdVeterinary(
+            this.cita.fechaCita,
+            Object.values(this.idVeterinariaAux)
+              .toString()
+              .split(" ")[0]
+          )
+          .then((response) => {
             return response.data;
-        });
+          });
         if (Object.values(this.disp)) {
-          this.veterinariaService
-          this.idVeterinariaAux2 = (Object.values(this.idVeterinariaAux).toString().split(" ")[0]);
-          this.idMascotaAux2 = (Object.values(this.idMascotaAux).toString().split(" ")[0]);
-          alert("La fecha que ingresaste esta disponible para que realices tu cita");
+          this.veterinariaService;
+          this.idVeterinariaAux2 = Object.values(this.idVeterinariaAux)
+            .toString()
+            .split(" ")[0];
+          this.idMascotaAux2 = Object.values(this.idMascotaAux)
+            .toString()
+            .split(" ")[0];
+          alert(
+            "La fecha que ingresaste esta disponible para que realices tu cita"
+          );
         }
-      }else{
-        alert("Tienes que escoger una fecha y una veterinaria, con el fin de ver la disponibilidad");
+      } else {
+        alert(
+          "Tienes que escoger una fecha y una veterinaria, con el fin de ver la disponibilidad"
+        );
         this.cita.idVeterinaria = null;
         this.idVeterinariaAux = null;
       }
@@ -173,8 +206,11 @@ export default {
     save() {
       if (Object.values(this.disp)) {
         this.cita.idMascota.idMascota = parseInt(this.idMascotaAux2);
-        this.cita.idVeterinaria.idVeterinaria = parseInt(this.idVeterinariaAux2);
-        this.cita.tipoCita = (Object.values(this.cita.tipoCita).toString());
+        console.log(this.idVeterinariaAux2);
+        this.cita.idVeterinaria.idVeterinaria = parseInt(
+          this.idVeterinariaAux2
+        );
+        this.cita.tipoCita = Object.values(this.cita.tipoCita).toString();
         console.log(this.cita);
         this.citaService.agregarCita(this.cita).then((data) => {
           if (data.status === 200) {
@@ -194,13 +230,11 @@ export default {
             this.$router.push("/");
           }
         });
-      }else{
+      } else {
         alert("Revisa la disponibilidad de la fecha!");
       }
-      
-      
     },
-  }
+  },
 };
 </script>
 
