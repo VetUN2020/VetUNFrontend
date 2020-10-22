@@ -21,7 +21,6 @@ Vue.use(VueRouter)
 export default new VueRouter({
 
     routes: [{
-<<<<<<< HEAD
         path: '/',
         name: 'Home',
         component: Home
@@ -66,63 +65,12 @@ export default new VueRouter({
         name: 'vetProfile',
         component: VetProfile
     }, {
+        path: '/DuenoProfile',
+        name: 'DuenoProfile',
+        component: DuenoProfile
+    }, {
         path: '/veterinariaProfile',
         name: 'veterinariaProfile',
         component: VeterinariaProfile
     }]
-=======
-            path: '/',
-            name: 'Home',
-            component: Home
-        }, {
-            path: '/crud',
-            name: 'CrudApp',
-            component: Table
-        }, {
-            path: '/registroDueno',
-            name: 'registroDueno',
-            component: RegistroDueno
-        }, {
-            path: '/mascotaRegistro',
-            name: 'registroMascota',
-            component: RegistroMascota
-        }, {
-            path: '/loginDueno',
-            name: 'loginDueno',
-            component: LoginDueno
-        }, {
-            path: '/loginMedico',
-            name: 'loginMedico',
-            component: LoginMedico
-        }, {
-            path: '/registroMedico',
-            name: 'registroMedico',
-            component: RegistroMedico
-        }, {
-            path: '/regvet',
-            name: 'veterinary',
-            component: Veterinary
-        }, {
-            path: '/agendarCita',
-            name: 'agendarCita',
-            component: AgendarCita
-        }, {
-            path: '/misCitas',
-            name: 'citasVet',
-            component: CitasVet
-        }, {
-            path: '/vetProfile',
-            name: 'vetProfile',
-            component: VetProfile
-        }, {
-            path: '/DuenoProfile',
-            name: 'DuenoProfile',
-            component: DuenoProfile
-        }, {
-            path: '/veterinariaProfile',
-            name: 'veterinariaProfile',
-            component: VeterinariaProfile
-        }
-    ]
->>>>>>> 9c7ade20a590da34f410c54fa725abc08b88f2d4
 })
