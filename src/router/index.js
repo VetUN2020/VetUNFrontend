@@ -11,6 +11,7 @@ import RegistroMascota from '../views/Register/RegistroMascota.vue'
 import AgendarCita from '../views/Register/AgendarCita.vue'
 import CitasVet from '../views/Agenda/Veterinario.vue'
 import VetProfile from '../views/Profile/VetProfile.vue'
+import DuenoProfile from '../views/Profile/DuenoProfile.vue'
 import VeterinariaProfile from '../views/Profile/Veterinaria.vue'
 
 
@@ -61,6 +62,10 @@ export default new VueRouter({
             path: '/vetProfile',
             name: 'vetProfile',
             component: VetProfile
+        }, {
+            path: '/DuenoProfile',
+            name: 'DuenoProfile',
+            component: DuenoProfile
         }, {
             path: '/veterinariaProfile',
             name: 'veterinariaProfile',
