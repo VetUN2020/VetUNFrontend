@@ -155,6 +155,9 @@ export default {
       veterinariasDisponibles: [],
       vetDisp: [],
     };
+  }, 
+  mounted() {
+      this.cargarVeterinarias()
   },
   methods: {
     cargarVeterinarias() {

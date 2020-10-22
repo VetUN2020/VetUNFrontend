@@ -14,6 +14,7 @@ import InputNumber from 'primevue/inputnumber';
 import Message from 'primevue/message';
 import Dropdown from 'primevue/dropdown';
 import Calendar from 'primevue/calendar';
+import ColumnGroup from 'primevue/columngroup';
 
 import {
   BootstrapVue,
@@ -49,6 +50,7 @@ Vue.component('InputNumber', InputNumber)
 Vue.component('Message', Message)
 Vue.component('Dropdown', Dropdown)
 Vue.component('Calendar', Calendar)
+Vue.component('ColumnGroup',ColumnGroup)
 
 Vue.component('b-navbar', BNavbar)
 Vue.component('b-form', BForm)
