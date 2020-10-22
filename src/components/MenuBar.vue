@@ -29,7 +29,11 @@
                 class="my-2 mr-2 my-sm-3"
                 right
               >
+<<<<<<< HEAD
                 <b-dropdown-item>Perfil</b-dropdown-item>
+=======
+                <b-dropdown-item @click="perfilDueno">Perfil</b-dropdown-item>
+>>>>>>> 9c7ade20a590da34f410c54fa725abc08b88f2d4
                 <b-dropdown-item @click="registrarMascota"
                   >Registrar Mascota</b-dropdown-item
                 >
@@ -185,7 +189,14 @@ export default {
     vetProfile() {
       this.$router.push("/vetProfile");
     },
+<<<<<<< HEAD
     profileVeterinary() {
+=======
+    perfilDueno() {
+      this.$router.push("/DuenoProfile");
+    },
+    profileVeterinary(){
+>>>>>>> 9c7ade20a590da34f410c54fa725abc08b88f2d4
       this.$router.push("/veterinariaProfile");
     },
     dates() {
