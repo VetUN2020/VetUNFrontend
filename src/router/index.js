@@ -15,7 +15,9 @@ import LoginUser from "../views/Login/LoginUser.vue";
 
 Vue.use(VueRouter);
 
+
 export default new VueRouter({
+<<<<<<< HEAD
   routes: [
     {
       path: "/",
@@ -79,3 +81,4 @@ export default new VueRouter({
     },
   ],
 });
+

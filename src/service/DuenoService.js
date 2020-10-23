@@ -6,8 +6,8 @@ export default class DuenoService {
         return axios.get("duenos");
     }
 
-    agregarDueno(dueno) {
-        return axios.post("duenos", dueno);
+    agregarDueno(duenoPOJO) {
+        return axios.post("registro/nuevo-dueno/", duenoPOJO);
     }
 
     login(dueno) {
