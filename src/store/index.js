@@ -4,7 +4,7 @@ import axios from 'axios'
 import loginDuenoModule from './modules/loginDueno';
 import loginMedicoModule from './modules/loginMedico';
 
-axios.defaults.baseURL = "http://localhost:9000/api/";
+axios.defaults.baseURL = "http://localhost:9000/";
 
 Vue.use(Vuex)
 

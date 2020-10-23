@@ -13,9 +13,21 @@
       <template slot="content">
         <div class="p-field p-grid">
           <span class="p-float-label">
+            <InputText
+              id="username"
+              type="text"
+              v-model="duenoPOJO.username"
+              style="width: 100%"
+            />
+            <label for="username">Nombre de usuario</label>
+          </span>
+        </div>
+        <br />
+        <div class="p-field p-grid">
+          <span class="p-float-label">
             <InputNumber
               id="cedula"
-              v-model="dueno.cedulaDueno"
+              v-model="duenoPOJO.cedulaDueno"
               mode="decimal"
               :useGrouping="false"
               style="width: 100%"
@@ -29,7 +41,7 @@
             <InputText
               id="nombre"
               type="text"
-              v-model="dueno.nombreDueno"
+              v-model="duenoPOJO.nombreDueno"
               style="width: 100%"
             />
             <label for="username">Nombre</label>
@@ -41,7 +53,7 @@
             <InputText
               id="apellido"
               type="text"
-              v-model="dueno.apellidoDueno"
+              v-model="duenoPOJO.apellidoDueno"
               style="width: 100%"
             />
             <label for="username">Apellido</label>
@@ -52,7 +64,7 @@
           <span class="p-float-label">
             <InputNumber
               id="telefono"
-              v-model="dueno.telefonoDueno"
+              v-model="duenoPOJO.telefonoDueno"
               mode="decimal"
               :useGrouping="false"
               style="width: 100%"
@@ -66,7 +78,7 @@
             <InputText
               id="direccion"
               type="text"
-              v-model="dueno.direccionCasa"
+              v-model="duenoPOJO.direccionDueno"
               style="width: 100%"
             />
             <label for="username">Direccion</label>
@@ -78,7 +90,7 @@
             <InputText
               id="correo"
               type="text"
-              v-model="dueno.correoElectronico"
+              v-model="duenoPOJO.correoElectronico"
               style="width: 100%"
             />
             <label for="correo">Correo electronico</label>
@@ -89,10 +101,21 @@
           <span class="p-float-label">
             <Password
               id="contrasenia"
-              v-model="dueno.contraseniaDueno"
+              v-model="duenoPOJO.password"
               style="width: 100%"
             />
             <label for="contrasenia">Contraseña</label>
+          </span>
+        </div>
+        <br />
+        <div class="p-field p-grid">
+          <span class="p-float-label">
+            <Password
+              id="verificar-contrasenia"
+              v-model="pass"
+              style="width: 100%"
+            />
+            <label for="contrasenia">Ingrese otra vez la contraseña</label>
           </span>
         </div>
       </template>
@@ -125,15 +148,17 @@ export default {
   name: "RegistroDueno",
   data() {
     return {
-      dueno: {
+      duenoPOJO: {
+        username: null,
+        password: null,
+        correoElectronico: null,
         cedulaDueno: null,
         nombreDueno: null,
         apellidoDueno: null,
         telefonoDueno: null,
-        direccionCasa: null,
-        correoElectronico: null,
-        contraseniaDueno: null,
+        direccionDueno: null,
       },
+      pass: null,
       error: null,
       correoExistente: null,
     };
@@ -145,42 +170,46 @@ export default {
   methods: {
     save() {
       if (
-        this.dueno.cedulaDueno &&
-        this.dueno.nombreDueno &&
-        this.dueno.apellidoDueno &&
-        this.dueno.telefonoDueno &&
-        this.dueno.direccionCasa &&
-        this.dueno.correoElectronico &&
-        this.dueno.contraseniaDueno
+        this.duenoPOJO.username &&
+        this.duenoPOJO.password &&
+        this.duenoPOJO.correoElectronico &&
+        this.duenoPOJO.cedulaDueno &&
+        this.duenoPOJO.nombreDueno &&
+        this.duenoPOJO.apellidoDueno &&
+        this.duenoPOJO.telefonoDueno &&
+        this.duenoPOJO.direccionDueno
       ) {
-        this.duenoService.verificarCorreo(this.dueno).then((data) => {
-          if (data.data === true) {
-            this.correoExistente = "Ya hay un usuario con este correo";
-          } else {
-            this.duenoService.agregarDueno(this.dueno).then((data) => {
-              if (data.status === 200) {
-                this.dueno = {
-                  cedulaDueno: null,
-                  nombreDueno: null,
-                  apellidoDueno: null,
-                  telefonoDueno: null,
-                  direccionCasa: null,
-                  correoElectronico: null,
-                  contraseniaDueno: null,
-                };
-                this.$swal({
-                  position: "top-end",
-                  icon: "success",
-                  title: "Te has registrado correctamente",
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
-                this.$router.push("/loginDueno");
-              }
-            });
-          }
-        });
+        if (this.duenoPOJO.password === this.pass) {
+          this.duenoService.agregarDueno(this.duenoPOJO).then((data) => {
+            if (data.status === 201) {
+              this.duenoPOJO = {
+                username: null,
+                password: null,
+                correoElectronico: null,
+                cedulaDueno: null,
+                nombreDueno: null,
+                apellidoDueno: null,
+                telefonoDueno: null,
+                direccionDueno: null,
+              };
+              this.$swal({
+                position: "top-end",
+                icon: "success",
+                title: "Te has registrado correctamente",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              this.$router.push("/loginDueno");
+            } else {
+              this.error = "";
+              this.correoExistente = "Cedula o correo ya existentes";
+            }
+          });
+        } else {
+          this.error = "Las contraseñas no coinciden";
+        }
       } else {
+        this.correoExistente = "";
         this.error = "Todos los campos son obligatorios";
       }
     },
@@ -188,7 +217,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
-
-
+<style scoped></style>

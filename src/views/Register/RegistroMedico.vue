@@ -12,6 +12,18 @@
       <template slot="content">
         <div class="p-field p-grid">
           <span class="p-float-label">
+            <InputText
+              id="username"
+              type="text"
+              v-model="medico.username"
+              style="width: 100%"
+            />
+            <label for="username">Nombre de usuario</label>
+          </span>
+        </div>
+        <br />
+        <div class="p-field p-grid">
+          <span class="p-float-label">
             <InputNumber
               id="cedula"
               v-model="medico.cedulaMedico"
@@ -77,7 +89,7 @@
             <InputText
               id="direccion"
               type="text"
-              v-model="medico.direccionResidencia"
+              v-model="medico.direccionMedico"
               style="width: 100%"
             />
             <label for="username">Direccion</label>
@@ -89,7 +101,7 @@
             <InputText
               id="matricula"
               type="text"
-              v-model="medico.correoMedico"
+              v-model="medico.correoElectronico"
               style="width: 100%"
             />
             <label for="matricula">Correo electronico</label>
@@ -100,10 +112,21 @@
           <span class="p-float-label">
             <Password
               id="contrasenia"
-              v-model="medico.contraseniaMedico"
+              v-model="medico.password"
               style="width: 100%"
             />
             <label for="contrasenia">Contraseña</label>
+          </span>
+        </div>
+        <br />
+        <div class="p-field p-grid">
+          <span class="p-float-label">
+            <Password
+              id="verificar-contrasenia"
+              v-model="pass"
+              style="width: 100%"
+            />
+            <label for="contrasenia">Ingrese otra vez la contraseña</label>
           </span>
         </div>
       </template>
@@ -137,15 +160,17 @@ export default {
   data() {
     return {
       medico: {
+        username: null,
+        password: null,
+        correoElectronico: null,
         cedulaMedico: null,
         nombreMedico: null,
         apellidoMedico: null,
-        direccionResidencia: null,
+        direccionMedico: null,
         telefonoMedico: null,
         matriculaProfesional: null,
-        correoMedico: null,
-        contraseniaMedico: null,
       },
+      pass: null,
       error: null,
       correoExistente: null,
     };
@@ -157,43 +182,45 @@ export default {
   methods: {
     save() {
       if (
+        this.medico.username &&
+        this.medico.password &&
+        this.medico.correoElectronico &&
         this.medico.cedulaMedico &&
         this.medico.nombreMedico &&
         this.medico.apellidoMedico &&
-        this.medico.direccionResidencia &&
+        this.medico.direccionMedico &&
         this.medico.telefonoMedico &&
         this.medico.matriculaProfesional &&
-        this.medico.correoMedico &&
-        this.medico.contraseniaMedico
+        this.pass
       ) {
-        this.medicoService.verificarCorreo(this.medico).then((data) => {
-          if (data.data === true) {
-            this.correoExistente = "Ya hay un usuario con este correo";
-          } else {
-            this.medicoService.agregarMedico(this.medico).then((data) => {
-              if (data.status === 200) {
-                this.medico = {
-                  cedulaMedico: null,
-                  nombreMedico: null,
-                  apellidoMedico: null,
-                  direccionResidencia: null,
-                  telefonoMedico: null,
-                  matriculaProfesional: null,
-                  correoMedico: null,
-                  contraseniaMedico: null,
-                };
-                this.$swal({
-                  position: "top-end",
-                  icon: "success",
-                  title: "Te has registrado correctamente",
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
-                this.$router.push("/loginMedico");
-              }
-            });
-          }
-        });
+        if (this.medico.password === this.pass) {
+          this.medicoService.agregarMedico(this.medico).then((data) => {
+            if (data.status === 201) {
+              this.medico = {
+                cedulaMedico: null,
+                nombreMedico: null,
+                apellidoMedico: null,
+                direccionResidencia: null,
+                telefonoMedico: null,
+                matriculaProfesional: null,
+                correoMedico: null,
+                contraseniaMedico: null,
+              };
+              this.$swal({
+                position: "top-end",
+                icon: "success",
+                title: "Te has registrado correctamente",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              this.$router.push("/loginMedico");
+            } else {
+              this.correoExistente = "Cedula o correo ya existentes";
+            }
+          });
+        } else {
+          this.error = "Las contraseñas no coinciden";
+        }
       } else {
         this.error = "Todos los campos son obligatorios";
       }
@@ -202,7 +229,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
-
-
+<style scoped></style>
