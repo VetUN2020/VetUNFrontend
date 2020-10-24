@@ -99,7 +99,9 @@
                   class="my-2 mr-2 my-sm-3"
                   right
                 >
-                  <b-dropdown-item @click="vetProfile">Perfil</b-dropdown-item>
+                  <b-dropdown-item @click="medicoProfile"
+                    >Perfil</b-dropdown-item
+                  >
                   <b-dropdown-item @click="signOutMedico"
                     >Cerrar sesion</b-dropdown-item
                   >
@@ -154,11 +156,12 @@ export default {
     async signOutDueno() {
       this.$store.dispatch("MenuBar/outUserMenuBar");
       localStorage.clear();
-      this.$router.push("/");
+      this.$router.push("/").catch(() => {});
     },
     async signOutMedico() {
-      await this.$store.dispatch("Medico/signOutMedico");
-      this.$router.push("/");
+      this.$store.dispatch("MenuBar/outUserMenuBar");
+      localStorage.clear();
+      this.$router.push("/").catch(() => {});
     },
     registrarseMedico() {
       this.$router.push("/registroMedico");
@@ -169,11 +172,11 @@ export default {
     agendarCita() {
       this.$router.push("/agendarCita");
     },
-    vetProfile() {
-      this.$router.push("/vetProfile");
+    medicoProfile() {
+      this.$router.push("/medicoProfile");
     },
     perfilDueno() {
-      this.$router.push("/DuenoProfile");
+      this.$router.push("/duenoProfile");
     },
     profileVeterinary() {
       this.$router.push("/veterinariaProfile");

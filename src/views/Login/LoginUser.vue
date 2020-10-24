@@ -74,13 +74,14 @@ export default {
           } else {
             localStorage.setItem("token", response.data.access_token);
             this.$store.dispatch("MenuBar/saveUserMenuBar");
-            console.log(this.$store.state.MenuBar.userAuth);
             this.$router.push("/");
           }
         })
         .catch((error) => {
           if (error.response.status === 400) {
             alert("Credenciales incorrectas");
+            this.user.username = null;
+            this.user.password = null;
           } else {
             alert("¡Parece que hubo un error de comunicación con el servidor!");
           }
