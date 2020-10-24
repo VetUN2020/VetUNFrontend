@@ -8,16 +8,20 @@ import RegistroMedico from "../views/Register/RegistroMedico.vue";
 import RegistroMascota from "../views/Register/RegistroMascota.vue";
 import AgendarCita from "../views/Register/AgendarCita.vue";
 import CitasVet from "../views/Agenda/Veterinario.vue";
-import VetProfile from "../views/Profile/VetProfile.vue";
+import MedicoProfile from "../views/Profile/MedicoProfile.vue";
 import DuenoProfile from "../views/Profile/DuenoProfile.vue";
 import VeterinariaProfile from "../views/Profile/Veterinaria.vue";
 import LoginUser from "../views/Login/LoginUser.vue";
 
+import AgendarCitaM from "../views/Register/AgendarCitaMascota.vue";
+
 Vue.use(VueRouter);
 
-
 export default new VueRouter({
-<<<<<<< HEAD
+  scrollBehavior() {
+    return { x: 0, y: 0 };
+  },
+  mode: "history",
   routes: [
     {
       path: "/",
@@ -60,12 +64,12 @@ export default new VueRouter({
       component: CitasVet,
     },
     {
-      path: "/vetProfile",
-      name: "vetProfile",
-      component: VetProfile,
+      path: "/medicoProfile",
+      name: "MedicoProfile",
+      component: MedicoProfile,
     },
     {
-      path: "/DuenoProfile",
+      path: "/duenoProfile",
       name: "DuenoProfile",
       component: DuenoProfile,
     },
@@ -79,6 +83,10 @@ export default new VueRouter({
       name: "loginUser",
       component: LoginUser,
     },
+    {
+      path: "/pruebaAgendar",
+      name: "AgendarCitaM",
+      component: AgendarCitaM,
+    },
   ],
 });
-

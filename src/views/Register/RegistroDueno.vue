@@ -1,6 +1,5 @@
 <template>
   <div class="registroDueno">
-    <br />
     <Card
       style="
         margin: 0 auto;
@@ -199,7 +198,7 @@ export default {
                 showConfirmButton: false,
                 timer: 1500,
               });
-              this.$router.push("/loginDueno");
+              this.$router.push("/loginUser");
             } else {
               this.error = "";
               this.correoExistente = "Cedula o correo ya existentes";
