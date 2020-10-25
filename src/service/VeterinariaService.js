@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export default class VeterinariaService {
 
-    data(){
+    data() {
         return {
             veterinariasDisponibles: null
         }
@@ -13,7 +13,11 @@ export default class VeterinariaService {
     }
 
     agregarVeterinaria(veterinaria) {
-        return axios.post("veterinarias", veterinaria);
+        return axios.post("usuario/registro-veterinaria", veterinaria, {
+            params: {
+                access_token: localStorage.getItem("token"),
+            },
+        });
     }
 
     getVeterinaryNames() {

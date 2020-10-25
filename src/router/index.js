@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Table from "../views/Table.vue";
 import RegistroDueno from "../views/Register/RegistroDueno.vue";
-import Veterinary from "../views/Register/Veterinary.vue";
+import RegistroVeterinaria from "../views/Register/RegistroVeterinaria.vue";
 import RegistroMedico from "../views/Register/RegistroMedico.vue";
 import RegistroMascota from "../views/Register/RegistroMascota.vue";
 import AgendarCita from "../views/Register/AgendarCita.vue";
@@ -19,11 +19,13 @@ Vue.use(VueRouter);
 
 export default new VueRouter({
   scrollBehavior() {
-    return { x: 0, y: 0 };
+    return {
+      x: 0,
+      y: 0
+    };
   },
   mode: "history",
-  routes: [
-    {
+  routes: [{
       path: "/",
       name: "Home",
       component: Home,
@@ -49,9 +51,9 @@ export default new VueRouter({
       component: RegistroMedico,
     },
     {
-      path: "/regvet",
-      name: "veterinary",
-      component: Veterinary,
+      path: "/registroVeterinaria",
+      name: "registroveterinaria",
+      component: RegistroVeterinaria,
     },
     {
       path: "/agendarCita",

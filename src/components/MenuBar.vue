@@ -56,34 +56,19 @@
                   >Mis citas</b-button
                 >
 
-                <b-button
-                  @click="registerVeterinary"
-                  variant="success"
-                  size="sm"
-                  class="my-2 mr-2 my-sm-3"
-                  >Registrar Veterinaria</b-button
-                >
-                <b-button
-                  @click="profileVeterinary"
-                  variant="success"
-                  size="sm"
-                  class="my-2 mr-2 my-sm-3"
-                  >Perfil Veterinaria</b-button
-                >
-
                 <b-dropdown
                   id="dropdown-right"
-                  text="Veterinaria"
+                  text="Mi veterinaria"
                   size="sm"
                   variant="success"
                   class="my-2 mr-2 my-sm-3"
                   right
                 >
                   <b-dropdown-item @click="profileVeterinary"
-                    >Perfil</b-dropdown-item
+                    >Perfil veterinaria</b-dropdown-item
                   >
                   <b-dropdown-item @click="registerVeterinary"
-                    >Registrar</b-dropdown-item
+                    >Registrar nueva veterinaria</b-dropdown-item
                   >
                 </b-dropdown>
 
@@ -151,7 +136,7 @@ export default {
       this.$router.push("/loginUser");
     },
     registerVeterinary() {
-      this.$router.push("/regvet");
+      this.$router.push("/registroVeterinaria");
     },
     async signOutDueno() {
       this.$store.dispatch("MenuBar/outUserMenuBar");
