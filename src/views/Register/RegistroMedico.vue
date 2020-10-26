@@ -213,7 +213,7 @@ export default {
                 showConfirmButton: false,
                 timer: 1500,
               });
-              this.$router.push("/loginMedico");
+              this.$router.push("/loginUser");
             } else {
               this.correoExistente = "Cedula o correo ya existentes";
             }

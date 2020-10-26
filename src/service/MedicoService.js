@@ -18,4 +18,12 @@ export default class MedicoService {
         return axios.post("medicos/registro", medico);
     }
 
+    obtenerPerfil() {
+        return axios.get("medico/perfil", {
+            params: {
+                access_token: localStorage.getItem("token"),
+            },
+        });
+    }
+
 }

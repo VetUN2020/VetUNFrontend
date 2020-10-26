@@ -10,7 +10,7 @@ import AgendarCita from "../views/Register/AgendarCita.vue";
 import CitasVet from "../views/Agenda/Veterinario.vue";
 import MedicoProfile from "../views/Profile/MedicoProfile.vue";
 import DuenoProfile from "../views/Profile/DuenoProfile.vue";
-import VeterinariaProfile from "../views/Profile/Veterinaria.vue";
+import VeterinariaProfile from "../views/Profile/VeterinariaProfile.vue";
 import LoginUser from "../views/Login/LoginUser.vue";
 
 import AgendarCitaM from "../views/Register/AgendarCitaMascota.vue";

@@ -94,10 +94,10 @@ export default {
   methods: {
     save() {
       if (
-        this.nombreVeterinaria &&
-        this.direccionVeterinaria &&
-        this.telefonoVeterinaria &&
-        this.tipoVeterinaria
+        this.veterinaria.nombreVeterinaria &&
+        this.veterinaria.direccionVeterinaria &&
+        this.veterinaria.telefonoVeterinaria &&
+        this.veterinaria.tipoVeterinaria
       ) {
         this.veterinariaService
           .agregarVeterinaria(this.veterinaria)
@@ -109,6 +109,14 @@ export default {
                 telefonoVeterinaria: null,
                 tipoVeterinaria: null,
               };
+            }
+          });
+
+        this.veterinariaService
+          .actualizarMedico(this.veterinaria)
+          .then((data) => {
+            if (data.status === 200) {
+              console.log(data);
             }
           });
 
