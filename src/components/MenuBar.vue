@@ -34,9 +34,9 @@
                   <b-dropdown-item @click="registrarMascota"
                     >Registrar Mascota</b-dropdown-item
                   >
-                  <b-dropdown-item @click="agendarCita"
+                  <!-- <b-dropdown-item @click="agendarCita"
                     >Agendar Cita</b-dropdown-item
-                  >
+                  > -->
                   <b-dropdown-item @click="signOutDueno"
                     >Cerrar sesion</b-dropdown-item
                   >
@@ -86,6 +86,9 @@
                 >
                   <b-dropdown-item @click="medicoProfile"
                     >Perfil</b-dropdown-item
+                  >
+                  <b-dropdown-item @click="agregarHorario"
+                    >Horario de atención</b-dropdown-item
                   >
                   <b-dropdown-item @click="signOutMedico"
                     >Cerrar sesion</b-dropdown-item
@@ -155,7 +158,7 @@ export default {
       this.$router.push("/mascotaRegistro");
     },
     agendarCita() {
-      this.$router.push("/agendarCita");
+      this.$router.push("/agendarCitaMascota");
     },
     medicoProfile() {
       this.$router.push("/medicoProfile");
@@ -168,6 +171,9 @@ export default {
     },
     dates() {
       this.$router.push("/misCitas");
+    },
+    agregarHorario() {
+      this.router.push("/agregarHorario");
     },
   },
 };

@@ -88,9 +88,9 @@ export default new VueRouter({
       component: LoginUser,
     },
     {
-      path: "/pruebaAgendar",
-      name: "AgendarCitaM",
-      component: AgendarCitaM,
+      path: "/agendarCitaMascota",
+      name: "AgendarCitaMascota",
+      component: AgendarCitaMascota,
     },
     {
       path: "/agregarHorario",
