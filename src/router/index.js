@@ -12,6 +12,7 @@ import MedicoProfile from "../views/Profile/MedicoProfile.vue";
 import DuenoProfile from "../views/Profile/DuenoProfile.vue";
 import VeterinariaProfile from "../views/Profile/VeterinariaProfile.vue";
 import LoginUser from "../views/Login/LoginUser.vue";
+import AgregarHorario from "../views/AgregarHorario.vue";
 
 import AgendarCitaM from "../views/Register/AgendarCitaMascota.vue";
 
@@ -21,11 +22,12 @@ export default new VueRouter({
   scrollBehavior() {
     return {
       x: 0,
-      y: 0
+      y: 0,
     };
   },
   mode: "history",
-  routes: [{
+  routes: [
+    {
       path: "/",
       name: "Home",
       component: Home,
@@ -89,6 +91,11 @@ export default new VueRouter({
       path: "/pruebaAgendar",
       name: "AgendarCitaM",
       component: AgendarCitaM,
+    },
+    {
+      path: "/agregarHorario",
+      name: "agregarHorario",
+      component: AgregarHorario,
     },
   ],
 });
