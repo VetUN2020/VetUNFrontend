@@ -20,4 +20,12 @@ export default class MascotaService {
   getMascotaById(idMascota) {
     return axios.get("mascotas/" + idMascota);
   }
+
+  getMascotasDueno() {
+    return axios.get("dueno/mis-mascotas", {
+      params: {
+        access_token: localStorage.getItem("token"),
+      },
+    });
+  }
 }

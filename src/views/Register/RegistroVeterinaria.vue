@@ -92,31 +92,31 @@ export default {
   },
   components: {},
   methods: {
-    save() {
+    async save() {
       if (
         this.veterinaria.nombreVeterinaria &&
         this.veterinaria.direccionVeterinaria &&
         this.veterinaria.telefonoVeterinaria &&
         this.veterinaria.tipoVeterinaria
       ) {
-        this.veterinariaService
+        await this.veterinariaService
           .agregarVeterinaria(this.veterinaria)
           .then((data) => {
             if (data.status === 201) {
+              console.log(data);
+            }
+          });
+
+        await this.veterinariaService
+          .actualizarMedico(this.veterinaria)
+          .then((data) => {
+            if (data.status === 200) {
               this.veterinaria = {
                 nombreVeterinaria: null,
                 direccionVeterinaria: null,
                 telefonoVeterinaria: null,
                 tipoVeterinaria: null,
               };
-            }
-          });
-
-        this.veterinariaService
-          .actualizarMedico(this.veterinaria)
-          .then((data) => {
-            if (data.status === 200) {
-              console.log(data);
             }
           });
 

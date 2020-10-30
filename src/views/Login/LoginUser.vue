@@ -29,6 +29,7 @@
               id="password"
               type="password"
               v-model="user.password"
+              v-on:keyup.enter="login"
               style="width: 100%"
             />
             <label for="contrasenia">Contraseña</label>
@@ -93,6 +94,6 @@ export default {
 
 <style>
 .p-card-body {
-  margin-top: 25px;
+  margin-top: 50px;
 }
 </style>
