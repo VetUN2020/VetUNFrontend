@@ -3,7 +3,7 @@
     <div class="container">
       <div class="main-body">
         <br /><br />
-        <template v-if="perfilDueno">
+        <template v-if="perfilVeterinaria">
           <div class="row gutters-sm">
             <div class="col-md-4 mb-3">
               <div class="card">
@@ -13,16 +13,15 @@
                   >
                     <img
                       id="profilePic"
-                      src="@/assets/dueno.png"
-                      alt="Dueno"
+                      src="@/assets/veterinaria.png"
+                      alt="Admin"
                       width="200"
                     />
                     <div class="mt-3">
                       <h3 class="text-info">
-                        {{ perfilDueno.nombreDueno }}
-                        {{ perfilDueno.apellidoDueno }}
+                        {{ perfilVeterinaria.nombreVeterinaria }}
                       </h3>
-                      <p class="text-secondary mb-1">Dueño de mascota</p>
+                      <p class="text-secondary mb-1">Veterinaria</p>
                     </div>
                   </div>
                 </div>
@@ -31,28 +30,16 @@
             <div class="col-md-8">
               <div class="card mb-3">
                 <div class="card-body">
-                  <!--Cedula-->
                   <hr />
-                  <div class="row">
-                    <div class="col-sm-4 text-primary">
-                      <h6 class="mb-0">C.C.</h6>
-                    </div>
-                    <div class="col-sm-8 text-secondary">
-                      {{ perfilDueno.cedulaDueno }}
-                    </div>
-                  </div>
-
                   <!--Direccion-->
-                  <hr />
                   <div class="row">
                     <div class="col-sm-4 text-primary">
                       <h6 class="mb-0">Direccion</h6>
                     </div>
                     <div class="col-sm-8 text-secondary">
-                      {{ perfilDueno.direccionDueno }}
+                      {{ perfilVeterinaria.direccionVeterinaria }}
                     </div>
                   </div>
-
                   <!--Telefono-->
                   <hr />
                   <div class="row">
@@ -60,29 +47,18 @@
                       <h6 class="mb-0">Telefono</h6>
                     </div>
                     <div class="col-sm-8 text-secondary">
-                      {{ perfilDueno.telefonoDueno }}
+                      {{ perfilVeterinaria.telefonoVeterinaria }}
                     </div>
                   </div>
 
-                  <!--Email-->
+                  <!--Matricula profesional-->
                   <hr />
                   <div class="row">
                     <div class="col-sm-4 text-primary">
-                      <h6 class="mb-0">Email</h6>
+                      <h6 class="mb-0">Tipo</h6>
                     </div>
                     <div class="col-sm-8 text-secondary">
-                      {{ perfilDueno.correoDueno }}
-                    </div>
-                  </div>
-
-                  <!--Usuario-->
-                  <hr />
-                  <div class="row">
-                    <div class="col-sm-4 text-primary">
-                      <h6 class="mb-0">Usuario</h6>
-                    </div>
-                    <div class="col-sm-8 text-secondary">
-                      {{ perfilDueno.usuarioDueno }}
+                      {{ perfilVeterinaria.tipoVeterinaria }}
                     </div>
                   </div>
                 </div>
@@ -97,22 +73,22 @@
 
 <script>
 // @ is an alias to /src
-import DuenoService from "@/service/DuenoService";
+import VeterinariaService from "@/service/VeterinariaService";
 
 export default {
   data() {
     return {
-      perfilDueno: null,
+      perfilVeterinaria: null,
     };
   },
   methods: {},
-  duenoService: null,
+  veterinariaService: null,
   created() {
-    this.duenoService = new DuenoService();
+    this.veterinariaService = new VeterinariaService();
   },
   mounted() {
-    this.duenoService.obtenerPerfil().then((response) => {
-      this.perfilDueno = response.data;
+    this.veterinariaService.obtenerPerfil().then((response) => {
+      this.perfilVeterinaria = response.data;
     });
   },
 };

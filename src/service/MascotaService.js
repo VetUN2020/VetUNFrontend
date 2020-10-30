@@ -1,20 +1,31 @@
-import axios from 'axios';
+import axios from "axios";
 
 export default class MascotaService {
+  getAll() {
+    return axios.get("mascotas");
+  }
 
-    getAll() {
-        return axios.get("mascotas");
-    }
+  agregarMascota(mascota) {
+    return axios.post("dueno/registro-mascota", mascota, {
+      params: {
+        access_token: localStorage.getItem("token"),
+      },
+    });
+  }
 
-    agregarMascota(mascota) {
-        return axios.post("mascotas", mascota);
-    }
+  getByIdDueno(idDueno) {
+    return axios.get("mascotas/byIdDueno/" + idDueno);
+  }
 
-    getByIdDueno(idDueno) {
-        return axios.get("mascotas/byIdDueno/" + idDueno);
-    }
+  getMascotaById(idMascota) {
+    return axios.get("mascotas/" + idMascota);
+  }
 
-    getMascotaById(idMascota) {
-        return axios.get("mascotas/" + idMascota);
-    }
+  getMascotasDueno() {
+    return axios.get("dueno/mis-mascotas", {
+      params: {
+        access_token: localStorage.getItem("token"),
+      },
+    });
+  }
 }

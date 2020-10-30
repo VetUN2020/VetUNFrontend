@@ -6,82 +6,96 @@
           <img
             src="../assets/Icono.png"
             class="d-inline-block align-top"
-            height="50px" /></b-navbar-brand
+            height="50px"/></b-navbar-brand
       ></router-link>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
-        <!-- Right aligned nav items -->
-
         <b-navbar-nav class="ml-auto">
-          <template v-if="$store.state.Dueno.authD">
-            <b-nav-form>
-              
-              <b-dropdown
-                id="dropdown-right"
-                v-bind:text="
-                  $store.state.Dueno.userD.nombreDueno +
-                  ' ' +
-                  $store.state.Dueno.userD.apellidoDueno
-                "
-                size="sm"
-                variant="success"
-                class="my-2 mr-2 my-sm-3"
-                right
-              >
-                <b-dropdown-item @click="perfilDueno">Perfil</b-dropdown-item>
-                <b-dropdown-item @click="registrarMascota"
-                  >Registrar Mascota</b-dropdown-item
+          <template v-if="$store.state.MenuBar.userAuth">
+            <template
+              v-if="$store.state.MenuBar.userAuth.rolUsuario === 'DUENO'"
+            >
+              <b-nav-form>
+                <b-dropdown
+                  id="dropdown-right"
+                  v-bind:text="
+                    $store.state.MenuBar.userAuth.nombreUsuario +
+                      ' ' +
+                      $store.state.MenuBar.userAuth.apellidoUsuario
+                  "
+                  size="sm"
+                  variant="success"
+                  class="my-2 mr-2 my-sm-3"
+                  right
                 >
-                <b-dropdown-item @click="agendarCita">Agendar Cita</b-dropdown-item>
-                <b-dropdown-item @click="signOutDueno"
-                  >Cerrar sesion</b-dropdown-item
+                  <b-dropdown-item @click="perfilDueno">Perfil</b-dropdown-item>
+                  <b-dropdown-item @click="registrarMascota"
+                    >Registrar Mascota</b-dropdown-item
+                  >
+                  <!-- <b-dropdown-item @click="agendarCita"
+                    >Agendar Cita</b-dropdown-item
+                  > -->
+                  <b-dropdown-item @click="signOutDueno"
+                    >Cerrar sesion</b-dropdown-item
+                  >
+                </b-dropdown>
+              </b-nav-form>
+            </template>
+
+            <template
+              v-else-if="$store.state.MenuBar.userAuth.rolUsuario === 'MEDICO'"
+            >
+              <b-nav-form>
+                <b-button
+                  @click="dates"
+                  variant="success"
+                  size="sm"
+                  class="my-2 mr-2 my-sm-3"
+                  >Mis citas</b-button
                 >
-              </b-dropdown>
-            </b-nav-form>
-          </template>
-
-          <template v-else-if="$store.state.Medico.authM">
-            <b-nav-form>
-              
-              <b-button  @click="dates" variant="success" size="sm" class="my-2 mr-2 my-sm-3">Mis citas</b-button>
-
-               <b-button @click="registerVeterinary" variant="success" size="sm" class="my-2 mr-2 my-sm-3">Registrar Veterinaria</b-button>
-               <b-button @click="profileVeterinary" variant="success" size="sm" class="my-2 mr-2 my-sm-3">Perfil Veterinaria</b-button>
 
                 <b-dropdown
-                id="dropdown-right"
-                text="Veterinaria"
-                size="sm"
-                variant="success"
-                class="my-2 mr-2 my-sm-3"
-                right
-              >
-                <b-dropdown-item  @click="profileVeterinary">Perfil</b-dropdown-item>
-                <b-dropdown-item  @click="registerVeterinary">Registrar</b-dropdown-item>               
-              
-              </b-dropdown>
-
-               <b-dropdown
-                id="dropdown-right"
-                v-bind:text="
-                  $store.state.Medico.userM.nombreMedico +
-                  ' ' +
-                  $store.state.Medico.userM.apellidoMedico
-                "
-                size="sm"
-                variant="success"
-                class="my-2 mr-2 my-sm-3"
-                right
-              >
-                <b-dropdown-item @click="vetProfile">Perfil</b-dropdown-item>
-                <b-dropdown-item @click="signOutMedico"
-                  >Cerrar sesion</b-dropdown-item
+                  id="dropdown-right"
+                  text="Mi veterinaria"
+                  size="sm"
+                  variant="success"
+                  class="my-2 mr-2 my-sm-3"
+                  right
                 >
-              </b-dropdown>
-             
-            </b-nav-form>
+                  <b-dropdown-item @click="profileVeterinary"
+                    >Perfil veterinaria</b-dropdown-item
+                  >
+                  <b-dropdown-item @click="registerVeterinary"
+                    >Registrar nueva veterinaria</b-dropdown-item
+                  >
+                </b-dropdown>
+
+                <b-dropdown
+                  id="dropdown-right"
+                  v-bind:text="
+                    $store.state.MenuBar.userAuth.nombreUsuario +
+                      ' ' +
+                      $store.state.MenuBar.userAuth.apellidoUsuario
+                  "
+                  size="sm"
+                  variant="success"
+                  class="my-2 mr-2 my-sm-3"
+                  right
+                >
+                  <b-dropdown-item @click="medicoProfile"
+                    >Perfil</b-dropdown-item
+                  >
+                  <b-dropdown-item @click="agregarHorario"
+                    >Horario de atención</b-dropdown-item
+                  >
+                  <b-dropdown-item @click="signOutMedico"
+                    >Cerrar sesion</b-dropdown-item
+                  >
+                </b-dropdown>
+              </b-nav-form>
+            </template>
           </template>
 
           <template v-else>
@@ -100,23 +114,14 @@
                 <b-dropdown-item @click="registrarseMedico"
                   >Medico veterinario</b-dropdown-item
                 >
-                
               </b-dropdown>
             </b-nav-form>
+
             <b-nav-form>
-              <b-dropdown
-                id="dropdown-right"
-                text="Iniciar sesion"
-                size="sm"
-                variant="success"
-                class="my-2 mr-2 my-sm-3"
-                right
+              <b-button variant="success" size="sm" @click="loginUsuario"
+                >Iniciar sesión</b-button
               >
-                <b-dropdown-item @click="loginDueno">Dueño</b-dropdown-item>
-                <b-dropdown-item @click="loginMedico">Medico veterinario</b-dropdown-item>
-              </b-dropdown>
             </b-nav-form>
-           
           </template>
         </b-navbar-nav>
       </b-collapse>
@@ -126,32 +131,25 @@
 
 <script>
 export default {
-  data() {
-    return {
-      nombre: "",
-    };
-  },
   methods: {
     registrarseDueno() {
       this.$router.push("/registroDueno");
     },
-    loginDueno() {
-      this.$router.push("/loginDueno");
-    },
-    loginMedico() {
-      this.$router.push("/loginMedico");
+    loginUsuario() {
+      this.$router.push("/loginUser");
     },
     registerVeterinary() {
-      this.$router.push("/regvet");
+      this.$router.push("/registroVeterinaria");
     },
     async signOutDueno() {
-      await this.$store.dispatch("Dueno/signOutDueno");
+      this.$store.dispatch("MenuBar/outUserMenuBar");
       localStorage.clear();
-      this.$router.push("/");
+      this.$router.push("/").catch(() => {});
     },
     async signOutMedico() {
-      await this.$store.dispatch("Medico/signOutMedico");
-      this.$router.push("/");
+      this.$store.dispatch("MenuBar/outUserMenuBar");
+      localStorage.clear();
+      this.$router.push("/").catch(() => {});
     },
     registrarseMedico() {
       this.$router.push("/registroMedico");
@@ -160,19 +158,23 @@ export default {
       this.$router.push("/mascotaRegistro");
     },
     agendarCita() {
-      this.$router.push("/agendarCita");
+      this.$router.push("/agendarCitaMascota");
     },
-    vetProfile() {
-      this.$router.push("/vetProfile");
+    medicoProfile() {
+      this.$router.push("/medicoProfile");
     },
     perfilDueno() {
-      this.$router.push("/DuenoProfile");
+      this.$router.push("/duenoProfile");
     },
-    profileVeterinary(){
+    profileVeterinary() {
       this.$router.push("/veterinariaProfile");
-    },dates(){
+    },
+    dates() {
       this.$router.push("/misCitas");
-    }
+    },
+    agregarHorario() {
+      this.router.push("/agregarHorario");
+    },
   },
 };
 </script>

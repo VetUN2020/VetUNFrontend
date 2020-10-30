@@ -49,18 +49,6 @@
         <div class="p-field p-grid">
           <span class="p-float-label">
             <InputText
-              id="localizacion"
-              type="text"
-              v-model="veterinaria.localizacion"
-              style="width: 100%"
-            />
-            <label for="username">Localizacion</label>
-          </span>
-        </div>
-        <br />
-        <div class="p-field p-grid">
-          <span class="p-float-label">
-            <InputText
               id="tipo"
               type="text"
               v-model="veterinaria.tipoVeterinaria"
@@ -78,12 +66,12 @@
         />
       </template>
     </Card>
+    <Message severity="error" :sticky="false" v-if="error">{{ error }}</Message>
   </div>
 </template>
 
 <script>
 import VeterinariaService from "../../service/VeterinariaService";
-
 
 export default {
   veterinariaService: null,
@@ -97,36 +85,53 @@ export default {
         nombreVeterinaria: null,
         direccionVeterinaria: null,
         telefonoVeterinaria: null,
-        localizacion: null,
         tipoVeterinaria: null,
-      }
+      },
+      error: null,
     };
   },
   components: {},
   methods: {
-    save() {
-      this.veterinariaService
-        .agregarVeterinaria(this.veterinaria)
-        .then((data) => {
-          if (data.status === 200) {
-            this.veterinaria = {
-              nombreVeterinaria: null,
-              direccionVeterinaria: null,
-              telefonoVeterinaria: null,
-              localizacion: null,
-              tipoVeterinaria: null,
-            };
-          }
-        });
+    async save() {
+      if (
+        this.veterinaria.nombreVeterinaria &&
+        this.veterinaria.direccionVeterinaria &&
+        this.veterinaria.telefonoVeterinaria &&
+        this.veterinaria.tipoVeterinaria
+      ) {
+        await this.veterinariaService
+          .agregarVeterinaria(this.veterinaria)
+          .then((data) => {
+            if (data.status === 201) {
+              console.log(data);
+            }
+          });
 
-      this.$swal({
-        position: "top-end",
-        icon: "success",
-        title: "Has registrado correctamente tu veterinaria",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-    }
-  }
+        await this.veterinariaService
+          .actualizarMedico(this.veterinaria)
+          .then((data) => {
+            if (data.status === 200) {
+              this.veterinaria = {
+                nombreVeterinaria: null,
+                direccionVeterinaria: null,
+                telefonoVeterinaria: null,
+                tipoVeterinaria: null,
+              };
+            }
+          });
+
+        this.$swal({
+          position: "top-end",
+          icon: "success",
+          title: "Has registrado correctamente tu veterinaria",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        this.$router.push("/");
+      } else {
+        this.error = "Todos los campos son obligatorios";
+      }
+    },
+  },
 };
 </script>

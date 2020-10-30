@@ -1,5 +1,5 @@
 <template>
-  <div class="loginDueno">
+  <div class="loginUser">
     <br />
     <Card
       style="
@@ -9,14 +9,14 @@
         margin-bottom: 2em;
       "
     >
-      <template slot="title"> Inicio de sesion Dueño</template>
+      <template slot="title">Inicio de sesion</template>
       <template slot="content">
         <div class="p-field p-grid">
           <span class="p-float-label">
             <InputText
               id="correo"
               type="text"
-              v-model="form.correoElectronico"
+              v-model="user.username"
               style="width: 100%"
             />
             <label for="correo">Correo</label>
@@ -28,7 +28,8 @@
             <InputText
               id="password"
               type="password"
-              v-model="form.contraseniaDueno"
+              v-model="user.password"
+              v-on:keyup.enter="login"
               style="width: 100%"
             />
             <label for="contrasenia">Contraseña</label>
@@ -46,44 +47,52 @@
 </template>
 
 <script>
-// @ is an alias to /src
-
-import DuenoService from "@/service/DuenoService";
+import UsuarioService from "@/service/UsuarioService";
+//import axios from "axios";
 
 export default {
-  name: "LoginDueno",
+  name: "LoginUser",
   data() {
     return {
-      form: {
-        correoElectronico: null,
-        contraseniaDueno: null,
+      user: {
+        username: null,
+        password: null,
       },
       datosIncorrectos: null,
     };
   },
-  duenoService: null,
+  usuarioService: null,
   created() {
-    this.duenoService = new DuenoService();
+    this.usuarioService = new UsuarioService();
   },
   methods: {
     async login() {
-      await this.$store.dispatch("Dueno/signInDueno", this.form);
-      this.form = {
-        correoElectronico: null,
-        contraseniaDueno: null,
-      };
-      if (!this.$store.state.Dueno.userNF) {
-        this.$router.push("/");
-        localStorage.setItem('UsuarioDueno', JSON.stringify(this.$store.state.Dueno.userD));
-      } else {
-        this.datosIncorrectos = "Datos incorrectos";
-      }
+      this.usuarioService
+        .login(this.user)
+        .then((response) => {
+          if (response.status !== 200) {
+            alert("Error en la autenticación");
+          } else {
+            localStorage.setItem("token", response.data.access_token);
+            this.$store.dispatch("MenuBar/saveUserMenuBar");
+            this.$router.push("/");
+          }
+        })
+        .catch((error) => {
+          if (error.response.status === 400) {
+            alert("Credenciales incorrectas");
+            this.user.username = null;
+            this.user.password = null;
+          } else {
+            alert("¡Parece que hubo un error de comunicación con el servidor!");
+          }
+        });
     },
   },
 };
 </script>
 
-<style scoped>
+<style>
 .p-card-body {
   margin-top: 50px;
 }
