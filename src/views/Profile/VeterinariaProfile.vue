@@ -30,7 +30,7 @@
             <div class="col-md-8">
               <div class="card mb-3">
                 <div class="card-body">
-                  <hr />
+                  
                   <!--Direccion-->
                   <div class="row">
                     <div class="col-sm-4 text-primary">
@@ -81,15 +81,36 @@ export default {
       perfilVeterinaria: null,
     };
   },
-  methods: {},
+    watch: {
+      $route(to, from) {        
+        if(to == from){
+        this.$router.go();
+        }else{
+          this.$router.go();
+        }
+      }
+    } ,
+  methods: {
+    loadPerfil() {
+      if (this.$route.params.id) {        
+        const idVeterinaria = this.$route.params.id;
+        this.veterinariaService.getVeterinaria(idVeterinaria).then((response) => {
+          this.perfilVeterinaria = response.data;
+        });
+      } else {
+        this.veterinariaService.obtenerPerfil().then((response) => {
+        this.perfilVeterinaria = response.data;
+        console.log(response.data);
+      });
+      }
+    },
+  },
   veterinariaService: null,
   created() {
     this.veterinariaService = new VeterinariaService();
   },
   mounted() {
-    this.veterinariaService.obtenerPerfil().then((response) => {
-      this.perfilVeterinaria = response.data;
-    });
+    this.loadPerfil();
   },
 };
 </script>

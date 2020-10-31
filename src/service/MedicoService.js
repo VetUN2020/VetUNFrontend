@@ -25,6 +25,10 @@ export default class MedicoService {
     });
   }
 
+  getMedico(medico){
+    return axios.get("medicos/"+medico);
+  }
+
   agregarHorario(listaHoras) {
     return axios.put("medico/agregarHora", listaHoras, {
       params: {
