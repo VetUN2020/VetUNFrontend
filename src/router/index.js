@@ -14,7 +14,7 @@ import VeterinariaProfile from "../views/Profile/VeterinariaProfile.vue";
 import LoginUser from "../views/Login/LoginUser.vue";
 import AgregarHorario from "../views/AgregarHorario.vue";
 
-import AgendarCitaM from "../views/Register/AgendarCitaMascota.vue";
+import AgendarCitaMascota from "../views/Register/AgendarCitaMascota.vue";
 
 Vue.use(VueRouter);
 
@@ -68,7 +68,12 @@ export default new VueRouter({
       component: CitasVet,
     },
     {
-      path: "/medicoProfile",
+      path: "/medicoProfile/",
+      name: "MyMedicoProfile",
+      component: MedicoProfile,
+    },
+    {
+      path: "/medicoProfile/:id",
       name: "MedicoProfile",
       component: MedicoProfile,
     },
@@ -76,10 +81,15 @@ export default new VueRouter({
       path: "/duenoProfile",
       name: "DuenoProfile",
       component: DuenoProfile,
-    },
+    },    
     {
       path: "/veterinariaProfile",
-      name: "veterinariaProfile",
+      name: "MyVeterinariaProfile",
+      component: VeterinariaProfile,
+    },
+    {
+      path: "/veterinariaProfile/:id",
+      name: "VeterinariaProfile",
       component: VeterinariaProfile,
     },
     {

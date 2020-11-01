@@ -8,9 +8,9 @@
         margin-bottom: 2em;
       "
     >
-      <template slot="title"
-        >Agregue sus horarios disponibles para citas</template
-      >
+      <template slot="title">
+        Agregue sus horarios disponibles para citas
+      </template>
       <template slot="content">
         <div class="p-field p-grid">
           <MultiSelect

@@ -6,24 +6,27 @@
           <img
             src="../assets/Icono.png"
             class="d-inline-block align-top"
-            height="50px"/></b-navbar-brand
+            height="50px" /></b-navbar-brand
       ></router-link>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="ml-auto">
+
+          <SearchBar v-if="$store.state.MenuBar.userAuth"/>         
+
           <template v-if="$store.state.MenuBar.userAuth">
             <template
               v-if="$store.state.MenuBar.userAuth.rolUsuario === 'DUENO'"
             >
               <b-nav-form>
                 <b-dropdown
-                  id="dropdown-right"
+                  id="dropdown-right1"
                   v-bind:text="
                     $store.state.MenuBar.userAuth.nombreUsuario +
-                      ' ' +
-                      $store.state.MenuBar.userAuth.apellidoUsuario
+                    ' ' +
+                    $store.state.MenuBar.userAuth.apellidoUsuario
                   "
                   size="sm"
                   variant="success"
@@ -57,7 +60,7 @@
                 >
 
                 <b-dropdown
-                  id="dropdown-right"
+                  id="dropdown-right2"
                   text="Mi veterinaria"
                   size="sm"
                   variant="success"
@@ -73,11 +76,11 @@
                 </b-dropdown>
 
                 <b-dropdown
-                  id="dropdown-right"
+                  id="dropdown-right3"
                   v-bind:text="
                     $store.state.MenuBar.userAuth.nombreUsuario +
-                      ' ' +
-                      $store.state.MenuBar.userAuth.apellidoUsuario
+                    ' ' +
+                    $store.state.MenuBar.userAuth.apellidoUsuario
                   "
                   size="sm"
                   variant="success"
@@ -130,7 +133,12 @@
 </template>
 
 <script>
+import SearchBar from './SearchBar'
+
 export default {
+  components:{
+    SearchBar
+  },
   methods: {
     registrarseDueno() {
       this.$router.push("/registroDueno");
@@ -174,7 +182,7 @@ export default {
     },
     agregarHorario() {
       this.router.push("/agregarHorario");
-    },
+    }
   },
 };
 </script>
@@ -185,4 +193,5 @@ export default {
   width: 100%;
   z-index: 100;
 }
+
 </style>
