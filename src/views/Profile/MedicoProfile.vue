@@ -135,7 +135,6 @@ export default {
           this.perfilMedico = response.data;
         });
       } else {
-        console.log('else');
         this.medicoService.obtenerPerfil().then((response) => {
         this.perfilMedico = response.data;
         
