@@ -49,7 +49,6 @@
                       {{ perfilVeterinaria.telefonoVeterinaria }}
                     </div>
                   </div>
-
                   <!--Matricula profesional-->
                   <hr />
                   <div class="row">
@@ -133,8 +132,12 @@ export default {
   },
   methods: {
     loadPerfil() {
-      if (this.$route.params.id) {
-        const idVeterinaria = this.$route.params.id;
+      //if (this.$route.params.id) {
+      console.log(this.$route.query.idVeterinaria);
+
+      if (this.$route.query.idVeterinaria) {
+        //const idVeterinaria = this.$route.params.id;
+        const idVeterinaria = this.$route.query.idVeterinaria;
         this.veterinariaService
           .getVeterinaria(idVeterinaria)
           .then((response) => {
