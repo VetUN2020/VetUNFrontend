@@ -70,7 +70,7 @@
                   v-bind:key="item"
                   class="col-md-3 col-6 my-1"
                 >
-                  <div class="card h-100">
+                  <div class="card h-100" @click="perfilMedico(item.idMedico)">
                     <img
                       id="profilePic"
                       src="@/assets/veterinario.jpg"
@@ -91,10 +91,6 @@
                         <hr />
                         <span class="badge badge-pill badge-info"
                           >Telefono : {{ item.telefonoMedico }}</span
-                        >
-                        <hr />
-                        <span class="badge badge-pill badge-info"
-                          >Link : {{ item.linkMedico }}</span
                         >
                       </div>
                     </div>
@@ -158,6 +154,16 @@ export default {
             });
         });
       }
+    },
+    perfilMedico(idM) {
+      this.$router
+        .push({
+          name: "MyMedicoProfile",
+          query: { idMedico: idM },
+        })
+        .catch(() => {});
+      this.showResults = false;
+      this.busqueda = "";
     },
   },
   veterinariaService: null,
