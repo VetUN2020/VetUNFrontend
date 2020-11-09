@@ -18,7 +18,6 @@
       </ul>
 
       <h5 v-if="resultadosVeterinarias.length > 0">Veterinarias:</h5>
-
       <ul
         @click="goVet(veterinaria.idVeterinaria)"
         v-for="veterinaria in resultadosVeterinarias"
@@ -65,6 +64,7 @@ export default {
       this.veterinariaService.getAll().then((response) => {
         response.data.map((item) => {
           this.veterinarias.push(item);
+
         });
       });
     },
@@ -108,6 +108,11 @@ export default {
               this.resultadosMedicos.push(item);
             }
           } else if (!medicoName.includes(busqueda)) {
+                    this.resultadosVeterinarias = []
+                }                   
+            });
+        }else{            
+            this.showResults= false;
             this.resultadosMedicos = [];
           }
         });

@@ -181,7 +181,7 @@ export default {
       this.$router.push("/misCitas");
     },
     agregarHorario() {
-      this.router.push("/agregarHorario");
+      this.$router.push("/agregarHorario");
     }
   },
 };
