@@ -40,4 +40,9 @@ export default class MedicoService {
   obtenerHoras() {
     return axios.get("pruebas/horasDisponibles");
   }
+
+  medicosSegunVeterinaria(Idveterinaria) {
+    return axios.get("medicoIdVet/"+Idveterinaria);
+  }
+
 }
