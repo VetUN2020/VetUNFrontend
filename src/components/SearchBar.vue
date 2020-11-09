@@ -97,46 +97,34 @@ export default {
         );
       busqueda = capitalize(busqueda).replace(/\s/g, "");
       if (busqueda) {
-        this.showResults = true;
-        this.medicos.filter((item) => {
-          let medicoName = item.nombreMedico + "" + item.apellidoMedico;
-          if (
-            medicoName.includes(busqueda) &&
-            !this.resultadosMedicos.includes(item)
-          ) {
-            if (this.resultadosMedicos.length < 5) {
-              this.resultadosMedicos.push(item);
-            }
-          } else if (!medicoName.includes(busqueda)) {
+         this.showResults= true;
+            this.medicos.filter((item) => {
+                let medicoName = item.nombreMedico+""+item.apellidoMedico;     
+                let busquedaMed = busqueda.toLowerCase();                                        
+                    if(medicoName.includes(busquedaMed) && (!this.resultadosMedicos.includes(item)) ){
+                        if(this.resultadosMedicos.length<3){ 
+                          this.resultadosMedicos.push(item);     
+                        }                          
+                    }else if(!medicoName.includes(busquedaMed)){
+                        this.resultadosMedicos = []
+                    }                 
+            });
+            this.veterinarias.filter((item) => {
+                let nameVet= item.nombreVeterinaria.toLowerCase();
+                let busquedaVet= busqueda.toLowerCase();
+                if(nameVet.startsWith(busquedaVet) && (!this.resultadosVeterinarias.includes(item)) ){
+                    if(this.resultadosVeterinarias.length<3){
+                    this.resultadosVeterinarias.push(item);
+                    }                    
+                }else if(!nameVet.startsWith(busquedaVet)){
                     this.resultadosVeterinarias = []
                 }                   
             });
         }else{            
             this.showResults= false;
             this.resultadosMedicos = [];
-          }
-        });
-
-        this.veterinarias.filter((item) => {
-          let nameVet = item.nombreVeterinaria.toLowerCase();
-          let busquedaVet = busqueda.toLowerCase();
-
-          if (
-            nameVet.includes(busquedaVet) &&
-            !this.resultadosVeterinarias.includes(item)
-          ) {
-            if (this.resultadosVeterinarias.length < 5) {
-              this.resultadosVeterinarias.push(item);
-            }
-          } else if (!nameVet.includes(busquedaVet)) {
-            this.resultadosVeterinarias = [];
-          }
-        });
-      } else {
-        this.showResults = false;
-        this.resultadosMedicos = [];
-        this.resultadosVeterinarias = [];
-      }
+            this.resultadosVeterinarias= [];
+        }
     },
     prueba() {
       console.log(this.resultadosVeterinarias);
