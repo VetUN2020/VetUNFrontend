@@ -70,6 +70,7 @@ export default new VueRouter({
     {
       path: "/medicoProfile/",
       name: "MyMedicoProfile",
+      props: true,
       component: MedicoProfile,
     },
     {
@@ -81,10 +82,11 @@ export default new VueRouter({
       path: "/duenoProfile",
       name: "DuenoProfile",
       component: DuenoProfile,
-    },    
+    },
     {
       path: "/veterinariaProfile",
       name: "MyVeterinariaProfile",
+      props: true,
       component: VeterinariaProfile,
     },
     {

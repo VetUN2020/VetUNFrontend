@@ -75,7 +75,7 @@
                   </div>
 
                   <!--Email-->
-                  <hr  v-if="perfilMedico.correoMedico"/>
+                  <hr v-if="perfilMedico.correoMedico" />
                   <div class="row" v-if="perfilMedico.correoMedico">
                     <div class="col-sm-4 text-primary">
                       <h6 class="mb-0">Email</h6>
@@ -87,7 +87,7 @@
 
                   <!--Contraseña-->
                   <!--Usuario-->
-                  <hr  v-if="perfilMedico.usuarioMedico"/>
+                  <hr v-if="perfilMedico.usuarioMedico" />
                   <div v-if="perfilMedico.usuarioMedico" class="row">
                     <div class="col-sm-4 text-primary">
                       <h6 class="mb-0">Usuario</h6>
@@ -118,28 +118,26 @@ export default {
       perfilMedico: null,
     };
   },
-    watch: {
-      $route(to, from) {
-        if(to == from){
+  watch: {
+    $route(to, from) {
+      if (to == from) {
         this.$router.go();
-        }else{
-          this.$router.go();
-        }
+      } else {
+        this.$router.go();
       }
-    } ,
+    },
+  },
   methods: {
     loadPerfil() {
-      if (this.$route.params.id) {        
-        const idMedico = this.$route.params.id;
+      if (this.$route.query.idMedico) {
+        const idMedico = this.$route.query.idMedico;
         this.medicoService.getMedico(idMedico).then((response) => {
           this.perfilMedico = response.data;
         });
       } else {
-        console.log('else');
         this.medicoService.obtenerPerfil().then((response) => {
-        this.perfilMedico = response.data;
-        
-      });
+          this.perfilMedico = response.data;
+        });
       }
     },
   },
