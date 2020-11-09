@@ -14,7 +14,6 @@
 
       <ul @click="goVet(veterinaria.idVeterinaria)" v-for="veterinaria in resultadosVeterinarias" :key="veterinaria.id">
           <li>{{veterinaria.nombreVeterinaria}}</li>
-        
       </ul>
       
     </div>
@@ -55,7 +54,6 @@ export default {
     },
     loadVeterinarias() {
         this.veterinariaService.getAll().then((response) => {
-        
         response.data.map( item =>{
             this.veterinarias.push(item);
         });
@@ -75,12 +73,13 @@ export default {
         if(busqueda){
             this.showResults= true;
             this.medicos.filter((item) => {
-                let medicoName = item.nombreMedico+""+item.apellidoMedico ;                                             
-                    if(medicoName.includes(busqueda) && (!this.resultadosMedicos.includes(item)) ){
+                let medicoName = item.nombreMedico+""+item.apellidoMedico;     
+                let busquedaMed = busqueda.toLowerCase();                                        
+                    if(medicoName.includes(busquedaMed) && (!this.resultadosMedicos.includes(item)) ){
                         if(this.resultadosMedicos.length<3){ 
-                    this.resultadosMedicos.push(item);     
-                    }                         
-                    }else if(!medicoName.includes(busqueda)){
+                          this.resultadosMedicos.push(item);     
+                        }                          
+                    }else if(!medicoName.includes(busquedaMed)){
                         this.resultadosMedicos = []
                     }                 
             });
@@ -88,7 +87,7 @@ export default {
                 let nameVet= item.nombreVeterinaria.toLowerCase();
                 let busquedaVet= busqueda.toLowerCase();
                 if(nameVet.startsWith(busquedaVet) && (!this.resultadosVeterinarias.includes(item)) ){
-                    if(this.resultadosVeterinarias<3){
+                    if(this.resultadosVeterinarias.length<3){
                     this.resultadosVeterinarias.push(item);
                     }                    
                 }else if(!nameVet.startsWith(busquedaVet)){
