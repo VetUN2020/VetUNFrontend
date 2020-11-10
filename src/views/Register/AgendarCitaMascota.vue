@@ -14,6 +14,7 @@
           Elige la fecha de la consulta
         </h6>
         <Calendar
+          @click="verFecha"
           v-model="fechaCita"
           dateFormat="dd.mm.yy"
           :disabledDays="[0]"
@@ -21,12 +22,7 @@
         margin: 0 auto;
         text-align: center;
         width: 18rem;
-      "
-        />
-        <br /><br />
-        <b-button variant="success" size="sm" @click="verFecha"
-          >Prueba</b-button
-        >
+      "/>
         <br /><br />
         <h6 style="text-align: center; margin-bottom: 15px">
           Elige la hora
@@ -37,8 +33,6 @@
           optionLabel="horaTexto"
           placeholder="Selecciona una hora"
         />
-        <br /><br />
-        <br />
         <h6 style="text-align: center; margin-bottom: 15px">
           Elige la mascota
         </h6>
@@ -58,7 +52,12 @@
           optionLabel="name"
           placeholder="Selecciona tipo de consulta"
         />
-        <br /><br /><br />
+      </template>
+      <template slot="footer">
+        <Button
+          label="Agendar cita"
+          class="p-button-rounded p-button-success"
+        />
       </template>
     </Card>
     <Message severity="error" v-if="datosFaltantes">{{

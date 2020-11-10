@@ -25,6 +25,11 @@
                       <p class="text-secondary mb-1">Medico veterinario</p>
                     </div>
                   </div>
+                  <br>
+                  <div class="d-flex flex-column align-items-center text-center">
+
+                    <Button label="Agendar cita" class="p-button-rounded p-button-success" @click="agendarCitaMascota" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -134,12 +139,16 @@ export default {
         this.medicoService.getMedico(idMedico).then((response) => {
           this.perfilMedico = response.data;
         });
+
       } else {
         this.medicoService.obtenerPerfil().then((response) => {
           this.perfilMedico = response.data;
         });
       }
     },
+    agendarCitaMascota() {
+      this.$router.push("/agendarCitaMascota");
+    }
   },
   created() {
     this.medicoService = new MedicoService();

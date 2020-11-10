@@ -24,4 +24,12 @@ export default class DuenoService {
       },
     });
   }
+
+  agendarCitaMascota(cita){
+    return axios.post("dueno/agendarCitaMascota", cita,{
+      params: {
+        access_token: localStorage.getItem("token"),
+      },
+    })
+  }
 }
