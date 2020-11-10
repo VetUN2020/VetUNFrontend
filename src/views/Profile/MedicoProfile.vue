@@ -28,7 +28,7 @@
                   <br>
                   <div class="d-flex flex-column align-items-center text-center">
 
-                    <Button label="Agendar cita" class="p-button-rounded p-button-success" @click="agendarCitaMascota" />
+                    <Button label="Agendar cita" class="p-button-rounded p-button-success" @click="agendarCitaMascota()" />
                   </div>
                 </div>
               </div>
@@ -147,7 +147,14 @@ export default {
       }
     },
     agendarCitaMascota() {
-      this.$router.push("/agendarCitaMascota");
+      //this.$router.push("/agendarCitaMascota");
+      const id = this.$route.query.idMedico;
+      this.$router
+        .push({
+          name: "AgendarCitaMascota",
+          query: { idMedico: id },
+        })
+        .catch(() => {});
     }
   },
   created() {

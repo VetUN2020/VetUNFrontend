@@ -102,6 +102,7 @@ export default new VueRouter({
     {
       path: "/agendarCitaMascota",
       name: "AgendarCitaMascota",
+      props: true,
       component: AgendarCitaMascota,
     },
     {

@@ -14,8 +14,8 @@
           Elige la fecha de la consulta
         </h6>
         <Calendar
-          @click="verFecha"
-          v-model="fechaCita"
+          v-on:date-select="obtenerHoras"
+          v-model="fecha.fechaCita"
           dateFormat="dd.mm.yy"
           :disabledDays="[0]"
           style="
@@ -94,6 +94,10 @@ export default {
         fechaCita: null,
         modalidadCita: "Presencial",
       },
+      fecha: {
+        fechaCita: null,
+        idMedico: null,
+      }
     };
   },
   mascotaService: null,
@@ -109,6 +113,24 @@ export default {
       // console.log(this.fechaCita.getDate());
       console.log(this.horasDisponibles);
     },
+    obtenerHoras(){
+      let dia = this.fecha.fechaCita.getDate();
+      let mes = this.fecha.fechaCita.getMonth();
+      let ano = this.fecha.fechaCita.getFullYear();
+      if(dia<=9){
+        this.fecha.fechaCita = ano+"-"+mes+"-0"+dia;
+      }else{
+        this.fecha.fechaCita = ano+"-"+mes+"-"+dia;
+      }
+      
+      this.medicoService = new MedicoService();
+      this.medicoService.obtenerHorasDisponibles(this.fecha).then((response) => {
+        console.log(response);
+      if (response.status === 200) {
+        this.horasDisponibles = response.data;
+      }
+    });
+    }
   },
   created() {
     this.mascotaService = new MascotaService();
@@ -117,13 +139,7 @@ export default {
         this.misMascotas = response.data;
       }
     });
-
-    this.medicoService = new MedicoService();
-    this.medicoService.obtenerHoras().then((response) => {
-      if (response.status === 200) {
-        this.horasDisponibles = response.data;
-      }
-    });
+    this.fecha.idMedico = this.$route.query.idMedico;
   },
   openBasic() {
     this.displayBasic = true;

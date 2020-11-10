@@ -36,13 +36,17 @@ export default class MedicoService {
       },
     });
   }
-
-  obtenerHoras() {
-    return axios.get("pruebas/horasDisponibles");
-  }
-
+  
   medicosSegunVeterinaria(Idveterinaria) {
     return axios.get("medicoIdVet/"+Idveterinaria);
+  }
+
+  obtenerHorasDisponibles(fecha){
+    return axios.post("usuario/horasDisponibles", fecha , {
+      params: {
+        access_token: localStorage.getItem("token"),
+      },
+    });
   }
 
 }
