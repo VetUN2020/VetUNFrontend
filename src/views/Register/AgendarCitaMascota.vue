@@ -28,7 +28,7 @@
           Elige la hora
         </h6>
         <Dropdown
-          v-model="horaSeleccionada"
+          v-model="cita.horaCita"
           :options="horasDisponibles"
           optionLabel="horaTexto"
           placeholder="Selecciona una hora"
@@ -37,7 +37,7 @@
           Elige la mascota
         </h6>
         <Dropdown
-          v-model="mascotaSeleccionada"
+          v-model="cita.idMascota"
           :options="misMascotas"
           optionLabel="nombreMascota"
           placeholder="Selecciona una de tus mascotas"
@@ -47,8 +47,8 @@
           Elegir tipo de consulta
         </h6>
         <Dropdown
-          v-model="citaSeleccionada"
-          :options="tiposCitas"
+          v-model="cita.idAtencion"
+          :options="tiposAtenciones"
           optionLabel="name"
           placeholder="Selecciona tipo de consulta"
         />
@@ -57,6 +57,7 @@
         <Button
           label="Agendar cita"
           class="p-button-rounded p-button-success"
+          @click="prueba"
         />
       </template>
     </Card>
@@ -75,23 +76,20 @@ export default {
   data() {
     return {
       displayBasic: false,
-      fechaCita: null,
       misMascotas: null,
       mascotaSeleccionada: null,
       citaSeleccionada: null,
       datosFaltantes: null,
-      horaSeleccionada: null,
-      tiposCitas: [{ name: "Consulta" }, { name: "Cirugia" }],
+      tiposAtenciones: [{ idAtencion: 1, name: "Consulta" }, { idAtencion: 2, name: "Cirugia" }],
       horasDisponibles: null,
       cita: {
         idMedico: {
-          idMedico: "1",
+          idMedico: null,
         },
         idMascota: null,
-        idAtencion: {
-          idAtencion: "1",
-        },
+        idAtencion: null,
         fechaCita: null,
+        horaCita: null,
         modalidadCita: "Presencial",
       },
       fecha: {
@@ -114,6 +112,7 @@ export default {
       console.log(this.horasDisponibles);
     },
     obtenerHoras(){
+      this.cita.fechaCita = this.fecha.fechaCita;
       let dia = this.fecha.fechaCita.getDate();
       let mes = this.fecha.fechaCita.getMonth();
       let ano = this.fecha.fechaCita.getFullYear();
@@ -126,10 +125,13 @@ export default {
       this.medicoService = new MedicoService();
       this.medicoService.obtenerHorasDisponibles(this.fecha).then((response) => {
         console.log(response);
-      if (response.status === 200) {
-        this.horasDisponibles = response.data;
-      }
-    });
+        if (response.status === 200) {
+          this.horasDisponibles = response.data;
+        }
+      });
+    },
+    prueba(){
+      console.log(this.cita);
     }
   },
   created() {
@@ -140,6 +142,7 @@ export default {
       }
     });
     this.fecha.idMedico = this.$route.query.idMedico;
+    this.cita.idMedico.idMedico = this.$route.query.idMedico;
   },
   openBasic() {
     this.displayBasic = true;
