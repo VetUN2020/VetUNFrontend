@@ -49,6 +49,14 @@ export default class MedicoService {
     });
   }
 
+  obtenerTiposAtencion() {
+    return axios.get("usuario/tiposAtencion", {
+      params: {
+        access_token: localStorage.getItem("token"),
+      },
+    });
+  }
+
   agregarPreciosCitas(listaCostos) {
     return axios.post("medico/agregarPrecios", listaCostos, {
       params: {

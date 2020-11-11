@@ -7,7 +7,7 @@ import RegistroVeterinaria from "../views/Register/RegistroVeterinaria.vue";
 import RegistroMedico from "../views/Register/RegistroMedico.vue";
 import RegistroMascota from "../views/Register/RegistroMascota.vue";
 import AgendarCita from "../views/Register/AgendarCita.vue";
-import CitasVet from "../views/Agenda/Veterinario.vue";
+import MisCitas from "../views/Agenda/MisCitas.vue";
 import MedicoProfile from "../views/Profile/MedicoProfile.vue";
 import DuenoProfile from "../views/Profile/DuenoProfile.vue";
 import VeterinariaProfile from "../views/Profile/VeterinariaProfile.vue";
@@ -26,8 +26,7 @@ export default new VueRouter({
     };
   },
   mode: "history",
-  routes: [
-    {
+  routes: [{
       path: "/",
       name: "Home",
       component: Home,
@@ -64,8 +63,8 @@ export default new VueRouter({
     },
     {
       path: "/misCitas",
-      name: "citasVet",
-      component: CitasVet,
+      name: "misCitas",
+      component: MisCitas,
     },
     {
       path: "/medicoProfile/",

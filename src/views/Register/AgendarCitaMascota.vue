@@ -22,7 +22,8 @@
         margin: 0 auto;
         text-align: center;
         width: 18rem;
-      "/>
+      "
+        />
         <br /><br />
         <h6 style="text-align: center; margin-bottom: 15px">
           Elige la hora
@@ -44,20 +45,20 @@
         />
         <br />
         <h6 style="text-align: center; margin-bottom: 15px">
-          Elegir tipo de consulta
+          Elegir tipo de atención
         </h6>
         <Dropdown
           v-model="cita.idAtencion"
           :options="tiposAtenciones"
-          optionLabel="name"
-          placeholder="Selecciona tipo de consulta"
+          optionLabel="descripcionAtencion"
+          placeholder="Selecciona tipo de atención"
         />
       </template>
       <template slot="footer">
         <Button
           label="Agendar cita"
           class="p-button-rounded p-button-success"
-          @click="prueba"
+          @click="agendarCita"
         />
       </template>
     </Card>
@@ -70,6 +71,7 @@
 <script>
 import MascotaService from "@/service/MascotaService";
 import MedicoService from "@/service/MedicoService";
+import DuenoService from "@/service/DuenoService";
 
 export default {
   name: "agendarCitaMascota",
@@ -80,7 +82,7 @@ export default {
       mascotaSeleccionada: null,
       citaSeleccionada: null,
       datosFaltantes: null,
-      tiposAtenciones: [{ idAtencion: 1, name: "Consulta" }, { idAtencion: 2, name: "Cirugia" }],
+      tiposAtenciones: null,
       horasDisponibles: null,
       cita: {
         idMedico: {
@@ -95,44 +97,55 @@ export default {
       fecha: {
         fechaCita: null,
         idMedico: null,
-      }
+      },
     };
   },
   mascotaService: null,
   medicoService: null,
+  DuenoService: null,
   methods: {
-    verFecha() {
-      /*this.fechaCita.setHours(this.horaSeleccionada.hour);
-      this.fechaCita.setMinutes(this.horaSeleccionada.minutes);
-      console.log(this.fechaCita);
-      console.log(this.horaSeleccionada);*/
-      // this.fechaCita.setDate(15);
-      // console.log(this.fechaCita);
-      // console.log(this.fechaCita.getDate());
-      console.log(this.horasDisponibles);
-    },
-    obtenerHoras(){
+    obtenerHoras() {
       this.cita.fechaCita = this.fecha.fechaCita;
       let dia = this.fecha.fechaCita.getDate();
       let mes = this.fecha.fechaCita.getMonth();
       let ano = this.fecha.fechaCita.getFullYear();
-      if(dia<=9){
-        this.fecha.fechaCita = ano+"-"+mes+"-0"+dia;
-      }else{
-        this.fecha.fechaCita = ano+"-"+mes+"-"+dia;
+      if (dia <= 9) {
+        this.fecha.fechaCita = ano + "-" + mes + "-0" + dia;
+      } else {
+        this.fecha.fechaCita = ano + "-" + mes + "-" + dia;
       }
-      
+
       this.medicoService = new MedicoService();
-      this.medicoService.obtenerHorasDisponibles(this.fecha).then((response) => {
-        console.log(response);
+      this.medicoService
+        .obtenerHorasDisponibles(this.fecha)
+        .then((response) => {
+          if (response.status === 200) {
+            this.horasDisponibles = response.data;
+          }
+        });
+    },
+    agendarCita() {
+      this.cita.horaCita = this.cita.horaCita.horaTiempo;
+      console.log(this.cita);
+      this.DuenoService = new DuenoService();
+      this.DuenoService.agendarCitaMascota(this.cita).then((response) => {
         if (response.status === 200) {
-          this.horasDisponibles = response.data;
+          (this.fecha = {
+            fechaCita: null,
+            idMedico: null,
+          }),
+            (this.cita = {
+              idMedico: {
+                idMedico: null,
+              },
+              idMascota: null,
+              idAtencion: null,
+              fechaCita: null,
+              horaCita: null,
+            });
         }
       });
     },
-    prueba(){
-      console.log(this.cita);
-    }
   },
   created() {
     this.mascotaService = new MascotaService();
@@ -143,6 +156,13 @@ export default {
     });
     this.fecha.idMedico = this.$route.query.idMedico;
     this.cita.idMedico.idMedico = this.$route.query.idMedico;
+
+    this.medicoService = new MedicoService();
+    this.medicoService.obtenerTiposAtencion().then((response) => {
+      if (response.status === 200) {
+        this.tiposAtenciones = response.data;
+      }
+    });
   },
   openBasic() {
     this.displayBasic = true;
