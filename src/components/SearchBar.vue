@@ -64,7 +64,6 @@ export default {
       this.veterinariaService.getAll().then((response) => {
         response.data.map((item) => {
           this.veterinarias.push(item);
-
         });
       });
     },
@@ -90,41 +89,59 @@ export default {
       this.busqueda = "";
     },
     fetchInfo(busqueda) {
-      const capitalize = (str, lower = false) =>
-        (lower ? str.toLowerCase() : str).replace(
-          /(?:^|\s|["'([{])+\S/g,
-          (match) => match.toUpperCase()
-        );
-      busqueda = capitalize(busqueda).replace(/\s/g, "");
+      // const capitalize = (str, lower = false) =>
+      //   (lower ? str.toLowerCase() : str).replace(
+      //     /(?:^|\s|["'([{])+\S/g,
+      //     (match) => match.toUpperCase()
+      //   );
+      // busqueda = capitalize(busqueda).replace(/\s/g, "");
       if (busqueda) {
-         this.showResults= true;
-            this.medicos.filter((item) => {
-                let medicoName = item.nombreMedico+""+item.apellidoMedico;     
-                let busquedaMed = busqueda.toLowerCase();                                        
-                    if(medicoName.includes(busquedaMed) && (!this.resultadosMedicos.includes(item)) ){
-                        if(this.resultadosMedicos.length<3){ 
-                          this.resultadosMedicos.push(item);     
-                        }                          
-                    }else if(!medicoName.includes(busquedaMed)){
-                        this.resultadosMedicos = []
-                    }                 
-            });
-            this.veterinarias.filter((item) => {
-                let nameVet= item.nombreVeterinaria.toLowerCase();
-                let busquedaVet= busqueda.toLowerCase();
-                if(nameVet.startsWith(busquedaVet) && (!this.resultadosVeterinarias.includes(item)) ){
-                    if(this.resultadosVeterinarias.length<3){
-                    this.resultadosVeterinarias.push(item);
-                    }                    
-                }else if(!nameVet.startsWith(busquedaVet)){
-                    this.resultadosVeterinarias = []
-                }                   
-            });
-        }else{            
-            this.showResults= false;
-            this.resultadosMedicos = [];
-            this.resultadosVeterinarias= [];
-        }
+        this.showResults = true;
+        this.medicos.filter((item) => {
+          let medicoName =
+            item.nombreMedico.toLowerCase() +
+            "" +
+            item.apellidoMedico.toLowerCase();
+          let busquedaMed = busqueda.toLowerCase();
+          console.log(medicoName.includes(busquedaMed));
+          if (
+            medicoName.includes(busquedaMed) &&
+            !this.resultadosMedicos.includes(item)
+          ) {
+            if (this.resultadosMedicos.length < 3) {
+              console.log("aqui deberia mostrarlo");
+              this.resultadosMedicos.push(item);
+              console.log(this.resultadosMedicos);
+            }
+          } else if (!medicoName.includes(busquedaMed)) {
+            let i = this.resultadosMedicos.indexOf(item);
+            if (i > -1) {
+              this.resultadosMedicos.splice(i, 1);
+            }
+          }
+        });
+        this.veterinarias.filter((item) => {
+          let nameVet = item.nombreVeterinaria.toLowerCase();
+          let busquedaVet = busqueda.toLowerCase();
+          if (
+            nameVet.includes(busquedaVet) &&
+            !this.resultadosVeterinarias.includes(item)
+          ) {
+            if (this.resultadosVeterinarias.length < 3) {
+              this.resultadosVeterinarias.push(item);
+            }
+          } else if (!nameVet.includes(busquedaVet)) {
+            let i = this.resultadosVeterinarias.indexOf(item);
+            if (i > -1) {
+              this.resultadosVeterinarias.splice(i, 1);
+            }
+          }
+        });
+      } else {
+        this.showResults = false;
+        this.resultadosMedicos = [];
+        this.resultadosVeterinarias = [];
+      }
     },
     prueba() {
       console.log(this.resultadosVeterinarias);

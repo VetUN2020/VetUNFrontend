@@ -18,10 +18,22 @@ import ColumnGroup from "primevue/columngroup";
 import Dialog from "primevue/dialog";
 import MultiSelect from "primevue/multiselect";
 import Checkbox from "primevue/checkbox";
+import FullCalendar from 'primevue/fullcalendar';
 
-import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
-import { BNavbar } from "bootstrap-vue";
-import { BForm } from "bootstrap-vue";
+import '@fullcalendar/daygrid/main.min.css';
+import '@fullcalendar/timegrid/main.min.css';
+// import '@fullcalendar/core/main.min.css';
+
+import {
+  BootstrapVue,
+  IconsPlugin
+} from "bootstrap-vue";
+import {
+  BNavbar
+} from "bootstrap-vue";
+import {
+  BForm
+} from "bootstrap-vue";
 
 import VueSweetalert2 from "vue-sweetalert2";
 
@@ -49,6 +61,7 @@ Vue.component("ColumnGroup", ColumnGroup);
 Vue.component("Dialog", Dialog);
 Vue.component("MultiSelect", MultiSelect);
 Vue.component("Checkbox", Checkbox);
+Vue.component("FullCalendar", FullCalendar);
 
 Vue.component("b-navbar", BNavbar);
 Vue.component("b-form", BForm);
@@ -57,7 +70,7 @@ Vue.use(IconsPlugin);
 Vue.use(VueSweetalert2);
 
 Vue.component("v-style", {
-  render: function(createElement) {
+  render: function (createElement) {
     return createElement("style", this.$slots.default);
   },
 });
