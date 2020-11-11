@@ -78,7 +78,6 @@ export default {
       this.busqueda = "";
     },
     goVet(id) {
-      //this.$router.push("/veterinariaProfile/" + id);
       this.$router
         .push({
           name: "MyVeterinariaProfile",
@@ -89,12 +88,6 @@ export default {
       this.busqueda = "";
     },
     fetchInfo(busqueda) {
-      // const capitalize = (str, lower = false) =>
-      //   (lower ? str.toLowerCase() : str).replace(
-      //     /(?:^|\s|["'([{])+\S/g,
-      //     (match) => match.toUpperCase()
-      //   );
-      // busqueda = capitalize(busqueda).replace(/\s/g, "");
       if (busqueda) {
         this.showResults = true;
         this.medicos.filter((item) => {
@@ -142,9 +135,6 @@ export default {
         this.resultadosMedicos = [];
         this.resultadosVeterinarias = [];
       }
-    },
-    prueba() {
-      console.log(this.resultadosVeterinarias);
     },
   },
 };

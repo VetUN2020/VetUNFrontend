@@ -57,4 +57,11 @@ export default class MedicoService {
     });
   }
 
+  agregarPreciosCitas(listaCostos) {
+    return axios.post("medico/agregarPrecios", listaCostos, {
+      params: {
+        access_token: localStorage.getItem("token"),
+      },
+    });
+  }
 }
