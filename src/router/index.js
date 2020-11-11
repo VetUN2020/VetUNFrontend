@@ -13,7 +13,7 @@ import DuenoProfile from "../views/Profile/DuenoProfile.vue";
 import VeterinariaProfile from "../views/Profile/VeterinariaProfile.vue";
 import LoginUser from "../views/Login/LoginUser.vue";
 import AgregarHorario from "../views/AgregarHorario.vue";
-
+import AgregarPrecios from "../views/AgregarPrecios.vue";
 import AgendarCitaMascota from "../views/Register/AgendarCitaMascota.vue";
 
 Vue.use(VueRouter);
@@ -109,6 +109,11 @@ export default new VueRouter({
       path: "/agregarHorario",
       name: "agregarHorario",
       component: AgregarHorario,
+    },
+    {
+      path: "/agregarPrecios",
+      name: "agregarPrecios",
+      component: AgregarPrecios,
     },
   ],
 });

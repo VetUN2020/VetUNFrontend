@@ -18,6 +18,7 @@ import ColumnGroup from "primevue/columngroup";
 import Dialog from "primevue/dialog";
 import MultiSelect from "primevue/multiselect";
 import Checkbox from "primevue/checkbox";
+import InputSwitch from "primevue/inputswitch";
 
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 import { BNavbar } from "bootstrap-vue";
@@ -49,6 +50,7 @@ Vue.component("ColumnGroup", ColumnGroup);
 Vue.component("Dialog", Dialog);
 Vue.component("MultiSelect", MultiSelect);
 Vue.component("Checkbox", Checkbox);
+Vue.component("InputSwitch", InputSwitch);
 
 Vue.component("b-navbar", BNavbar);
 Vue.component("b-form", BForm);
