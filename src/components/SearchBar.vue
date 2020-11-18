@@ -2,7 +2,7 @@
   <div class="search-bar form-inline">
     <input
       v-model="busqueda"
-      placeholder="Buscar"
+      placeholder="Buscar medicos o veterinarias"
       @keyup="fetchInfo(busqueda)"
     />
 
