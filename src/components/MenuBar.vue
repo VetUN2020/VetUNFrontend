@@ -13,12 +13,11 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="ml-auto">
-          <SearchBar v-if="$store.state.MenuBar.userAuth" />
-
           <template v-if="$store.state.MenuBar.userAuth">
             <template
               v-if="$store.state.MenuBar.userAuth.rolUsuario === 'DUENO'"
             >
+              <SearchBar />
               <b-nav-form>
                 <b-dropdown
                   id="dropdown-right1"
