@@ -32,4 +32,12 @@ export default class DuenoService {
       },
     })
   }
+
+  async obtenerMisCitas() {
+    return await axios.get("dueno/misCitas", {
+      params: {
+        access_token: localStorage.getItem("token"),
+      },
+    })
+  }
 }

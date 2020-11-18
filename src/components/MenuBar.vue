@@ -35,7 +35,7 @@
                   <b-dropdown-item @click="registrarMascota"
                     >Registrar Mascota</b-dropdown-item
                   >
-                  <b-dropdown-item @click="obtenerCitas"
+                  <b-dropdown-item @click="citasDueno"
                     >Mis citas</b-dropdown-item
                   >
                   <b-dropdown-item @click="signOutDueno"
@@ -50,7 +50,7 @@
             >
               <b-nav-form>
                 <b-button
-                  @click="dates"
+                  @click="citasMedico"
                   variant="success"
                   size="sm"
                   class="my-2 mr-2 my-sm-3"
@@ -175,14 +175,14 @@ export default {
     profileVeterinary() {
       this.$router.push("/veterinariaProfile");
     },
-    dates() {
-      this.$router.push("/misCitas");
+    citasMedico() {
+      this.$router.push("/misCitasMedico");
     },
     agregarHorario() {
       this.$router.push("/agregarHorario");
     },
-    obtenerCitas() {
-      this.$router.push("/misCitas");
+    citasDueno() {
+      this.$router.push("/misCitasDueno");
     },
   },
 };
