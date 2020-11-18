@@ -4,8 +4,7 @@
       <FullCalendar
         class="demo-app-calendar"
         :options="calendarOptions"
-        :events="events"
-        v-if="micas.length > 0"
+        v-if="citas.length > 0"
       >
         <template v-slot:eventContent="arg">
           <b>{{ arg.timeText }}</b>
@@ -23,7 +22,7 @@ import FullCalendar from "@fullcalendar/vue";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import MedicoService from "@/service/MedicoService";
+import DuenoService from "@/service/DuenoService";
 
 export default {
   components: {
@@ -32,7 +31,7 @@ export default {
 
   data() {
     return {
-      micas: [],
+      citas: [],
       calendarOptions: {
         plugins: [
           dayGridPlugin,
@@ -57,41 +56,28 @@ export default {
         eventRemove:
         */
       },
-      events: null,
       currentEvents: [],
-      bool: false,
     };
   },
-  medicoService: null,
-  methods: {
-    agregarCitas(citas) {
-      console.log("m", citas);
-      let c = [];
-      c.push({
-        id: 1,
-        title: "All Day Event",
-        start: "2020-11-16",
-      });
-      return c;
-    },
-    mostrar() {
-      console.log(this.micas);
-    },
-  },
+  duenoService: null,
+  methods: {},
   created() {
-    this.medicoService = new MedicoService();
+    this.duenoService = new DuenoService();
   },
   mounted() {
-    this.micas = [];
-    this.medicoService.obtenerMisCitas().then((response) => {
+    this.citas = [];
+    this.duenoService.obtenerMisCitas().then((response) => {
       response.data.forEach((element) => {
-        this.micas.push({
+        this.citas.push({
           id: element.idCita,
-          title: element.idAtencion.descripcionAtencion,
+          title:
+            element.idAtencion.descripcionAtencion +
+            " con " +
+            element.idMascota.nombreMascota,
           start: element.fechaCita + "T" + element.horaCita,
         });
       });
-      this.calendarOptions.initialEvents = this.micas;
+      this.calendarOptions.initialEvents = this.citas;
     });
   },
 };
