@@ -64,4 +64,12 @@ export default class MedicoService {
       },
     });
   }
+
+  obtenerMisCitas() {
+    return axios.get("medico/misCitas", {
+      params: {
+        access_token: localStorage.getItem("token"),
+      },
+    });
+  }
 }
