@@ -49,8 +49,8 @@ export default class MedicoService {
     });
   }
 
-  obtenerTiposAtencion() {
-    return axios.get("usuario/tiposAtencion", {
+  obtenerTiposAtencion(idMedico) {
+    return axios.get("usuario/costos/" + idMedico, {
       params: {
         access_token: localStorage.getItem("token"),
       },
@@ -63,5 +63,13 @@ export default class MedicoService {
         access_token: localStorage.getItem("token"),
       },
     });
+  }
+
+  async obtenerMisCitas() {
+    return await axios.get("medico/misCitas", {
+      params: {
+        access_token: localStorage.getItem("token"),
+      },
+    })
   }
 }

@@ -50,11 +50,14 @@
         <Dropdown
           v-model="cita.idAtencion"
           :options="tiposAtenciones"
-          optionLabel="descripcionAtencion"
+          optionLabel="idAtencion.descripcionAtencion"
           placeholder="Selecciona tipo de atención"
         />
       </template>
       <template slot="footer">
+        <Message severity="info" v-if="cita.idAtencion"
+          >El precio de su cita sera de ${{ cita.idAtencion.costo }}</Message
+        >
         <Button
           label="Agendar cita"
           class="p-button-rounded p-button-success"
@@ -82,8 +85,9 @@ export default {
       mascotaSeleccionada: null,
       citaSeleccionada: null,
       datosFaltantes: null,
-      tiposAtenciones: null,
+      tiposAtenciones: [],
       horasDisponibles: null,
+      costos: null,
       cita: {
         idMedico: {
           idMedico: null,
@@ -107,7 +111,7 @@ export default {
     obtenerHoras() {
       this.cita.fechaCita = this.fecha.fechaCita;
       let dia = this.fecha.fechaCita.getDate();
-      let mes = this.fecha.fechaCita.getMonth();
+      let mes = this.fecha.fechaCita.getMonth() + 1;
       let ano = this.fecha.fechaCita.getFullYear();
       if (dia <= 9) {
         this.fecha.fechaCita = ano + "-" + mes + "-0" + dia;
@@ -123,10 +127,13 @@ export default {
             this.horasDisponibles = response.data;
           }
         });
+      for (let i = 0; i < this.costos.length; i++) {
+        this.tiposAtenciones.push(this.costos[i]);
+      }
     },
     agendarCita() {
+      this.cita.idAtencion = this.cita.idAtencion.idAtencion;
       this.cita.horaCita = this.cita.horaCita.horaTiempo;
-      console.log(this.cita);
       this.DuenoService = new DuenoService();
       this.DuenoService.agendarCitaMascota(this.cita).then((response) => {
         if (response.status === 200) {
@@ -145,6 +152,14 @@ export default {
             });
         }
       });
+      this.$swal({
+        position: "top-end",
+        icon: "success",
+        title: "Cita registrada correctamente",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+      this.$router.push("/");
     },
   },
   created() {
@@ -158,11 +173,13 @@ export default {
     this.cita.idMedico.idMedico = this.$route.query.idMedico;
 
     this.medicoService = new MedicoService();
-    this.medicoService.obtenerTiposAtencion().then((response) => {
-      if (response.status === 200) {
-        this.tiposAtenciones = response.data;
-      }
-    });
+    this.medicoService
+      .obtenerTiposAtencion(this.cita.idMedico.idMedico)
+      .then((response) => {
+        if (response.status === 200) {
+          this.costos = response.data;
+        }
+      });
   },
   openBasic() {
     this.displayBasic = true;
