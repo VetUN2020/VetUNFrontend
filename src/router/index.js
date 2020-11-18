@@ -15,7 +15,6 @@ import LoginUser from "../views/Login/LoginUser.vue";
 import AgregarHorario from "../views/AgregarHorario.vue";
 import AgregarPrecios from "../views/AgregarPrecios.vue";
 import AgendarCitaMascota from "../views/Register/AgendarCitaMascota.vue";
-import PruebaCitas from "../views/Agenda/PruebaCitas.vue";
 
 Vue.use(VueRouter);
 
@@ -115,11 +114,6 @@ export default new VueRouter({
       path: "/agregarPrecios",
       name: "agregarPrecios",
       component: AgregarPrecios,
-    },
-    {
-      path: "/pruebaCitas",
-      name: "pruebaCitas",
-      component: PruebaCitas,
     },
   ],
 });
