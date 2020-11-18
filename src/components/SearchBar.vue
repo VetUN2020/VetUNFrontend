@@ -96,15 +96,12 @@ export default {
             "" +
             item.apellidoMedico.toLowerCase();
           let busquedaMed = busqueda.toLowerCase();
-          console.log(medicoName.includes(busquedaMed));
           if (
             medicoName.includes(busquedaMed) &&
             !this.resultadosMedicos.includes(item)
           ) {
             if (this.resultadosMedicos.length < 3) {
-              console.log("aqui deberia mostrarlo");
               this.resultadosMedicos.push(item);
-              console.log(this.resultadosMedicos);
             }
           } else if (!medicoName.includes(busquedaMed)) {
             let i = this.resultadosMedicos.indexOf(item);

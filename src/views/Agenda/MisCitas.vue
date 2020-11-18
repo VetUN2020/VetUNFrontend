@@ -1,6 +1,18 @@
 <template>
-  <div class="misCitas">
-    <FullCalendar :events="events" :options="options" />
+  <div class="demo-app">
+    <div class="demo-app-main">
+      <FullCalendar
+        class="demo-app-calendar"
+        :options="calendarOptions"
+        :events="events"
+        v-if="micas.length > 0"
+      >
+        <template v-slot:eventContent="arg">
+          <b>{{ arg.timeText }}</b>
+          <i>{{ arg.event.title }}</i>
+        </template>
+      </FullCalendar>
+    </div>
   </div>
 </template>
 
@@ -11,70 +23,78 @@ import FullCalendar from "@fullcalendar/vue";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
+import MedicoService from "@/service/MedicoService";
 
 export default {
-  name: "misCitas",
   components: {
     FullCalendar, // make the <FullCalendar> tag available
   },
+
   data() {
     return {
-      options: {
-        plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-        defaultDate: "2019-01-01",
-        header: {
-          left: "prev,next",
+      micas: [],
+      calendarOptions: {
+        plugins: [
+          dayGridPlugin,
+          timeGridPlugin,
+          interactionPlugin, // needed for dateClick
+        ],
+        headerToolbar: {
+          left: "prev,next today",
           center: "title",
           right: "dayGridMonth,timeGridWeek,timeGridDay",
         },
+        initialView: "dayGridMonth",
+        initialEvents: null, // alternatively, use the `events` setting to fetch from a feed
         editable: true,
+        selectable: true,
+        selectMirror: true,
+        dayMaxEvents: true,
+        weekends: true,
+        /* you can update a remote database when these fire:
+        eventAdd:
+        eventChange:
+        eventRemove:
+        */
       },
-      events: [
-        {
-          id: 1,
-          title: "All Day Event",
-          start: "2019-01-01",
-        },
-        {
-          id: 2,
-          title: "Long Event",
-          start: "2019-01-07",
-          end: "2019-01-10",
-        },
-        {
-          id: 3,
-          title: "Repeating Event",
-          start: "2019-01-09T16:00:00",
-        },
-        {
-          id: 4,
-          title: "Repeating Event",
-          start: "2019-01-16T16:00:00",
-        },
-        {
-          id: 5,
-          title: "Conference",
-          start: "2019-01-11",
-          end: "2019-01-13",
-        },
-        {
-          id: 6,
-          title: "Meeting",
-          start: "2019-01-12T10:30:00",
-          end: "2019-01-12T12:30:00",
-        },
-      ],
+      events: null,
+      currentEvents: [],
+      bool: false,
     };
   },
-  created() {},
-  mounted() {},
-  methods: {},
+  medicoService: null,
+  methods: {
+    agregarCitas(citas) {
+      console.log("m", citas);
+      let c = [];
+      c.push({
+        id: 1,
+        title: "All Day Event",
+        start: "2020-11-16",
+      });
+      return c;
+    },
+    mostrar() {
+      console.log(this.micas);
+    },
+  },
+  created() {
+    this.medicoService = new MedicoService();
+  },
+  mounted() {
+    this.micas = [];
+    this.medicoService.obtenerMisCitas().then((response) => {
+      response.data.forEach((element) => {
+        this.micas.push({
+          id: element.idCita,
+          title: element.idAtencion.descripcionAtencion,
+          start: element.fechaCita + "T" + element.horaCita,
+        });
+      });
+      this.calendarOptions.initialEvents = this.micas;
+    });
+  },
 };
 </script>
 
-<style>
-.calendar {
-  width: 500px;
-  height: 500px;
-}
-</style>
+<style></style>

@@ -25,10 +25,19 @@
                       <p class="text-secondary mb-1">Medico veterinario</p>
                     </div>
                   </div>
-                  <br>
-                  <div class="d-flex flex-column align-items-center text-center">
-
-                    <Button label="Agendar cita" class="p-button-rounded p-button-success" @click="agendarCitaMascota()" />
+                  <br />
+                  <div
+                    class="d-flex flex-column align-items-center text-center"
+                  >
+                    <Button
+                      v-if="
+                        $store.state.MenuBar.userAuth.rolUsuario === 'DUENO'
+                      "
+                      label="Agendar cita"
+                      class="p-button-rounded
+                    p-button-success"
+                      @click="agendarCitaMascota()"
+                    />
                   </div>
                 </div>
               </div>
@@ -139,7 +148,6 @@ export default {
         this.medicoService.getMedico(idMedico).then((response) => {
           this.perfilMedico = response.data;
         });
-
       } else {
         this.medicoService.obtenerPerfil().then((response) => {
           this.perfilMedico = response.data;
@@ -155,7 +163,7 @@ export default {
           query: { idMedico: id },
         })
         .catch(() => {});
-    }
+    },
   },
   created() {
     this.medicoService = new MedicoService();
