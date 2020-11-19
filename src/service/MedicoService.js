@@ -70,6 +70,6 @@ export default class MedicoService {
       params: {
         access_token: localStorage.getItem("token"),
       },
-    })
+    });
   }
 }

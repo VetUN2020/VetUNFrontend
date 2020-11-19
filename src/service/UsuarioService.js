@@ -29,4 +29,12 @@ export default class UsuarioService {
       },
     });
   }
+
+  enviarCorreoRecuperacion(correo) {
+    return axios.post("recuperarContrasena", correo);
+  }
+
+  cambiarContrasenia(cambioContrasenia) {
+    return axios.post("nuevaContrasena", cambioContrasenia);
+  }
 }
