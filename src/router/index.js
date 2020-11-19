@@ -16,6 +16,8 @@ import AgregarHorario from "../views/AgregarHorario.vue";
 import AgregarPrecios from "../views/AgregarPrecios.vue";
 import AgendarCitaMascota from "../views/Register/AgendarCitaMascota.vue";
 import MisCitasDueno from "../views/Agenda/MisCitasDueno.vue";
+import RecuperacionContrasenia from "../views/RecuperarContrasena.vue";
+import NuevaContrasenia from "../views/NuevaContrasena.vue";
 
 Vue.use(VueRouter);
 
@@ -120,6 +122,16 @@ export default new VueRouter({
       path: "/agregarPrecios",
       name: "agregarPrecios",
       component: AgregarPrecios,
+    },
+    {
+      path: "/recuperacionContrasenia",
+      name: "recuperacionContrasenia",
+      component: RecuperacionContrasenia,
+    },
+    {
+      path: "/nuevaContrasenia",
+      name: "nuevaContrasenia",
+      component: NuevaContrasenia,
     },
   ],
 });
