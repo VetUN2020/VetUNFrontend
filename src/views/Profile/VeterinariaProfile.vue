@@ -30,7 +30,6 @@
             <div class="col-md-8">
               <div class="card mb-3">
                 <div class="card-body">
-                  
                   <!--Direccion-->
                   <div class="row">
                     <div class="col-sm-4 text-primary">
@@ -50,7 +49,6 @@
                       {{ perfilVeterinaria.telefonoVeterinaria }}
                     </div>
                   </div>
-
                   <!--Matricula profesional-->
                   <hr />
                   <div class="row">
@@ -59,6 +57,42 @@
                     </div>
                     <div class="col-sm-8 text-secondary">
                       {{ perfilVeterinaria.tipoVeterinaria }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--Veterinarios-->
+            <div class="container" id="app">
+              <div class="row">
+                <div
+                  v-for="item in veterinarios"
+                  v-bind:key="item"
+                  class="col-md-3 col-6 my-1"
+                >
+                  <div class="card h-100" @click="perfilMedico(item.idMedico)">
+                    <img
+                      id="profilePic"
+                      src="@/assets/veterinario.jpg"
+                      alt="Admin"
+                      width="100%"
+                    />
+                    <div class="card-body">
+                      <div class="card-title">
+                        <strong
+                          >{{ item.nombreMedico }}
+                          {{ item.apellidoMedico }}</strong
+                        >
+                      </div>
+                      <div>
+                        <span class="badge badge-pill badge-info"
+                          >Direccion : {{ item.direccionMedico }}</span
+                        >
+                        <hr />
+                        <span class="badge badge-pill badge-info"
+                          >Telefono : {{ item.telefonoMedico }}</span
+                        >
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -74,40 +108,69 @@
 <script>
 // @ is an alias to /src
 import VeterinariaService from "@/service/VeterinariaService";
+import MedicoService from "@/service/MedicoService";
 
 export default {
   data() {
     return {
       perfilVeterinaria: null,
+      veterinarios: [],
     };
   },
-    watch: {
-      $route(to, from) {        
-        if(to == from){
+  watch: {
+    $route(to, from) {
+      if (to == from) {
         this.$router.go();
-        }else{
-          this.$router.go();
-        }
-      }
-    } ,
-  methods: {
-    loadPerfil() {
-      if (this.$route.params.id) {        
-        const idVeterinaria = this.$route.params.id;
-        this.veterinariaService.getVeterinaria(idVeterinaria).then((response) => {
-          this.perfilVeterinaria = response.data;
-        });
       } else {
-        this.veterinariaService.obtenerPerfil().then((response) => {
-        this.perfilVeterinaria = response.data;
-        console.log(response.data);
-      });
+        this.$router.go();
       }
     },
   },
+  methods: {
+    loadPerfil() {
+      //if (this.$route.params.id) {
+      console.log(this.$route.query.idVeterinaria);
+
+      if (this.$route.query.idVeterinaria) {
+        //const idVeterinaria = this.$route.params.id;
+        const idVeterinaria = this.$route.query.idVeterinaria;
+        this.veterinariaService
+          .getVeterinaria(idVeterinaria)
+          .then((response) => {
+            this.perfilVeterinaria = response.data;
+            this.medicoService
+              .medicosSegunVeterinaria(this.perfilVeterinaria.idVeterinaria)
+              .then((response) => {
+                this.veterinarios = response.data;
+              });
+          });
+      } else {
+        this.veterinariaService.obtenerPerfil().then((response) => {
+          this.perfilVeterinaria = response.data;
+          this.medicoService
+            .medicosSegunVeterinaria(this.perfilVeterinaria.idVeterinaria)
+            .then((response) => {
+              this.veterinarios = response.data;
+            });
+        });
+      }
+    },
+    perfilMedico(idM) {
+      this.$router
+        .push({
+          name: "MyMedicoProfile",
+          query: { idMedico: idM },
+        })
+        .catch(() => {});
+      this.showResults = false;
+      this.busqueda = "";
+    },
+  },
   veterinariaService: null,
+  medicoService: null,
   created() {
     this.veterinariaService = new VeterinariaService();
+    this.medicoService = new MedicoService();
   },
   mounted() {
     this.loadPerfil();

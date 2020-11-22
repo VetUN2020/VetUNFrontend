@@ -7,14 +7,17 @@ import RegistroVeterinaria from "../views/Register/RegistroVeterinaria.vue";
 import RegistroMedico from "../views/Register/RegistroMedico.vue";
 import RegistroMascota from "../views/Register/RegistroMascota.vue";
 import AgendarCita from "../views/Register/AgendarCita.vue";
-import CitasVet from "../views/Agenda/Veterinario.vue";
+import MisCitasMedico from "../views/Agenda/MisCitasMedico.vue";
 import MedicoProfile from "../views/Profile/MedicoProfile.vue";
 import DuenoProfile from "../views/Profile/DuenoProfile.vue";
 import VeterinariaProfile from "../views/Profile/VeterinariaProfile.vue";
 import LoginUser from "../views/Login/LoginUser.vue";
 import AgregarHorario from "../views/AgregarHorario.vue";
-
+import AgregarPrecios from "../views/AgregarPrecios.vue";
 import AgendarCitaMascota from "../views/Register/AgendarCitaMascota.vue";
+import MisCitasDueno from "../views/Agenda/MisCitasDueno.vue";
+import RecuperacionContrasenia from "../views/RecuperarContrasena.vue";
+import NuevaContrasenia from "../views/NuevaContrasena.vue";
 
 Vue.use(VueRouter);
 
@@ -63,13 +66,19 @@ export default new VueRouter({
       component: AgendarCita,
     },
     {
-      path: "/misCitas",
-      name: "citasVet",
-      component: CitasVet,
+      path: "/misCitasMedico",
+      name: "misCitasMedico",
+      component: MisCitasMedico,
+    },
+    {
+      path: "/misCitasDueno",
+      name: "misCitasDueno",
+      component: MisCitasDueno,
     },
     {
       path: "/medicoProfile/",
       name: "MyMedicoProfile",
+      props: true,
       component: MedicoProfile,
     },
     {
@@ -81,10 +90,11 @@ export default new VueRouter({
       path: "/duenoProfile",
       name: "DuenoProfile",
       component: DuenoProfile,
-    },    
+    },
     {
       path: "/veterinariaProfile",
       name: "MyVeterinariaProfile",
+      props: true,
       component: VeterinariaProfile,
     },
     {
@@ -100,12 +110,28 @@ export default new VueRouter({
     {
       path: "/agendarCitaMascota",
       name: "AgendarCitaMascota",
+      props: true,
       component: AgendarCitaMascota,
     },
     {
       path: "/agregarHorario",
       name: "agregarHorario",
       component: AgregarHorario,
+    },
+    {
+      path: "/agregarPrecios",
+      name: "agregarPrecios",
+      component: AgregarPrecios,
+    },
+    {
+      path: "/recuperacionContrasenia",
+      name: "recuperacionContrasenia",
+      component: RecuperacionContrasenia,
+    },
+    {
+      path: "/nuevaContrasenia",
+      name: "nuevaContrasenia",
+      component: NuevaContrasenia,
     },
   ],
 });

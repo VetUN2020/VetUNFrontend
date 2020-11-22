@@ -25,8 +25,8 @@ export default class MedicoService {
     });
   }
 
-  getMedico(medico){
-    return axios.get("medicos/"+medico);
+  getMedico(medico) {
+    return axios.get("medicos/" + medico);
   }
 
   agregarHorario(listaHoras) {
@@ -37,7 +37,39 @@ export default class MedicoService {
     });
   }
 
-  obtenerHoras() {
-    return axios.get("pruebas/horasDisponibles");
+  medicosSegunVeterinaria(Idveterinaria) {
+    return axios.get("medicoIdVet/" + Idveterinaria);
+  }
+
+  obtenerHorasDisponibles(fecha) {
+    return axios.post("usuario/horasDisponibles", fecha, {
+      params: {
+        access_token: localStorage.getItem("token"),
+      },
+    });
+  }
+
+  obtenerTiposAtencion(idMedico) {
+    return axios.get("usuario/costos/" + idMedico, {
+      params: {
+        access_token: localStorage.getItem("token"),
+      },
+    });
+  }
+
+  agregarPreciosCitas(listaCostos) {
+    return axios.post("medico/agregarPrecios", listaCostos, {
+      params: {
+        access_token: localStorage.getItem("token"),
+      },
+    });
+  }
+
+  async obtenerMisCitas() {
+    return await axios.get("medico/misCitas", {
+      params: {
+        access_token: localStorage.getItem("token"),
+      },
+    });
   }
 }

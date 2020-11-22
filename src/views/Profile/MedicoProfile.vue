@@ -25,6 +25,20 @@
                       <p class="text-secondary mb-1">Medico veterinario</p>
                     </div>
                   </div>
+                  <br />
+                  <div
+                    class="d-flex flex-column align-items-center text-center"
+                  >
+                    <Button
+                      v-if="
+                        $store.state.MenuBar.userAuth.rolUsuario === 'DUENO'
+                      "
+                      label="Agendar cita"
+                      class="p-button-rounded
+                    p-button-success"
+                      @click="agendarCitaMascota()"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -75,7 +89,7 @@
                   </div>
 
                   <!--Email-->
-                  <hr  v-if="perfilMedico.correoMedico"/>
+                  <hr v-if="perfilMedico.correoMedico" />
                   <div class="row" v-if="perfilMedico.correoMedico">
                     <div class="col-sm-4 text-primary">
                       <h6 class="mb-0">Email</h6>
@@ -87,7 +101,7 @@
 
                   <!--Contraseña-->
                   <!--Usuario-->
-                  <hr  v-if="perfilMedico.usuarioMedico"/>
+                  <hr v-if="perfilMedico.usuarioMedico" />
                   <div v-if="perfilMedico.usuarioMedico" class="row">
                     <div class="col-sm-4 text-primary">
                       <h6 class="mb-0">Usuario</h6>
@@ -118,28 +132,37 @@ export default {
       perfilMedico: null,
     };
   },
-    watch: {
-      $route(to, from) {
-        if(to == from){
+  watch: {
+    $route(to, from) {
+      if (to == from) {
         this.$router.go();
-        }else{
-          this.$router.go();
-        }
+      } else {
+        this.$router.go();
       }
-    } ,
+    },
+  },
   methods: {
     loadPerfil() {
-      if (this.$route.params.id) {        
-        const idMedico = this.$route.params.id;
+      if (this.$route.query.idMedico) {
+        const idMedico = this.$route.query.idMedico;
         this.medicoService.getMedico(idMedico).then((response) => {
           this.perfilMedico = response.data;
         });
       } else {
         this.medicoService.obtenerPerfil().then((response) => {
-        this.perfilMedico = response.data;
-        
-      });
+          this.perfilMedico = response.data;
+        });
       }
+    },
+    agendarCitaMascota() {
+      //this.$router.push("/agendarCitaMascota");
+      const id = this.$route.query.idMedico;
+      this.$router
+        .push({
+          name: "AgendarCitaMascota",
+          query: { idMedico: id },
+        })
+        .catch(() => {});
     },
   },
   created() {

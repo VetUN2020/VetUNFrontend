@@ -6,27 +6,25 @@
           <img
             src="../assets/Icono.png"
             class="d-inline-block align-top"
-            height="50px" /></b-navbar-brand
+            height="50px"/></b-navbar-brand
       ></router-link>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="ml-auto">
-
-          <SearchBar v-if="$store.state.MenuBar.userAuth"/>         
-
           <template v-if="$store.state.MenuBar.userAuth">
             <template
               v-if="$store.state.MenuBar.userAuth.rolUsuario === 'DUENO'"
             >
+              <SearchBar />
               <b-nav-form>
                 <b-dropdown
                   id="dropdown-right1"
                   v-bind:text="
                     $store.state.MenuBar.userAuth.nombreUsuario +
-                    ' ' +
-                    $store.state.MenuBar.userAuth.apellidoUsuario
+                      ' ' +
+                      $store.state.MenuBar.userAuth.apellidoUsuario
                   "
                   size="sm"
                   variant="success"
@@ -37,9 +35,9 @@
                   <b-dropdown-item @click="registrarMascota"
                     >Registrar Mascota</b-dropdown-item
                   >
-                  <!-- <b-dropdown-item @click="agendarCita"
-                    >Agendar Cita</b-dropdown-item
-                  > -->
+                  <b-dropdown-item @click="citasDueno"
+                    >Mis citas</b-dropdown-item
+                  >
                   <b-dropdown-item @click="signOutDueno"
                     >Cerrar sesion</b-dropdown-item
                   >
@@ -52,7 +50,7 @@
             >
               <b-nav-form>
                 <b-button
-                  @click="dates"
+                  @click="citasMedico"
                   variant="success"
                   size="sm"
                   class="my-2 mr-2 my-sm-3"
@@ -79,8 +77,8 @@
                   id="dropdown-right3"
                   v-bind:text="
                     $store.state.MenuBar.userAuth.nombreUsuario +
-                    ' ' +
-                    $store.state.MenuBar.userAuth.apellidoUsuario
+                      ' ' +
+                      $store.state.MenuBar.userAuth.apellidoUsuario
                   "
                   size="sm"
                   variant="success"
@@ -133,11 +131,11 @@
 </template>
 
 <script>
-import SearchBar from './SearchBar'
+import SearchBar from "./SearchBar";
 
 export default {
-  components:{
-    SearchBar
+  components: {
+    SearchBar,
   },
   methods: {
     registrarseDueno() {
@@ -177,12 +175,15 @@ export default {
     profileVeterinary() {
       this.$router.push("/veterinariaProfile");
     },
-    dates() {
-      this.$router.push("/misCitas");
+    citasMedico() {
+      this.$router.push("/misCitasMedico");
     },
     agregarHorario() {
       this.$router.push("/agregarHorario");
-    }
+    },
+    citasDueno() {
+      this.$router.push("/misCitasDueno");
+    },
   },
 };
 </script>
@@ -193,5 +194,4 @@ export default {
   width: 100%;
   z-index: 100;
 }
-
 </style>

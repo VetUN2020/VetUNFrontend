@@ -114,7 +114,9 @@
               v-model="pass"
               style="width: 100%"
             />
-            <label for="contrasenia">Ingrese otra vez la contraseña</label>
+            <label for="verificar-contrasenia"
+              >Ingrese otra vez la contraseña</label
+            >
           </span>
         </div>
       </template>
