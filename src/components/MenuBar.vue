@@ -119,7 +119,7 @@
             </b-nav-form>
 
             <b-nav-form>
-              <b-button variant="success" size="sm" @click="loginUsuario"
+              <b-button variant="success" size="sm" v-on:click="loginUsuario"
                 >Iniciar sesión</b-button
               >
             </b-nav-form>
