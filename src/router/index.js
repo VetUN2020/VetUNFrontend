@@ -18,6 +18,7 @@ import AgendarCitaMascota from "../views/Register/AgendarCitaMascota.vue";
 import MisCitasDueno from "../views/Agenda/MisCitasDueno.vue";
 import RecuperacionContrasenia from "../views/RecuperarContrasena.vue";
 import NuevaContrasenia from "../views/NuevaContrasena.vue";
+import RegistroVeterinariaExistente from "../views/Register/RegistroVeterinariaExistente.vue";
 
 Vue.use(VueRouter);
 
@@ -59,6 +60,11 @@ export default new VueRouter({
       path: "/registroVeterinaria",
       name: "registroveterinaria",
       component: RegistroVeterinaria,
+    },
+    {
+      path: "/registroVeterinariaExistente",
+      name: "registroveterinariaExistente",
+      component: RegistroVeterinariaExistente,
     },
     {
       path: "/agendarCita",
