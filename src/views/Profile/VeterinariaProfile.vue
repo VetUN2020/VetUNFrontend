@@ -23,10 +23,20 @@
                       </h3>
                       <p class="text-secondary mb-1">Veterinaria</p>
                     </div>
+                    <Button
+                      v-if="
+                        $store.state.MenuBar.userAuth.rolUsuario === 'DUENO'
+                      "
+                      label="Calificar Veterinaria"
+                      class="p-button-rounded mt-2 p-button-success"
+                      style="margin: 0 auto;"
+                      @click="calificarVeterinaria()"
+                    />
                   </div>
                 </div>
               </div>
             </div>
+
             <div class="col-md-8">
               <div class="card mb-3">
                 <div class="card-body">
@@ -100,6 +110,18 @@
             </div>
           </div>
         </template>
+        <h3 class="text-right mb-2">Comentarios y calificaciones</h3>
+          <div class="row gutters-sm mt-2">            
+            <div v-for="calificacion in calificaciones" :key="calificacion.idComentarioVeterinaria" class="col-md-6 mb-4">
+              <div class="card">
+                <div class="card-body"> 
+                  <p class="text-right mb-0">{{calificacion.puntuacionV}}/5</p>
+                  <h5>"{{calificacion.comentarioV}}"</h5>
+                  <p class="text-right">-{{calificacion.idDueno.nombreDueno}} {{calificacion.idDueno.apellidoDueno}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
       </div>
     </div>
   </div>
@@ -115,6 +137,7 @@ export default {
     return {
       perfilVeterinaria: null,
       veterinarios: [],
+      calificaciones: []
     };
   },
   watch: {
@@ -127,12 +150,17 @@ export default {
     },
   },
   methods: {
+    calificarVeterinaria(){
+      const id = this.$route.query.idVeterinaria;
+      this.$router
+        .push({
+          name: "agregarCalificacionVeterinaria",
+          query: { idVeterinaria: id },
+        })
+        .catch(() => {});
+    },
     loadPerfil() {
-      //if (this.$route.params.id) {
-      console.log(this.$route.query.idVeterinaria);
-
       if (this.$route.query.idVeterinaria) {
-        //const idVeterinaria = this.$route.params.id;
         const idVeterinaria = this.$route.query.idVeterinaria;
         this.veterinariaService
           .getVeterinaria(idVeterinaria)
@@ -144,6 +172,15 @@ export default {
                 this.veterinarios = response.data;
               });
           });
+        
+        this.veterinariaService.getCalificaciones(idVeterinaria).then((response) => {
+          response.data.forEach(element => {
+            this.calificaciones.push(element);
+          });
+          console.log(this.calificaciones)
+        });
+
+
       } else {
         this.veterinariaService.obtenerPerfil().then((response) => {
           this.perfilVeterinaria = response.data;

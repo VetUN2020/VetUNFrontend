@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+
 import Home from "../views/Home.vue";
 import Table from "../views/Table.vue";
 import RegistroDueno from "../views/Register/RegistroDueno.vue";
@@ -18,6 +19,8 @@ import AgendarCitaMascota from "../views/Register/AgendarCitaMascota.vue";
 import MisCitasDueno from "../views/Agenda/MisCitasDueno.vue";
 import RecuperacionContrasenia from "../views/RecuperarContrasena.vue";
 import NuevaContrasenia from "../views/NuevaContrasena.vue";
+import AgregarCalificacionM from "../views/AgregarCalificacionM.vue"
+import AgregarCalificacionV from "../views/AgregarCalificacionV.vue"
 
 Vue.use(VueRouter);
 
@@ -133,5 +136,17 @@ export default new VueRouter({
       name: "nuevaContrasenia",
       component: NuevaContrasenia,
     },
+    {
+      path: "/calificarMedico",
+      name: "agregarCalificacionMedico",
+      props: true,
+      component: AgregarCalificacionM
+    },
+    {
+      path: "/calificarVeterinaria",
+      name: "agregarCalificacionVeterinaria",
+      props: true,
+      component: AgregarCalificacionV
+    }
   ],
 });
