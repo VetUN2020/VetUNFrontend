@@ -20,6 +20,8 @@ import MultiSelect from "primevue/multiselect";
 import Checkbox from "primevue/checkbox";
 import FullCalendar from 'primevue/fullcalendar';
 import InputSwitch from "primevue/inputswitch";
+import Listbox from 'primevue/listbox';
+
 
 import '@fullcalendar/daygrid/main.min.css';
 import '@fullcalendar/timegrid/main.min.css';
@@ -64,6 +66,7 @@ Vue.component("MultiSelect", MultiSelect);
 Vue.component("Checkbox", Checkbox);
 Vue.component("FullCalendar", FullCalendar);
 Vue.component("InputSwitch", InputSwitch);
+Vue.component("Listbox",Listbox);
 
 Vue.component("b-navbar", BNavbar);
 Vue.component("b-form", BForm);

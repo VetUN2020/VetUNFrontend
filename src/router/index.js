@@ -21,6 +21,7 @@ import RecuperacionContrasenia from "../views/RecuperarContrasena.vue";
 import NuevaContrasenia from "../views/NuevaContrasena.vue";
 import AgregarCalificacionM from "../views/AgregarCalificacionM.vue"
 import AgregarCalificacionV from "../views/AgregarCalificacionV.vue"
+import RegistroVeterinariaExistente from "../views/Register/RegistroVeterinariaExistente.vue";
 
 Vue.use(VueRouter);
 
@@ -62,6 +63,11 @@ export default new VueRouter({
       path: "/registroVeterinaria",
       name: "registroveterinaria",
       component: RegistroVeterinaria,
+    },
+    {
+      path: "/registroVeterinariaExistente",
+      name: "registroveterinariaExistente",
+      component: RegistroVeterinariaExistente,
     },
     {
       path: "/agendarCita",
