@@ -111,17 +111,31 @@
           </div>
         </template>
         <h3 class="text-right mb-2">Comentarios y calificaciones</h3>
-          <div class="row gutters-sm mt-2">            
-            <div v-for="calificacion in calificaciones" :key="calificacion.idComentarioVeterinaria" class="col-md-6 mb-4">
-              <div class="card">
-                <div class="card-body"> 
-                  <p class="text-right mb-0">{{calificacion.puntuacionV}}/5</p>
-                  <h5>"{{calificacion.comentarioV}}"</h5>
-                  <p class="text-right">-{{calificacion.idDueno.nombreDueno}} {{calificacion.idDueno.apellidoDueno}}</p>
-                </div>
+        <div class="row gutters-sm mt-2">
+          <div
+            v-for="calificacion in calificaciones"
+            :key="calificacion.idComentarioVeterinaria"
+            class="col-md-6 mb-4"
+          >
+            <div class="card">
+              <div class="card-body">
+                <p class="text-right mb-0">{{ calificacion.puntuacionV }}/5</p>
+                <h5>"{{ calificacion.comentarioV }}"</h5>
+                <p class="text-right">
+                  -{{ calificacion.idDueno.nombreDueno }}
+                  {{ calificacion.idDueno.apellidoDueno }}
+                </p>
               </div>
             </div>
           </div>
+        </div>
+        <div class="map">
+          <HereMap
+            v-if="perfilVeterinaria"
+            :veterinariaProfile="perfilVeterinaria.direccionVeterinaria"
+            :veterinarias="[]"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -131,13 +145,17 @@
 // @ is an alias to /src
 import VeterinariaService from "@/service/VeterinariaService";
 import MedicoService from "@/service/MedicoService";
+import HereMap from "@/components/HereMap.vue";
 
 export default {
+  components: {
+    HereMap,
+  },
   data() {
     return {
       perfilVeterinaria: null,
       veterinarios: [],
-      calificaciones: []
+      calificaciones: [],
     };
   },
   watch: {
@@ -150,7 +168,7 @@ export default {
     },
   },
   methods: {
-    calificarVeterinaria(){
+    calificarVeterinaria() {
       const id = this.$route.query.idVeterinaria;
       this.$router
         .push({
@@ -172,15 +190,14 @@ export default {
                 this.veterinarios = response.data;
               });
           });
-        
-        this.veterinariaService.getCalificaciones(idVeterinaria).then((response) => {
-          response.data.forEach(element => {
-            this.calificaciones.push(element);
+
+        this.veterinariaService
+          .getCalificaciones(idVeterinaria)
+          .then((response) => {
+            response.data.forEach((element) => {
+              this.calificaciones.push(element);
+            });
           });
-          console.log(this.calificaciones)
-        });
-
-
       } else {
         this.veterinariaService.obtenerPerfil().then((response) => {
           this.perfilVeterinaria = response.data;
