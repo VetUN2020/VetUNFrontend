@@ -112,7 +112,8 @@ export default {
   },
   mounted() {
     this.duenoService.obtenerPerfil().then((response) => {
-      this.perfilDueno = response.data;
+      this.perfilDueno = response.data;      
+      console.log(response.data)
     });
   },
 };
