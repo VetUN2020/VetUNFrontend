@@ -7,7 +7,6 @@ import RegistroDueno from "../views/Register/RegistroDueno.vue";
 import RegistroVeterinaria from "../views/Register/RegistroVeterinaria.vue";
 import RegistroMedico from "../views/Register/RegistroMedico.vue";
 import RegistroMascota from "../views/Register/RegistroMascota.vue";
-import AgendarCita from "../views/Register/AgendarCita.vue";
 import MisCitasMedico from "../views/Agenda/MisCitasMedico.vue";
 import MedicoProfile from "../views/Profile/MedicoProfile.vue";
 import DuenoProfile from "../views/Profile/DuenoProfile.vue";
@@ -68,11 +67,6 @@ export default new VueRouter({
       path: "/registroVeterinariaExistente",
       name: "registroveterinariaExistente",
       component: RegistroVeterinariaExistente,
-    },
-    {
-      path: "/agendarCita",
-      name: "agendarCita",
-      component: AgendarCita,
     },
     {
       path: "/misCitasMedico",
