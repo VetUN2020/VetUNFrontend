@@ -83,7 +83,7 @@ export default {
         );
       }
 
-      //addEventListener("resize", () => map.getViewPort().resize());
+      addEventListener("resize", () => map.getViewPort().resize());
 
       // add UI
       H.ui.UI.createDefault(map, maptypes);
