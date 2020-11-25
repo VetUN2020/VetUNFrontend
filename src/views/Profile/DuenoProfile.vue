@@ -85,8 +85,45 @@
                       {{ perfilDueno.usuarioDueno }}
                     </div>
                   </div>
+                  
                 </div>
               </div>
+              <!--Mascotas-->
+            <div class="container" id="app">
+              <div class="row">
+                <div
+                  v-for="item in misMascotas"
+                  v-bind:key="item"
+                  class="col-md-3 col-6 my-1"
+                >
+                  <div class="card h-100" @click="perfilMedico(item.idMedico)">
+                    <img
+                      id="profilePic"
+                      src="@/assets/veterinario.jpg"
+                      alt="Admin"
+                      width="100%"
+                    />
+                    <div class="card-body">
+                      <div class="card-title">
+                        <strong
+                          >{{ item.nombreMascota }}
+                        </strong
+                        >
+                      </div>
+                      <div>
+                        <span class="badge badge-pill badge-info"
+                          >Especie: {{ item.especie }}</span
+                        >
+                        <hr />
+                        <span class="badge badge-pill badge-info"
+                          >Raza: {{ item.raza }}</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             </div>
           </div>
         </template>
@@ -97,18 +134,30 @@
 
 <script>
 // @ is an alias to /src
+import MascotaService from "@/service/MascotaService";
 import DuenoService from "@/service/DuenoService";
 
 export default {
   data() {
     return {
       perfilDueno: null,
+      misMascotas: [],
     };
   },
   methods: {},
   duenoService: null,
+  mascotaService: null,
   created() {
     this.duenoService = new DuenoService();
+    this.mascotaService = new MascotaService();
+    this.mascotaService.getMascotasDueno().then((response) => {
+      if (response.status === 200) {
+        this.misMascotas = response.data;
+        console.log(this.misMascotas);
+      }
+  
+    });
+    
   },
   mounted() {
     this.duenoService.obtenerPerfil().then((response) => {
@@ -117,3 +166,4 @@ export default {
   },
 };
 </script>
+
