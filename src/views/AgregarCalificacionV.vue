@@ -27,12 +27,13 @@
         <br />
         <h6 style="text-align: left">Calificacion</h6>
 
-        <Dropdown
+        <!-- <Dropdown
           v-model="comentario.puntuacionV"
           :options="puntuaciones"
           optionLabel="name"
           placeholder="Calificacion"
-        />
+        /> -->
+        <Rating v-model="comentario.puntuacionV" :stars="5" />
       </template>
       <template slot="footer">
         <Button
@@ -84,22 +85,20 @@ export default {
   },
   methods: {
     save() {
-      if (this.comentario.comentarioV && this.comentario.puntuacionV) {
-        this.comentario.puntuacionV = this.comentario.puntuacionV.name;
-        this.comentario.idDueno.idDueno = this.$store.getters["PerfilDueno/currentPerfil"].idDueno;
+      if (this.comentario.comentarioV) {
         this.veterinariaService
           .agregarComentario(this.comentario)
           .then((data) => {
-            if (data.status === 200) {              
+            if (data.status === 201) {
               this.$router.push("/");
-            }
-            this.$swal({
+              this.$swal({
                 position: "top-end",
                 icon: "success",
                 title: "Calificacion registrada correctamente",
                 showConfirmButton: false,
                 timer: 1500,
               });
+            }
           });
       } else {
         this.datosFaltantes = "Datos faltantes";
