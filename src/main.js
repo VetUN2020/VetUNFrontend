@@ -21,6 +21,7 @@ import Checkbox from "primevue/checkbox";
 import FullCalendar from 'primevue/fullcalendar';
 import InputSwitch from "primevue/inputswitch";
 import Listbox from 'primevue/listbox';
+import Carousel from 'primevue/carousel';
 
 
 import '@fullcalendar/daygrid/main.min.css';
@@ -68,6 +69,7 @@ Vue.component("Checkbox", Checkbox);
 Vue.component("FullCalendar", FullCalendar);
 Vue.component("InputSwitch", InputSwitch);
 Vue.component("Listbox",Listbox);
+Vue.component("Carousel",Carousel)
 
 Vue.component("b-navbar", BNavbar);
 Vue.component("b-form", BForm);

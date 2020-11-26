@@ -19,7 +19,7 @@
               v-model="user.username"
               style="width: 100%"
             />
-            <label for="correo">Correo</label>
+            <label for="correo">Usuario</label>
           </span>
         </div>
         <br />

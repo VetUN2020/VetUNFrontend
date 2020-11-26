@@ -20,8 +20,8 @@ export default {
     MenuBar,
   },
   created() {
-    console.log("Creado");
-  },
+    this.$store.dispatch("PerfilDueno/setPerfil");
+  }
 };
 </script>
 

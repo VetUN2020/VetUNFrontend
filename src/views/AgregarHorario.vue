@@ -23,7 +23,7 @@
         <br />
       </template>
       <template slot="footer">
-        <Button label="Agregar" @click="agregar" icon="pi pi-check" />
+        <Button label="Agregar" @click="agregar()" icon="pi pi-check" />
       </template>
     </Card>
     <Message severity="error" v-if="datosFaltantes">{{
@@ -64,7 +64,13 @@ export default {
       if (this.selectedHours != null) {
         this.medicoService.agregarHorario(this.selectedHours).then((data) => {
           if (data.status === 201) {
-            console.log(data);
+            this.$swal({
+                position: "top-end",
+                icon: "success",
+                title: "Horas Registradas Correctamente",
+                showConfirmButton: false,
+                timer: 1500,
+              });
           }
         });
         this.$router.push("/");
