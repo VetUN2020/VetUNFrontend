@@ -71,13 +71,16 @@ export default {
             .cambiarContrasenia(this.usuarioContrasenia)
             .then((response) => {
               if (response.status === 202) {
-                this.$swal({
-                  position: "top-end",
-                  icon: "success",
-                  title: "Se ha cambiado tu contraseña correctamente",
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
+                this.$router.push("/login");
+                this.usuarioContrasenia.nuevaContrasena = "";
+                (this.pass = ""),
+                  this.$swal({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Se ha cambiado tu contraseña correctamente",
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
               }
             });
         } else {
