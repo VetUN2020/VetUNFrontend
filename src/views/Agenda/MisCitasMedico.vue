@@ -1,17 +1,14 @@
 <template>
-  <div class="demo-app">
-    <div class="demo-app-main">
+  <div class="demo-app" v-if="datosCargados">
       <FullCalendar
         class="demo-app-calendar"
         :options="calendarOptions"
-        v-if="citas.length > 0"
       >
         <template v-slot:eventContent="arg">
           <b>{{ arg.timeText }}</b>
           <i>{{ arg.event.title }}</i>
         </template>
       </FullCalendar>
-    </div>
   </div>
 </template>
 
@@ -31,6 +28,8 @@ export default {
 
   data() {
     return {
+      datosCargados: false,
+      allCitas: [],
       citas: [],
       calendarOptions: {
         plugins: [
@@ -44,6 +43,7 @@ export default {
           right: "dayGridMonth,timeGridWeek,timeGridDay",
         },
         initialView: "dayGridMonth",
+        eventClick: this.mostrarInfo,
         initialEvents: null, // alternatively, use the `events` setting to fetch from a feed
         editable: true,
         selectable: true,
@@ -60,13 +60,23 @@ export default {
     };
   },
   medicoService: null,
-  methods: {},
+  methods: {
+    mostrarInfo(arg){
+      this.allCitas.forEach(cita => {
+        if(cita.idCita == arg.event.id){
+          console.log("entro2");
+          console.log(cita);
+        }
+      })
+    }
+  },
   created() {
     this.medicoService = new MedicoService();
   },
   mounted() {
     this.citas = [];
     this.medicoService.obtenerMisCitas().then((response) => {
+      this.allCitas = response.data;
       response.data.forEach((element) => {
         this.citas.push({
           id: element.idCita,
@@ -74,8 +84,9 @@ export default {
           start: element.fechaCita + "T" + element.horaCita,
         });
       });
+      this.datosCargados = true
       this.calendarOptions.initialEvents = this.citas;
-    });
+    })
   },
 };
 </script>

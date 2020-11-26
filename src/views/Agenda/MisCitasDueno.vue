@@ -1,17 +1,14 @@
 <template>
-  <div class="demo-app">
-    <div class="demo-app-main">
+  <div class="demo-app" v-if="datosCargados">
       <FullCalendar
         class="demo-app-calendar"
         :options="calendarOptions"
-        v-if="citas.length > 0"
       >
         <template v-slot:eventContent="arg">
           <b>{{ arg.timeText }}</b>
           <i>{{ arg.event.title }}</i>
         </template>
       </FullCalendar>
-    </div>
   </div>
 </template>
 
@@ -31,6 +28,7 @@ export default {
 
   data() {
     return {
+      datosCargados: false,
       citas: [],
       calendarOptions: {
         plugins: [
@@ -77,6 +75,7 @@ export default {
           start: element.fechaCita + "T" + element.horaCita,
         });
       });
+      this.datosCargados = true
       this.calendarOptions.initialEvents = this.citas;
     });
   },

@@ -37,6 +37,7 @@ import {
 import {
   BForm
 } from "bootstrap-vue";
+import { BModal } from 'bootstrap-vue'
 
 import VueSweetalert2 from "vue-sweetalert2";
 
@@ -70,6 +71,7 @@ Vue.component("Listbox",Listbox);
 
 Vue.component("b-navbar", BNavbar);
 Vue.component("b-form", BForm);
+Vue.component('b-modal', BModal)
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(VueSweetalert2);
