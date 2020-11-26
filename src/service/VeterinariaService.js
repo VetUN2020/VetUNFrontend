@@ -43,11 +43,15 @@ export default class VeterinariaService {
     });
   }
 
-  getCalificaciones(idVeterinaria){
-    return axios.get("calificaciones/veterinaria/"+idVeterinaria);
+  getCalificaciones(idVeterinaria) {
+    return axios.get("calificaciones/veterinaria/" + idVeterinaria);
   }
 
-  agregarComentario(comentario){
-    return axios.post("calificar/veterinaria", comentario);
+  agregarComentario(comentario) {
+    return axios.post("dueno/calificar/veterinaria", comentario, {
+      params: {
+        access_token: localStorage.getItem("token"),
+      },
+    });
   }
 }

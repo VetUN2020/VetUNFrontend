@@ -2,11 +2,11 @@
   <div id="app">
     <MenuBar />
     <div id="router">
-    <!-- <br />
+      <!-- <br />
     <br />
     <br />
     <br /> -->
-    <router-view />
+      <router-view />
     </div>
   </div>
 </template>
@@ -21,12 +21,12 @@ export default {
   },
   created() {
     this.$store.dispatch("PerfilDueno/setPerfil");
-  }
+  },
 };
 </script>
 
 <style scoped>
-  #router{
-    padding-top: 80px;
-  }
+#router {
+  padding-top: 80px;
+}
 </style>

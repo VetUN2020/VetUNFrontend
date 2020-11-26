@@ -73,12 +73,15 @@ export default class MedicoService {
     });
   }
 
-  getCalificaciones(idMedico){
-    return axios.get("calificaciones/medico/"+idMedico);
+  getCalificaciones(idMedico) {
+    return axios.get("calificaciones/medico/" + idMedico);
   }
 
-  agregarComentario(comentario){
-    return axios.post("calificar/medico", comentario);
+  agregarComentario(comentario) {
+    return axios.post("dueno/calificar/medico", comentario, {
+      params: {
+        access_token: localStorage.getItem("token"),
+      },
+    });
   }
-
 }

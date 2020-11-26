@@ -2,7 +2,6 @@
   <div class="calificacion">
     <br />
     <Card
-    
       style="
         margin: 0 auto;
         text-align: center;
@@ -28,12 +27,13 @@
         <br />
         <h6 style="text-align: left">Calificacion</h6>
 
-        <Dropdown
+        <!-- <Dropdown
           v-model="comentario.puntuacionM"
           :options="puntuaciones"
           optionLabel="name"
           placeholder="Calificacion"
-        />
+        /> -->
+        <Rating v-model="comentario.puntuacionM" :stars="5" />
       </template>
       <template slot="footer">
         <Button
@@ -59,11 +59,11 @@ export default {
     return {
       comentario: {
         idDueno: {
-            idDueno: null
+          idDueno: null,
         },
         idMedico: {
-          idMedico: parseInt(this.$route.query.idMedico)
-        },        
+          idMedico: parseInt(this.$route.query.idMedico),
+        },
         comentarioM: null,
         puntuacionM: null,
       },
@@ -85,20 +85,18 @@ export default {
   },
   methods: {
     save() {
-      if (this.comentario.comentarioM && this.comentario.puntuacionM) {
-        this.comentario.puntuacionM = this.comentario.puntuacionM.name;
-        this.comentario.idDueno.idDueno =  this.$store.getters["PerfilDueno/currentPerfil"].idDueno;
+      if (this.comentario.comentarioM) {
         this.medicoService.agregarComentario(this.comentario).then((data) => {
-          if (data.status === 200) {              
-              this.$router.push("/");
-            }
+          if (data.status === 201) {
+            this.$router.push("/");
             this.$swal({
-                position: "top-end",
-                icon: "success",
-                title: "Calificacion registrada correctamente",
-                showConfirmButton: false,
-                timer: 1500,
-              });
+              position: "top-end",
+              icon: "success",
+              title: "Calificacion registrada correctamente",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
         });
       } else {
         this.datosFaltantes = "Datos faltantes";
