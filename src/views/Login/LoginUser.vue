@@ -35,9 +35,16 @@
             <label for="contrasenia">Contraseña</label>
           </span>
         </div>
+        <br />
+        <div class="p-text-right">
+          <router-link to="/recuperacionContrasenia"
+            >¿Olvidaste tu contraseña?</router-link
+          >
+        </div>
       </template>
       <template slot="footer">
         <Button label="Iniciar sesión" @click="login" icon="pi pi-check" />
+        <br />
       </template>
     </Card>
     <Message severity="error" v-if="datosIncorrectos">{{
