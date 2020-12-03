@@ -135,8 +135,9 @@
           id="header"
           class="transparent-header"
           v-bind:class="{
-            'sticky-header': scrollM,
-            'sticky-header sticky-header-shrink': scrollT,
+            'sticky-header': $store.state.MenuBar.scroll.scrollM,
+            'sticky-header sticky-header-shrink':
+              $store.state.MenuBar.scroll.scrollT,
             dark: scrollF,
           }"
           data-sticky-class="not-dark"
@@ -148,16 +149,14 @@
 						============================================= -->
                 <div id="logo">
                   <a
-                    href="index.html"
                     class="standard-logo"
                     data-dark-logo="demos/pet/images/logo-dark.png"
-                    >VetUN</a
+                    ><router-link to="/"> VetUN </router-link></a
                   >
                   <a
-                    href="index.html"
                     class="retina-logo"
                     data-dark-logo="demos/pet/images/logo-dark@2x.png"
-                    >VetUN</a
+                    ><router-link to="/"> VetUN </router-link></a
                   >
                 </div>
                 <!-- #logo end -->
@@ -203,10 +202,11 @@
         id="header"
         class="transparent-header"
         v-bind:class="{
-          'sticky-header': scrollM,
-          'sticky-header sticky-header-shrink': scrollT,
-          dark: scrollF,
-          'sticky-header dark': scrollL,
+          'sticky-header': $store.state.MenuBar.scroll.scrollM,
+          'sticky-header sticky-header-shrink':
+            $store.state.MenuBar.scroll.scrollT,
+          dark: $store.state.MenuBar.scroll.scrollF,
+          'sticky-header dark': $store.state.MenuBar.scroll.scrollL,
         }"
         data-sticky-class="not-dark"
       >
@@ -253,20 +253,40 @@
                       ><div>About us</div></a
                     >
                   </li>
-                  <li class="menu-item">
-                    <b-dropdown
-                      text="Unete a nosotros"
-                      variant="outline-light"
-                      class="m-2"
-                    >
-                      <b-dropdown-item @click="registrarseMedico"
-                        >¿Eres medico?</b-dropdown-item
+
+                  <div v-if="light">
+                    <li class="menu-item">
+                      <b-dropdown
+                        text="Unete a nosotros"
+                        variant="outline-dark"
+                        class="m-2"
                       >
-                      <b-dropdown-item @click="registrarseDueno"
-                        >Amas a tus mascotas</b-dropdown-item
+                        <b-dropdown-item @click="registrarseMedico"
+                          >¿Eres medico?</b-dropdown-item
+                        >
+                        <b-dropdown-item @click="registrarseDueno"
+                          >Amas a tus mascotas</b-dropdown-item
+                        >
+                      </b-dropdown>
+                    </li>
+                  </div>
+                  <div v-else>
+                    <li class="menu-item">
+                      <b-dropdown
+                        text="Unete a nosotros"
+                        variant="outline-light"
+                        class="m-2"
                       >
-                    </b-dropdown>
-                  </li>
+                        <b-dropdown-item @click="registrarseMedico"
+                          >¿Eres medico?</b-dropdown-item
+                        >
+                        <b-dropdown-item @click="registrarseDueno"
+                          >Amas a tus mascotas</b-dropdown-item
+                        >
+                      </b-dropdown>
+                    </li>
+                  </div>
+
                   <li class="menu-item bg-color">
                     <a class="menu-link" @click="loginUsuario"
                       ><div>Ingresar</div></a
@@ -293,36 +313,34 @@ export default {
   },
   data() {
     return {
-      scrollT: false,
-      scrollM: false,
-      scrollF: true,
-      scrollL: false,
+      light: false,
     };
   },
   methods: {
     controlNav() {
       let desplazamiento_Actual = window.pageYOffset;
-      if (desplazamiento_Actual >= 1 && desplazamiento_Actual < 400) {
-        this.scrollF = false;
-        this.scrollM = true;
-      } else if (desplazamiento_Actual >= 400) {
-        this.scrollT = true;
-        this.scrollM = false;
+      if (this.$store.state.MenuBar.homePage) {
+        if (desplazamiento_Actual >= 1 && desplazamiento_Actual < 400) {
+          //Miniscroll
+          this.light = true;
+          this.$store.dispatch("MenuBar/MenuBarMiniScroll");
+        } else if (desplazamiento_Actual >= 400) {
+          //fullscroll
+          this.light = true;
+          this.$store.dispatch("MenuBar/MenuBarFullScroll");
+        } else {
+          this.light = false;
+          this.$store.dispatch("MenuBar/MenuBarInvisible");
+        }
       } else {
-        this.scrollT = false;
-        this.scrollM = false;
-        this.scrollF = true;
+        this.$store.dispatch("MenuBar/MenuBarDark");
       }
     },
     montarNav() {
-      this.scrollT = false;
-      this.scrollM = false;
-      this.scrollF = true;
-      this.scrollL = false;
+      this.$store.dispatch("MenuBar/MenuBarInvisible");
     },
     registrarseDueno() {
       this.$router.push("/registroDueno");
-      this.scrollL = true;
     },
     loginUsuario() {
       this.$router.push("/loginUser");
@@ -342,7 +360,6 @@ export default {
     },
     registrarseMedico() {
       this.$router.push("/registroMedico");
-      this.scrollL = true;
     },
     registrarMascota() {
       this.$router.push("/mascotaRegistro");
@@ -378,10 +395,4 @@ export default {
 };
 </script>
 
-<style>
-/* #navBarGeneral {
-  position: fixed;
-  width: 100%;
-  z-index: 100;
-} */
-</style>
+<style></style>

@@ -352,6 +352,8 @@ export default {
     this.veterinariaService.getAll().then((response) => {
       this.veterinarias = response.data;
     });
+
+    this.$store.dispatch("MenuBar/MenuBarInvisible");
   },
 };
 </script>
