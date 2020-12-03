@@ -1,13 +1,7 @@
 <template>
   <div id="app">
     <MenuBar />
-    <div id="router">
-      <!-- <br />
-    <br />
-    <br />
-    <br /> -->
-      <router-view />
-    </div>
+    <router-view />
   </div>
 </template>
 
