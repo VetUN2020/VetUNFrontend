@@ -168,6 +168,9 @@ export default {
   created() {
     this.duenoService = new DuenoService();
   },
+  mounted() {
+    this.$store.dispatch("MenuBar/MenuBarDark");
+  },
   methods: {
     save() {
       if (
