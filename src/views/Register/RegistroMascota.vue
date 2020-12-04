@@ -90,6 +90,9 @@ export default {
     this.mascotaServ = new MascotaService();
     this.datosFaltantes = null;
   },
+  mounted() {
+    this.$store.dispatch("MenuBar/MenuBarDark");
+  },
   methods: {
     save() {
       if (

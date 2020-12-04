@@ -59,18 +59,21 @@ export default {
     }
     this.medicoService = new MedicoService();
   },
+  mounted() {
+    this.$store.dispatch("MenuBar/MenuBarDark");
+  },
   methods: {
     agregar() {
       if (this.selectedHours != null) {
         this.medicoService.agregarHorario(this.selectedHours).then((data) => {
           if (data.status === 201) {
             this.$swal({
-                position: "top-end",
-                icon: "success",
-                title: "Horas Registradas Correctamente",
-                showConfirmButton: false,
-                timer: 1500,
-              });
+              position: "top-end",
+              icon: "success",
+              title: "Horas Registradas Correctamente",
+              showConfirmButton: false,
+              timer: 1500,
+            });
           }
         });
         this.$router.push("/");

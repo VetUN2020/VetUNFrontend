@@ -161,6 +161,7 @@ export default {
       this.perfilDueno = response.data;
       console.log(response.data);
     });
+    this.$store.dispatch("MenuBar/MenuBarDark");
   },
 };
 </script>

@@ -228,6 +228,7 @@ export default {
   },
   mounted() {
     this.loadPerfil();
+    this.$store.dispatch("MenuBar/MenuBarDark");
   },
 };
 </script>
