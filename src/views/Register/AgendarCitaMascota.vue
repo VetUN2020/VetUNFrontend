@@ -1,5 +1,5 @@
 <template>
-  <div class="agendarCitaMascota">
+  <div class="agendarCitaMascota fondo">
     <Card
       style="
         margin: 0 auto;

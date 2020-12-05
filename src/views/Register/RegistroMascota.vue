@@ -1,5 +1,5 @@
 <template>
-  <div class="registroMascota">
+  <div class="registroMascota fondo">
     <br />
     <Card
       style="

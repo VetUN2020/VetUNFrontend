@@ -1,5 +1,5 @@
 <template>
-  <div class="veterinary">
+  <div class="veterinary fondo">
     <Card
       style="
         margin: 0 auto;

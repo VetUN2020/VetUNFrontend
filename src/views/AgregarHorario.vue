@@ -1,5 +1,5 @@
 <template>
-  <div class="agregarHorario">
+  <div class="agregarHorario fondo">
     <Card
       style="
         margin: 0 auto;

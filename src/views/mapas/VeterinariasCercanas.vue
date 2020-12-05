@@ -1,5 +1,5 @@
 <template>
-  <div class="veterinariasCercanas">
+  <div class="veterinariasCercanas fondo">
     <div id="mapa">
       <HereMap
         v-if="center.lat && center.lng && veterinarias"

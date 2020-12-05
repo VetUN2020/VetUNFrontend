@@ -1,5 +1,5 @@
 <template>
-  <div class="agregarPrecios">
+  <div class="agregarPrecios fondo">
     <Card
       style="
         margin: 0 auto;
