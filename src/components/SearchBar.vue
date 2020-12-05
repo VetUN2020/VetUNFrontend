@@ -4,6 +4,7 @@
       v-model="busqueda"
       placeholder="Buscar medicos o veterinarias"
       @keyup="fetchInfo(busqueda)"
+      class="input"
     />
 
     <div class="search-results" v-if="showResults">
@@ -140,15 +141,26 @@ export default {
 <style scoped>
 .search-bar {
   margin: 0rem 0.5rem;
-  width: 30vw;
+  width: 23vw;
 }
 .search-bar input {
-  width: 100%;
+  width: 1000px;
+  height: 37.5px;
 }
 .search-results {
-  background-color: #fff;
+  background-color: rgb(40, 40, 40);
   position: absolute;
   top: 55px;
-  width: 30vw;
+  width: 23vw;
+}
+.input {
+  border-radius: 4px;
+  border: 0.01px solid black;
+}
+.input:focus {
+  display: inline-block;
+  border: 2px solid #1abc9c;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 </style>

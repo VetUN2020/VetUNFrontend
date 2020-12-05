@@ -1,14 +1,11 @@
 <template>
   <div class="demo-app" v-if="datosCargados">
-      <FullCalendar
-        class="demo-app-calendar"
-        :options="calendarOptions"
-      >
-        <template v-slot:eventContent="arg">
-          <b>{{ arg.timeText }}</b>
-          <i>{{ arg.event.title }}</i>
-        </template>
-      </FullCalendar>
+    <FullCalendar @date-click="dateClicked" :options="calendarOptions">
+      <template v-slot:eventContent="arg">
+        <b>{{ arg.timeText }}</b>
+        <i>{{ arg.event.title }}</i>
+      </template>
+    </FullCalendar>
   </div>
 </template>
 
@@ -28,9 +25,6 @@ export default {
 
   data() {
     return {
-      datosCargados: false,
-      allCitas: [],
-      citas: [],
       calendarOptions: {
         plugins: [
           dayGridPlugin,
@@ -43,13 +37,14 @@ export default {
           right: "dayGridMonth,timeGridWeek,timeGridDay",
         },
         initialView: "dayGridMonth",
-        eventClick: this.mostrarInfo,
         initialEvents: null, // alternatively, use the `events` setting to fetch from a feed
-        editable: true,
         selectable: true,
         selectMirror: true,
         dayMaxEvents: true,
         weekends: true,
+        select: this.handleDateSelect,
+        eventClick: this.handleEventClick,
+        eventsSet: this.handleEvents,
         /* you can update a remote database when these fire:
         eventAdd:
         eventChange:
@@ -57,18 +52,38 @@ export default {
         */
       },
       currentEvents: [],
+      datosCargados: false,
+      allCitas: [],
+      citas: [],
     };
   },
   medicoService: null,
   methods: {
-    mostrarInfo(arg){
-      this.allCitas.forEach(cita => {
-        if(cita.idCita == arg.event.id){
-          console.log("entro2");
-          console.log(cita);
+    handleEventClick(clickInfo) {
+      const h = this.$createElement;
+      this.allCitas.forEach((cita) => {
+        if (cita.idCita == clickInfo.event.id) {
+          const messageVNode = h("div", { class: ["foobar"] }, [
+            h("p", ["Fecha: ", cita.fechaCita]),
+            h("p", ["Hora: ", cita.horaCita]),
+            h("p", ["Mascota: ", cita.idMascota.nombreMascota]),
+            h("p", ["Especie: ", cita.idMascota.especie]),
+            h("p", ["Raza: ", cita.idMascota.raza]),
+            h("p", ["Motivo atencion: ", cita.idAtencion.descripcionAtencion]),
+            h("p", ["Modalidad : ", cita.modalidadCita]),
+          ]);
+          this.$bvModal.msgBoxOk(messageVNode, {
+            title: "Estos son los datos de tu cita",
+            size: "sm",
+            buttonSize: "sm",
+            okVariant: "success",
+            headerClass: "p-2 border-bottom-0",
+            footerClass: "p-2 border-top-0",
+            centered: true,
+          });
         }
-      })
-    }
+      });
+    },
   },
   created() {
     this.medicoService = new MedicoService();
@@ -84,9 +99,10 @@ export default {
           start: element.fechaCita + "T" + element.horaCita,
         });
       });
-      this.datosCargados = true
+      this.datosCargados = true;
       this.calendarOptions.initialEvents = this.citas;
-    })
+      this.$store.dispatch("MenuBar/MenuBarDark");
+    });
   },
 };
 </script>
