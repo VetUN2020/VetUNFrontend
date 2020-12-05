@@ -22,9 +22,10 @@ export default {
 <style>
 .fondo {
   margin-top: -5px;
+  padding-top: 50px;
   height: 100vh;
-  background-image: url("https://c8.alamy.com/compes/mxaxf6/vector-patron-sin-fisuras-con-huellas-de-huellas-de-animales-puede-utilizarse-para-papel-tapiz-de-fondo-de-la-pagina-web-las-texturas-de-la-superficie-10-eps-mxaxf6.jpg");
-  /* background: url("./assets/background.jpg"); */
+  /* background-image: url("https://c8.alamy.com/compes/mxaxf6/vector-patron-sin-fisuras-con-huellas-de-huellas-de-animales-puede-utilizarse-para-papel-tapiz-de-fondo-de-la-pagina-web-las-texturas-de-la-superficie-10-eps-mxaxf6.jpg"); */
+  background: url("./assets/background.jpg");
   background-size: cover;
 }
 </style>

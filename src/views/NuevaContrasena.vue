@@ -1,5 +1,5 @@
 <template>
-  <div class="nuevaContrasena">
+  <div class="nuevaContrasena fondo">
     <Card
       style="
         margin: 0 auto;
@@ -61,6 +61,19 @@ export default {
   usuarioService: null,
   created() {
     this.usuarioService = new UsuarioService();
+  },
+  mounted() {
+    this.$store.dispatch("MenuBar/MenuBarDark");
+    if (this.$route.query.token == "") {
+      this.$router.push("/");
+      this.$swal({
+        position: "top-end",
+        icon: "warning",
+        title: "El token no es valido",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
   },
   methods: {
     cambiarContrasenia() {

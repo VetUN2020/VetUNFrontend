@@ -6,7 +6,7 @@
     <Message severity="error" :closable="false" v-if="correoExistente">{{
       correoExistente
     }}</Message>
-    <br /><br />
+    <!-- <br /><br /> -->
     <Card
       style="
         margin: 0 auto;

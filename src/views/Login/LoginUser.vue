@@ -1,6 +1,5 @@
 <template>
   <div class="loginUser fondo">
-    <br />
     <Card
       style="
         margin: 0 auto;
@@ -115,5 +114,9 @@ export default {
   background-color: #1abc9c !important;
   color: #f8f9fa !important;
   border-color: #1abc9c !important;
+}
+.p-card {
+  padding: 1rem !important;
+  padding-top: 0.5rem;
 }
 </style>
