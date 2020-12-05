@@ -43,7 +43,12 @@
         </div>
       </template>
       <template slot="footer">
-        <Button label="Iniciar sesión" @click="login" icon="pi pi-check" />
+        <Button
+          label="Iniciar sesión"
+          class="p-button"
+          @click="login"
+          icon="pi pi-check"
+        />
         <br />
       </template>
     </Card>
@@ -71,6 +76,9 @@ export default {
   usuarioService: null,
   created() {
     this.usuarioService = new UsuarioService();
+  },
+  mounted() {
+    this.$store.dispatch("MenuBar/MenuBarDark");
   },
   methods: {
     async login() {
@@ -102,5 +110,10 @@ export default {
 <style scoped>
 .p-card-body {
   margin-top: 50px;
+}
+.p-button {
+  background-color: #1abc9c !important;
+  color: #f8f9fa !important;
+  border-color: #1abc9c !important;
 }
 </style>

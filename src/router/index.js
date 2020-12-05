@@ -2,7 +2,6 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 import Home from "../views/Home.vue";
-import Table from "../views/Table.vue";
 import RegistroDueno from "../views/Register/RegistroDueno.vue";
 import RegistroVeterinaria from "../views/Register/RegistroVeterinaria.vue";
 import RegistroMedico from "../views/Register/RegistroMedico.vue";
@@ -21,6 +20,7 @@ import NuevaContrasenia from "../views/NuevaContrasena.vue";
 import AgregarCalificacionM from "../views/AgregarCalificacionM.vue";
 import AgregarCalificacionV from "../views/AgregarCalificacionV.vue";
 import RegistroVeterinariaExistente from "../views/Register/RegistroVeterinariaExistente.vue";
+import VeterinariasCercanas from "../views/mapas/VeterinariasCercanas.vue"
 
 Vue.use(VueRouter);
 
@@ -32,16 +32,10 @@ export default new VueRouter({
     };
   },
   mode: "history",
-  routes: [
-    {
+  routes: [{
       path: "/",
       name: "Home",
       component: Home,
-    },
-    {
-      path: "/crud",
-      name: "CrudApp",
-      component: Table,
     },
     {
       path: "/registroDueno",
@@ -147,6 +141,11 @@ export default new VueRouter({
       name: "agregarCalificacionVeterinaria",
       props: true,
       component: AgregarCalificacionV,
+    },
+    {
+      path: "/veterinariasCercanas",
+      name: "mapaVeterinariasCercanas",
+      component: VeterinariasCercanas,
     },
   ],
 });

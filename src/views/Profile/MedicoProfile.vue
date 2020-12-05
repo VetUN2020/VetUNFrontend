@@ -123,13 +123,22 @@
             </div>
           </div>
           <h3 class="text-right mb-2">Comentarios y calificaciones</h3>
-          <div class="row gutters-sm mt-2">            
-            <div v-for="calificacion in calificaciones" :key="calificacion.idComentarioMedico" class="col-md-6 mb-4">
+          <div class="row gutters-sm mt-2">
+            <div
+              v-for="calificacion in calificaciones"
+              :key="calificacion.idComentarioMedico"
+              class="col-md-6 mb-4"
+            >
               <div class="card">
-                <div class="card-body"> 
-                  <p class="text-right mb-0">{{calificacion.puntuacionM}}/5</p>
-                  <h5>"{{calificacion.comentarioM}}"</h5>
-                  <p class="text-right">-{{calificacion.idDueno.nombreDueno}} {{calificacion.idDueno.apellidoDueno}}</p>
+                <div class="card-body">
+                  <p class="text-right mb-0">
+                    {{ calificacion.puntuacionM }}/5
+                  </p>
+                  <h5>"{{ calificacion.comentarioM }}"</h5>
+                  <p class="text-right">
+                    -{{ calificacion.idDueno.nombreDueno }}
+                    {{ calificacion.idDueno.apellidoDueno }}
+                  </p>
                 </div>
               </div>
             </div>
@@ -151,7 +160,7 @@ export default {
     return {
       perfilMedico: null,
       medicoLoaded: false,
-      calificaciones: []
+      calificaciones: [],
     };
   },
   watch: {
@@ -172,12 +181,11 @@ export default {
         });
 
         this.medicoService.getCalificaciones(idMedico).then((response) => {
-          response.data.forEach(element => {
+          response.data.forEach((element) => {
             this.calificaciones.push(element);
           });
           console.log(this.calificaciones);
         });
-
       } else {
         this.medicoService.obtenerPerfil().then((response) => {
           this.perfilMedico = response.data;
@@ -193,7 +201,7 @@ export default {
         })
         .catch(() => {});
     },
-    calificarVeterinario(){
+    calificarVeterinario() {
       const id = this.$route.query.idMedico;
       this.$router
         .push({
@@ -201,13 +209,14 @@ export default {
           query: { idMedico: id },
         })
         .catch(() => {});
-    }
+    },
   },
   created() {
     this.medicoService = new MedicoService();
   },
   mounted() {
     this.loadPerfil();
+    this.$store.dispatch("MenuBar/MenuBarDark");
   },
 };
 </script>

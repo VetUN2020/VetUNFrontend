@@ -57,7 +57,12 @@
             <label for="username">Tipo de Veterinaria</label>
           </span>
         </div>
-        <Message severity="warn">¿Tu veterinaria ya esta registrada? agregala a tu perfil <router-link to="/registroVeterinariaExistente">aqui</router-link></Message>
+        <Message severity="warn"
+          >¿Tu veterinaria ya esta registrada? agregala a tu perfil
+          <router-link to="/registroVeterinariaExistente"
+            >aqui</router-link
+          ></Message
+        >
       </template>
       <template slot="footer">
         <Button
@@ -133,9 +138,12 @@ export default {
         this.error = "Todos los campos son obligatorios";
       }
     },
-    agregarVeterinariaExistente(){
+    agregarVeterinariaExistente() {
       this.$router.push("/registroVeterinariaExistente");
-    }
+    },
+  },
+  mounted() {
+    this.$store.dispatch("MenuBar/MenuBarDark");
   },
 };
 </script>

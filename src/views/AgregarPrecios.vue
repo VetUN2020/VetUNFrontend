@@ -94,6 +94,9 @@ export default {
   created() {
     this.medicoService = new MedicoService();
   },
+  mounted() {
+    this.$store.dispatch("MenuBar/MenuBarDark");
+  },
   methods: {
     agregarPrecios() {
       this.preciosMedico = [];
