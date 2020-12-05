@@ -1,5 +1,5 @@
 <template>
-  <div class="registroDueno">
+  <div class="registroDueno fondo">
     <Card
       style="
         margin: 0 auto;

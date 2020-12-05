@@ -1,5 +1,5 @@
 <template>
-  <div class="loginUser">
+  <div class="loginUser fondo">
     <br />
     <Card
       style="
@@ -99,7 +99,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .p-card-body {
   margin-top: 50px;
 }
