@@ -63,50 +63,50 @@
                       <SearchBar />
                     </li>
                     <div v-if="light">
-                    <li class="menu-item">
-                      <b-dropdown
-                        v-bind:text="
-                          $store.state.MenuBar.userAuth.nombreUsuario +
-                            ' ' +
-                            $store.state.MenuBar.userAuth.apellidoUsuario
-                        "
-                        variant="outline-light"
-                        class="m-2 "
-                      >
-                        <b-dropdown-item @click="perfilDueno"
-                          >Perfil</b-dropdown-item
+                      <li class="menu-item">
+                        <b-dropdown
+                          v-bind:text="
+                            $store.state.MenuBar.userAuth.nombreUsuario +
+                              ' ' +
+                              $store.state.MenuBar.userAuth.apellidoUsuario
+                          "
+                          variant="outline-dark"
+                          class="m-2 "
                         >
-                        <b-dropdown-item @click="registrarMascota"
-                          >Registrar mascota</b-dropdown-item
-                        >
-                        <b-dropdown-item @click="signOutDueno"
-                          >Cerrar sesion</b-dropdown-item
-                        >
-                      </b-dropdown>
-                    </li>
+                          <b-dropdown-item @click="perfilDueno"
+                            >Perfil</b-dropdown-item
+                          >
+                          <b-dropdown-item @click="registrarMascota"
+                            >Registrar mascota</b-dropdown-item
+                          >
+                          <b-dropdown-item @click="signOutDueno"
+                            >Cerrar sesion</b-dropdown-item
+                          >
+                        </b-dropdown>
+                      </li>
                     </div>
-                  <div v-else>
-                    <li class="menu-item">
-                      <b-dropdown
-                        v-bind:text="
-                          $store.state.MenuBar.userAuth.nombreUsuario +
-                            ' ' +
-                            $store.state.MenuBar.userAuth.apellidoUsuario
-                        "
-                        variant="outline-dark"
-                        class="m-2 "
-                      >
-                        <b-dropdown-item @click="perfilDueno"
-                          >Perfil</b-dropdown-item
+                    <div v-else>
+                      <li class="menu-item">
+                        <b-dropdown
+                          v-bind:text="
+                            $store.state.MenuBar.userAuth.nombreUsuario +
+                              ' ' +
+                              $store.state.MenuBar.userAuth.apellidoUsuario
+                          "
+                          variant="outline-light"
+                          class="m-2 "
                         >
-                        <b-dropdown-item @click="registrarMascota"
-                          >Registrar mascota</b-dropdown-item
-                        >
-                        <b-dropdown-item @click="signOutDueno"
-                          >Cerrar sesion</b-dropdown-item
-                        >
-                      </b-dropdown>
-                    </li>
+                          <b-dropdown-item @click="perfilDueno"
+                            >Perfil</b-dropdown-item
+                          >
+                          <b-dropdown-item @click="registrarMascota"
+                            >Registrar mascota</b-dropdown-item
+                          >
+                          <b-dropdown-item @click="signOutDueno"
+                            >Cerrar sesion</b-dropdown-item
+                          >
+                        </b-dropdown>
+                      </li>
                     </div>
                   </ul>
                 </nav>
@@ -174,36 +174,88 @@
                       >
                     </li>
                     <div v-if="light">
-                    <li class="menu-item">
-                      <b-dropdown
-                        text="Mi veterinaria"
-                        variant="outline-light"
-                        class="m-2"
-                      >
-                        <b-dropdown-item @click="profileVeterinary"
-                          >Perfil veterinaria</b-dropdown-item
+                      <li class="menu-item">
+                        <b-dropdown
+                          text="Mi veterinaria"
+                          variant="outline-dark"
+                          class="m-2"
                         >
-                        <b-dropdown-item @click="registerVeterinary"
-                          >Registrar nueva veterinaria</b-dropdown-item
-                        >
-                      </b-dropdown>
-                    </li>
+                          <b-dropdown-item @click="profileVeterinary"
+                            >Perfil veterinaria</b-dropdown-item
+                          >
+                          <b-dropdown-item @click="registerVeterinary"
+                            >Registrar nueva veterinaria</b-dropdown-item
+                          >
+                        </b-dropdown>
+                      </li>
                     </div>
-                  <div v-else>
-                    <li class="menu-item">
-                      <b-dropdown
-                        text="Mi veterinaria"
-                        variant="outline-dark"
-                        class="m-2"
-                      >
-                        <b-dropdown-item @click="profileVeterinary"
-                          >Perfil veterinaria</b-dropdown-item
+                    <div v-else>
+                      <li class="menu-item">
+                        <b-dropdown
+                          text="Mi veterinaria"
+                          variant="outline-light"
+                          class="m-2"
                         >
-                        <b-dropdown-item @click="registerVeterinary"
-                          >Registrar nueva veterinaria</b-dropdown-item
+                          <b-dropdown-item @click="profileVeterinary"
+                            >Perfil veterinaria</b-dropdown-item
+                          >
+                          <b-dropdown-item @click="registerVeterinary"
+                            >Registrar nueva veterinaria</b-dropdown-item
+                          >
+                        </b-dropdown>
+                      </li>
+                    </div>
+                    <div v-if="light">
+                      <li class="menu-item">
+                        <b-dropdown
+                          v-bind:text="
+                            $store.state.MenuBar.userAuth.nombreUsuario +
+                              ' ' +
+                              $store.state.MenuBar.userAuth.apellidoUsuario
+                          "
+                          variant="outline-dark"
+                          class="m-2"
                         >
-                      </b-dropdown>
-                    </li>
+                          <b-dropdown-item @click="medicoProfile"
+                            >Perfil</b-dropdown-item
+                          >
+                          <b-dropdown-item @click="agregarHorario"
+                            >Mi horario de atención</b-dropdown-item
+                          >
+                          <b-dropdown-item @click="agregarTipoAtencion"
+                            >Mis tipos de atención</b-dropdown-item
+                          >
+                          <b-dropdown-item @click="signOutDueno"
+                            >Cerrar sesion</b-dropdown-item
+                          >
+                        </b-dropdown>
+                      </li>
+                    </div>
+                    <div v-else>
+                      <li class="menu-item">
+                        <b-dropdown
+                          v-bind:text="
+                            $store.state.MenuBar.userAuth.nombreUsuario +
+                              ' ' +
+                              $store.state.MenuBar.userAuth.apellidoUsuario
+                          "
+                          variant="outline-light"
+                          class="m-2"
+                        >
+                          <b-dropdown-item @click="medicoProfile"
+                            >Perfil</b-dropdown-item
+                          >
+                          <b-dropdown-item @click="agregarHorario"
+                            >Mi horario de atención</b-dropdown-item
+                          >
+                          <b-dropdown-item @click="agregarTipoAtencion"
+                            >Mis tipos de atención</b-dropdown-item
+                          >
+                          <b-dropdown-item @click="signOutDueno"
+                            >Cerrar sesion</b-dropdown-item
+                          >
+                        </b-dropdown>
+                      </li>
                     </div>
                   </ul>
                 </nav>
