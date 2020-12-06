@@ -84,7 +84,7 @@ export default {
             .cambiarContrasenia(this.usuarioContrasenia)
             .then((response) => {
               if (response.status === 202) {
-                this.$router.push("/login");
+                this.$router.push("/loginUser");
                 this.usuarioContrasenia.nuevaContrasena = "";
                 (this.pass = ""),
                   this.$swal({

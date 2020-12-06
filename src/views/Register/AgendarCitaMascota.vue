@@ -18,6 +18,7 @@
           v-model="fecha.fechaCita"
           dateFormat="dd.mm.yy"
           :disabledDays="[0]"
+          :minDate="fechaHoy"
           style="
         margin: 0 auto;
         text-align: center;
@@ -80,7 +81,6 @@ export default {
   name: "agendarCitaMascota",
   data() {
     return {
-      displayBasic: false,
       misMascotas: null,
       mascotaSeleccionada: null,
       citaSeleccionada: null,
@@ -88,6 +88,7 @@ export default {
       tiposAtenciones: [],
       horasDisponibles: null,
       costos: null,
+      fechaHoy: null,
       cita: {
         idMedico: {
           idMedico: null,
@@ -180,12 +181,9 @@ export default {
           this.costos = response.data;
         }
       });
-  },
-  openBasic() {
-    this.displayBasic = true;
-  },
-  closeBasic() {
-    this.displayBasic = false;
+
+    this.fechaHoy = new Date();
+    this.fechaHoy.setDate(this.fechaHoy.getDate() + 1);
   },
 };
 </script>

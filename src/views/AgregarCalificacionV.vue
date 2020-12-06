@@ -99,6 +99,18 @@ export default {
                 timer: 1500,
               });
             }
+          })
+          .catch((error) => {
+            if (error.response.status === 400) {
+              this.$swal({
+                position: "top-end",
+                icon: "error",
+                title:
+                  "No puedes calificar una veterinaria si no has tenido cita con uno de sus medicos",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
           });
       } else {
         this.datosFaltantes = "Datos faltantes";
