@@ -1,133 +1,4 @@
 <template>
-  <!-- <div id="navBarGeneral">
-    <b-navbar toggleable="lg" type="dark" variant="primary">
-      <router-link to="/"
-        ><b-navbar-brand>
-          <img
-            src="../assets/Icono.png"
-            class="d-inline-block align-top"
-            height="50px"/></b-navbar-brand
-      ></router-link>
-
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
-      <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav class="ml-auto">
-          <template v-if="$store.state.MenuBar.userAuth">
-            <template
-              v-if="$store.state.MenuBar.userAuth.rolUsuario === 'DUENO'"
-            >
-              <SearchBar />
-              <b-nav-form>
-                <b-dropdown
-                  id="dropdown-right1"
-                  v-bind:text="
-                    $store.state.MenuBar.userAuth.nombreUsuario +
-                      ' ' +
-                      $store.state.MenuBar.userAuth.apellidoUsuario
-                  "
-                  size="sm"
-                  variant="success"
-                  class="my-2 mr-2 my-sm-3"
-                  right
-                >
-                  <b-dropdown-item @click="perfilDueno">Perfil</b-dropdown-item>
-                  <b-dropdown-item @click="registrarMascota"
-                    >Registrar Mascota</b-dropdown-item
-                  >
-                  <b-dropdown-item @click="citasDueno"
-                    >Mis citas</b-dropdown-item
-                  >
-                  <b-dropdown-item @click="signOutDueno"
-                    >Cerrar sesion</b-dropdown-item
-                  >
-                </b-dropdown>
-              </b-nav-form>
-            </template>
-
-            <template
-              v-else-if="$store.state.MenuBar.userAuth.rolUsuario === 'MEDICO'"
-            >
-              <b-nav-form>
-                <b-button
-                  @click="citasMedico"
-                  variant="success"
-                  size="sm"
-                  class="my-2 mr-2 my-sm-3"
-                  >Mis citas</b-button
-                >
-
-                <b-dropdown
-                  id="dropdown-right2"
-                  text="Mi veterinaria"
-                  size="sm"
-                  variant="success"
-                  class="my-2 mr-2 my-sm-3"
-                  right
-                >
-                  <b-dropdown-item @click="profileVeterinary"
-                    >Perfil veterinaria</b-dropdown-item
-                  >
-                  <b-dropdown-item @click="registerVeterinary"
-                    >Registrar nueva veterinaria</b-dropdown-item
-                  >
-                </b-dropdown>
-
-                <b-dropdown
-                  id="dropdown-right3"
-                  v-bind:text="
-                    $store.state.MenuBar.userAuth.nombreUsuario +
-                      ' ' +
-                      $store.state.MenuBar.userAuth.apellidoUsuario
-                  "
-                  size="sm"
-                  variant="success"
-                  class="my-2 mr-2 my-sm-3"
-                  right
-                >
-                  <b-dropdown-item @click="medicoProfile"
-                    >Perfil</b-dropdown-item
-                  >
-                  <b-dropdown-item @click="agregarHorario"
-                    >Horario de atención</b-dropdown-item
-                  >
-                  <b-dropdown-item @click="signOutMedico"
-                    >Cerrar sesion</b-dropdown-item
-                  >
-                </b-dropdown>
-              </b-nav-form>
-            </template>
-          </template>
-
-          <template v-else>
-            <b-nav-form>
-              <b-dropdown
-                id="sesionInactiva"
-                text="Registrarse"
-                size="sm"
-                variant="success"
-                class="my-2 mr-2 my-sm-3"
-                right
-              >
-                <b-dropdown-item @click="registrarseDueno"
-                  >Dueño</b-dropdown-item
-                >
-                <b-dropdown-item @click="registrarseMedico"
-                  >Medico veterinario</b-dropdown-item
-                >
-              </b-dropdown>
-            </b-nav-form>
-
-            <b-nav-form>
-              <b-button variant="success" size="sm" v-on:click="loginUsuario"
-                >Iniciar sesión</b-button
-              >
-            </b-nav-form>
-          </template>
-        </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
-  </div> -->
   <div class="navBarGeneral">
     <template v-if="$store.state.MenuBar.userAuth">
       <template v-if="$store.state.MenuBar.userAuth.rolUsuario === 'DUENO'">
@@ -191,6 +62,7 @@
                     <li class="menu-item">
                       <SearchBar />
                     </li>
+                    <div v-if="light">
                     <li class="menu-item">
                       <b-dropdown
                         v-bind:text="
@@ -199,7 +71,7 @@
                             $store.state.MenuBar.userAuth.apellidoUsuario
                         "
                         variant="outline-light"
-                        class="m-2"
+                        class="m-2 "
                       >
                         <b-dropdown-item @click="perfilDueno"
                           >Perfil</b-dropdown-item
@@ -212,6 +84,30 @@
                         >
                       </b-dropdown>
                     </li>
+                    </div>
+                  <div v-else>
+                    <li class="menu-item">
+                      <b-dropdown
+                        v-bind:text="
+                          $store.state.MenuBar.userAuth.nombreUsuario +
+                            ' ' +
+                            $store.state.MenuBar.userAuth.apellidoUsuario
+                        "
+                        variant="outline-dark"
+                        class="m-2 "
+                      >
+                        <b-dropdown-item @click="perfilDueno"
+                          >Perfil</b-dropdown-item
+                        >
+                        <b-dropdown-item @click="registrarMascota"
+                          >Registrar mascota</b-dropdown-item
+                        >
+                        <b-dropdown-item @click="signOutDueno"
+                          >Cerrar sesion</b-dropdown-item
+                        >
+                      </b-dropdown>
+                    </li>
+                    </div>
                   </ul>
                 </nav>
                 <!-- #primary-menu end -->
@@ -277,6 +173,7 @@
                         ><div>Mis citas</div></a
                       >
                     </li>
+                    <div v-if="light">
                     <li class="menu-item">
                       <b-dropdown
                         text="Mi veterinaria"
@@ -291,30 +188,23 @@
                         >
                       </b-dropdown>
                     </li>
+                    </div>
+                  <div v-else>
                     <li class="menu-item">
                       <b-dropdown
-                        v-bind:text="
-                          $store.state.MenuBar.userAuth.nombreUsuario +
-                            ' ' +
-                            $store.state.MenuBar.userAuth.apellidoUsuario
-                        "
-                        variant="outline-light"
+                        text="Mi veterinaria"
+                        variant="outline-dark"
                         class="m-2"
                       >
-                        <b-dropdown-item @click="medicoProfile"
-                          >Perfil</b-dropdown-item
+                        <b-dropdown-item @click="profileVeterinary"
+                          >Perfil veterinaria</b-dropdown-item
                         >
-                        <b-dropdown-item @click="agregarHorario"
-                          >Mi horario de atención</b-dropdown-item
-                        >
-                        <b-dropdown-item @click="agregarTipoAtencion"
-                          >Mis tipos de atención</b-dropdown-item
-                        >
-                        <b-dropdown-item @click="signOutDueno"
-                          >Cerrar sesion</b-dropdown-item
+                        <b-dropdown-item @click="registerVeterinary"
+                          >Registrar nueva veterinaria</b-dropdown-item
                         >
                       </b-dropdown>
                     </li>
+                    </div>
                   </ul>
                 </nav>
                 <!-- #primary-menu end -->
