@@ -18,6 +18,7 @@
               type="text"
               v-model="duenoPOJO.username"
               style="width: 100%"
+              @click="borrarErrores"
             />
             <label for="username">Nombre de usuario</label>
           </span>
@@ -31,6 +32,7 @@
               mode="decimal"
               :useGrouping="false"
               style="width: 100%"
+              @click="borrarErrores"
             />
             <label for="username">Cedula</label>
           </span>
@@ -43,6 +45,7 @@
               type="text"
               v-model="duenoPOJO.nombreDueno"
               style="width: 100%"
+              @click="borrarErrores"
             />
             <label for="username">Nombre</label>
           </span>
@@ -55,6 +58,7 @@
               type="text"
               v-model="duenoPOJO.apellidoDueno"
               style="width: 100%"
+              @click="borrarErrores"
             />
             <label for="username">Apellido</label>
           </span>
@@ -68,6 +72,7 @@
               mode="decimal"
               :useGrouping="false"
               style="width: 100%"
+              @click="borrarErrores"
             />
             <label for="username">Telefono</label>
           </span>
@@ -80,6 +85,7 @@
               type="text"
               v-model="duenoPOJO.direccionDueno"
               style="width: 100%"
+              @click="borrarErrores"
             />
             <label for="username">Direccion</label>
           </span>
@@ -92,6 +98,7 @@
               type="text"
               v-model="duenoPOJO.correoElectronico"
               style="width: 100%"
+              @click="borrarErrores"
             />
             <label for="correo">Correo electronico</label>
           </span>
@@ -103,6 +110,7 @@
               id="contrasenia"
               v-model="duenoPOJO.password"
               style="width: 100%"
+              @click="borrarErrores"
             />
             <label for="contrasenia">Contraseña</label>
           </span>
@@ -114,6 +122,7 @@
               id="verificar-contrasenia"
               v-model="pass"
               style="width: 100%"
+              @click="borrarErrores"
             />
             <label for="verificar-contrasenia"
               >Ingrese otra vez la contraseña</label
@@ -173,6 +182,10 @@ export default {
     this.$store.dispatch("MenuBar/MenuBarDark");
   },
   methods: {
+    borrarErrores() {
+      this.error = null;
+      this.correoExistente = null;
+    },
     save() {
       if (
         this.duenoPOJO.username &&
@@ -205,16 +218,17 @@ export default {
                 timer: 1500,
               });
               this.$router.push("/loginUser");
-            } else {
-              this.error = "";
-              this.correoExistente = "Cedula o correo ya existentes";
             }
-          });
+          })
+          .catch((error) => {
+              if (error.response.status === 400) {
+                this.correoExistente = "El correo ya existe";
+              }
+            });
         } else {
           this.error = "Las contraseñas no coinciden";
         }
       } else {
-        this.correoExistente = "";
         this.error = "Todos los campos son obligatorios";
       }
     },
