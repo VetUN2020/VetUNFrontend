@@ -1,10 +1,11 @@
 <template>
-  <div class="registroDueno">
+  <div class="registroDueno fondo">
+    <!-- <br /><br /> -->
     <Card
       style="
         margin: 0 auto;
         text-align: center;
-        width: 25rem;
+        width: 27rem;
         margin-bottom: 2em;
       "
     >
@@ -168,6 +169,9 @@ export default {
   created() {
     this.duenoService = new DuenoService();
   },
+  mounted() {
+    this.$store.dispatch("MenuBar/MenuBarDark");
+  },
   methods: {
     save() {
       if (
@@ -218,4 +222,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.p-card {
+  padding: 1rem !important;
+  padding-top: 0.5rem;
+}
+</style>

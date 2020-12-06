@@ -1,6 +1,5 @@
 <template>
-  <div class="loginUser">
-    <br />
+  <div class="loginUser fondo">
     <Card
       style="
         margin: 0 auto;
@@ -43,7 +42,12 @@
         </div>
       </template>
       <template slot="footer">
-        <Button label="Iniciar sesión" @click="login" icon="pi pi-check" />
+        <Button
+          label="Iniciar sesión"
+          class="p-button"
+          @click="login"
+          icon="pi pi-check"
+        />
         <br />
       </template>
     </Card>
@@ -72,6 +76,9 @@ export default {
   created() {
     this.usuarioService = new UsuarioService();
   },
+  mounted() {
+    this.$store.dispatch("MenuBar/MenuBarDark");
+  },
   methods: {
     async login() {
       this.usuarioService
@@ -99,8 +106,17 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .p-card-body {
   margin-top: 50px;
+}
+.p-button {
+  background-color: #1abc9c !important;
+  color: #f8f9fa !important;
+  border-color: #1abc9c !important;
+}
+.p-card {
+  padding: 1rem !important;
+  padding-top: 0.5rem;
 }
 </style>

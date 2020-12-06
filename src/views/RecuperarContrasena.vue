@@ -1,5 +1,5 @@
 <template>
-  <div class="recuperarContrasena">
+  <div class="recuperarContrasena fondo">
     <Card
       style="
         margin: 0 auto;
@@ -46,6 +46,9 @@ export default {
   usuarioService: null,
   created() {
     this.usuarioService = new UsuarioService();
+  },
+  mounted() {
+    this.$store.dispatch("MenuBar/MenuBarDark");
   },
   methods: {
     enviarLink() {

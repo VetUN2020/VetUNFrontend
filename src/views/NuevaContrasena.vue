@@ -1,5 +1,5 @@
 <template>
-  <div class="nuevaContrasena">
+  <div class="nuevaContrasena fondo">
     <Card
       style="
         margin: 0 auto;
@@ -62,6 +62,19 @@ export default {
   created() {
     this.usuarioService = new UsuarioService();
   },
+  mounted() {
+    this.$store.dispatch("MenuBar/MenuBarDark");
+    if (this.$route.query.token == "") {
+      this.$router.push("/");
+      this.$swal({
+        position: "top-end",
+        icon: "warning",
+        title: "El token no es valido",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  },
   methods: {
     cambiarContrasenia() {
       if (this.usuarioContrasenia.nuevaContrasena && this.pass) {
@@ -71,7 +84,7 @@ export default {
             .cambiarContrasenia(this.usuarioContrasenia)
             .then((response) => {
               if (response.status === 202) {
-                this.$router.push("/login");
+                this.$router.push("/loginUser");
                 this.usuarioContrasenia.nuevaContrasena = "";
                 (this.pass = ""),
                   this.$swal({

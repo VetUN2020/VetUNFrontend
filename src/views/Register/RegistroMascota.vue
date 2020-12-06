@@ -1,5 +1,5 @@
 <template>
-  <div class="registroMascota">
+  <div class="registroMascota fondo">
     <br />
     <Card
       style="
@@ -89,6 +89,9 @@ export default {
   created() {
     this.mascotaServ = new MascotaService();
     this.datosFaltantes = null;
+  },
+  mounted() {
+    this.$store.dispatch("MenuBar/MenuBarDark");
   },
   methods: {
     save() {

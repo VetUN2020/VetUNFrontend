@@ -53,6 +53,12 @@ export default {
         });
       }
 
+      // add behavior control
+      new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+
+      // add UI
+      const ui = H.ui.UI.createDefault(map, maptypes);
+
       if (this.veterinarias.length > 0) {
         this.veterinarias.forEach((veterinaria) => {
           service.geocode(
@@ -62,7 +68,22 @@ export default {
             (result) => {
               // Add a marker for each location found
               result.items.forEach((item) => {
-                map.addObject(new H.map.Marker(item.position));
+                const marker1 = new H.map.Marker(item.position);
+                marker1.setData(this.infoVet(veterinaria));
+                marker1.addEventListener(
+                  "tap",
+                  (event) => {
+                    const bubble = new H.ui.InfoBubble(
+                      event.target.getGeometry(),
+                      {
+                        content: event.target.getData(),
+                      }
+                    );
+                    ui.addBubble(bubble);
+                  },
+                  false
+                );
+                map.addObject(marker1);
               });
             },
             alert
@@ -85,12 +106,19 @@ export default {
 
       addEventListener("resize", () => map.getViewPort().resize());
 
-      // add UI
-      H.ui.UI.createDefault(map, maptypes);
       // End rendering the initial map
+    },
+    infoVet(veterinaria) {
+      let titulo = "<h6><b>" + veterinaria.nombreVeterinaria + "</b></h6>";
+      let separacion = "<br />";
+      let telefono =
+        "<p> Telefono: " + veterinaria.telefonoVeterinaria + "</p>";
+      let link =
+        '<p> <a href="http://localhost:8080/veterinariaProfile?idVeterinaria=' +
+        veterinaria.idVeterinaria +
+        '" target="_blank"> Link </a> </p>';
 
-      // add behavior control
-      new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+      return titulo + separacion + telefono + link;
     },
   },
 };

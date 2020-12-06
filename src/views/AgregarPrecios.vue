@@ -1,5 +1,5 @@
 <template>
-  <div class="agregarPrecios">
+  <div class="agregarPrecios fondo">
     <Card
       style="
         margin: 0 auto;
@@ -93,6 +93,9 @@ export default {
   medicoService: null,
   created() {
     this.medicoService = new MedicoService();
+  },
+  mounted() {
+    this.$store.dispatch("MenuBar/MenuBarDark");
   },
   methods: {
     agregarPrecios() {

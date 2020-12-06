@@ -1,13 +1,7 @@
 <template>
   <div id="app">
     <MenuBar />
-    <div id="router">
-      <!-- <br />
-    <br />
-    <br />
-    <br /> -->
-      <router-view />
-    </div>
+    <router-view />
   </div>
 </template>
 
@@ -25,8 +19,13 @@ export default {
 };
 </script>
 
-<style scoped>
-#router {
-  padding-top: 80px;
+<style>
+.fondo {
+  margin-top: -5px;
+  padding-top: 50px;
+  height: 100vh;
+  /* background-image: url("https://c8.alamy.com/compes/mxaxf6/vector-patron-sin-fisuras-con-huellas-de-huellas-de-animales-puede-utilizarse-para-papel-tapiz-de-fondo-de-la-pagina-web-las-texturas-de-la-superficie-10-eps-mxaxf6.jpg"); */
+  background: url("./assets/background.jpg");
+  background-size: cover;
 }
 </style>
