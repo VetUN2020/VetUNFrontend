@@ -284,7 +284,7 @@
                         class="m-2"
                       >
                         <b-dropdown-item @click="profileVeterinary"
-                          >perfil veterinaria</b-dropdown-item
+                          >Perfil veterinaria</b-dropdown-item
                         >
                         <b-dropdown-item @click="registerVeterinary"
                           >Registrar nueva veterinaria</b-dropdown-item
@@ -302,7 +302,7 @@
                         class="m-2"
                       >
                         <b-dropdown-item @click="medicoProfile"
-                          >perfil</b-dropdown-item
+                          >Perfil</b-dropdown-item
                         >
                         <b-dropdown-item @click="agregarHorario"
                           >Mi horario de atención</b-dropdown-item

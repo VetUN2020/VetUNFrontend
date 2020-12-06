@@ -4,13 +4,13 @@
       <div class="main-body">
         <br /><br />
         <template v-if="perfilMedico">
-          <div class="row gutters-sm">
-            <div class="col-md-4 mb-3">
-              <div class="card">
+          <div class="row justify-content-sm-center justify-content-xs-center">
+              <div class="card mb-5" style="width: 80%;">
                 <div class="card-body">
                   <div
                     class="d-flex flex-column align-items-center text-center"
                   >
+                  <div class="col-lg-auto">
                     <img
                       id="profilePic"
                       src="@/assets/veterinario.jpg"
@@ -26,42 +26,8 @@
                     </div>
                   </div>
                   <br />
-                  <div
-                    class="d-flex flex-column align-items-center text-center"
-                  >
-                    <Button
-                      v-if="
-                        $store.state.MenuBar.userAuth.rolUsuario === 'DUENO'
-                      "
-                      label="Agendar cita"
-                      class="p-button-rounded
-                    p-button-success"
-                      @click="agendarCitaMascota()"
-                    />
-                    <Button
-                      v-if="
-                        $store.state.MenuBar.userAuth.rolUsuario === 'DUENO'
-                      "
-                      label="Comentario"
-                      class="p-button-rounded mt-2 p-button-success"
-                      @click="calificarVeterinario()"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-8">
-              <div class="card mb-3">
-                <div class="card-body">
+                  <div class="col-md-8">
                   <!--Cedula-->
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <h6 class="mb-0 text-primary">Cedula</h6>
-                    </div>
-                    <div class="col-sm-8 text-secondary">
-                      {{ perfilMedico.cedulaMedico }}
-                    </div>
-                  </div>
 
                   <!--Direccion-->
                   <hr />
@@ -118,12 +84,35 @@
                       {{ perfilMedico.usuarioMedico }}
                     </div>
                   </div>
+                  <br>
+                  <div
+                    class="flex-row align-items-center text-center row justify-content-around"
+                  >
+                    <Button
+                      v-if="
+                        $store.state.MenuBar.userAuth.rolUsuario === 'DUENO'
+                      "
+                      label="Agendar cita"
+                      class="col-4 p-button-rounded
+                    p-button-success"
+                      @click="agendarCitaMascota()"
+                    />
+                    <Button
+                      v-if="
+                        $store.state.MenuBar.userAuth.rolUsuario === 'DUENO'
+                      "
+                      label="Comentario"
+                      class="col-4 p-button-rounded p-button-success"
+                      @click="calificarVeterinario()"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <h3 class="text-right mb-2">Comentarios y calificaciones</h3>
-          <div class="row gutters-sm mt-2">
+          </div>
+          <h3 class="text-center mb-4">Comentarios y calificaciones</h3>
+          <div class="row justify-content-sm-center justify-content-xs-cente" style="width: 80%;">
             <div
               v-for="calificacion in calificaciones"
               :key="calificacion.idComentarioMedico"
@@ -220,3 +209,8 @@ export default {
   },
 };
 </script>
+<style  scoped>
+.p-button{
+  background:#1abc9c !important;
+}
+</style>
