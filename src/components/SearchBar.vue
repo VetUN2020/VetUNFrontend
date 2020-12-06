@@ -150,8 +150,9 @@ export default {
 .search-results {
   background-color: rgb(40, 40, 40);
   position: absolute;
-  top: 55px;
+  top: 45px;
   width: 23vw;
+  padding: 10px;
 }
 .input {
   border-radius: 4px;
@@ -162,5 +163,8 @@ export default {
   border: 2px solid #1abc9c;
   border-radius: 4px;
   box-sizing: border-box;
+}
+li{
+  margin-left: 20px;
 }
 </style>
