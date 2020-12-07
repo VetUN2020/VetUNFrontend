@@ -104,7 +104,7 @@ export default {
         if (this.checked[i] === true) {
           let costo = {
             idAtencion: { idAtencion: i + 1 },
-            costo: this.value[i],
+            costoA: this.value[i],
           };
           this.preciosMedico.push(costo);
         }

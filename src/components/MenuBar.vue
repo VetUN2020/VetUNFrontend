@@ -62,7 +62,7 @@
                     <li class="menu-item">
                       <SearchBar />
                     </li>
-                    <div v-if="light">
+                    <div v-if="$store.state.MenuBar.light">
                       <li class="menu-item">
                         <b-dropdown
                           v-bind:text="
@@ -173,7 +173,7 @@
                         ><div>Mis citas</div></a
                       >
                     </li>
-                    <div v-if="light">
+                    <div v-if="$store.state.MenuBar.light">
                       <li class="menu-item">
                         <b-dropdown
                           text="Mi veterinaria"
@@ -205,7 +205,7 @@
                         </b-dropdown>
                       </li>
                     </div>
-                    <div v-if="light">
+                    <div v-if="$store.state.MenuBar.light">
                       <li class="menu-item">
                         <b-dropdown
                           v-bind:text="
@@ -326,7 +326,7 @@
                     >
                   </li>
 
-                  <div v-if="light">
+                  <div v-if="$store.state.MenuBar.light">
                     <li class="menu-item">
                       <b-dropdown
                         text="Unete a nosotros"
@@ -384,9 +384,7 @@ export default {
     SearchBar,
   },
   data() {
-    return {
-      light: false,
-    };
+    return {};
   },
   methods: {
     controlNav() {
@@ -394,14 +392,11 @@ export default {
       if (this.$store.state.MenuBar.homePage) {
         if (desplazamiento_Actual >= 1 && desplazamiento_Actual < 400) {
           //Miniscroll
-          this.light = true;
           this.$store.dispatch("MenuBar/MenuBarMiniScroll");
         } else if (desplazamiento_Actual >= 400) {
           //fullscroll
-          this.light = true;
           this.$store.dispatch("MenuBar/MenuBarFullScroll");
         } else {
-          this.light = false;
           this.$store.dispatch("MenuBar/MenuBarInvisible");
         }
       } else {

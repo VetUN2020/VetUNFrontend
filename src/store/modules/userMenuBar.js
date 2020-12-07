@@ -10,6 +10,7 @@ export default {
       scrollL: false,
     },
     homePage: true,
+    light: false,
   },
   mutations: {
     SET_USER(state, user) {
@@ -24,18 +25,21 @@ export default {
       state.scroll.scrollF = true;
       state.scroll.scrollL = false;
       state.homePage = true;
+      state.light = false;
     },
     NAV_MINI_SCROLL(state) {
       state.scroll.scrollT = false;
       state.scroll.scrollM = true;
       state.scroll.scrollF = false;
       state.scroll.scrollL = false;
+      state.light = true;
     },
     NAV_FULL_SCROLL(state) {
       state.scroll.scrollT = true;
       state.scroll.scrollM = false;
       state.scroll.scrollF = false;
       state.scroll.scrollL = false;
+      state.light = true;
     },
     NAV_DARK_SCROLL(state) {
       state.scroll.scrollT = false;
@@ -43,6 +47,7 @@ export default {
       state.scroll.scrollF = false;
       state.scroll.scrollL = true;
       state.homePage = false;
+      state.light = false;
     },
   },
   actions: {
