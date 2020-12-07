@@ -6,7 +6,7 @@ import loginMedicoModule from "./modules/loginMedico";
 import userMenuBar from "./modules/userMenuBar";
 import perfilDuenoModule from "./modules/perfilDueno";
 
-axios.defaults.baseURL = "http://localhost:9050/";
+axios.defaults.baseURL = "http://localhost:9000/";
 
 Vue.use(Vuex);
 
