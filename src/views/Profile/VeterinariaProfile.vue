@@ -103,7 +103,7 @@
         <h3 class="text-center mb-2">Comentarios y calificaciones</h3>
         <div
           class="row justify-content-sm-center justify-content-xs-cente"
-          style="width: 80%;"
+          style="width: 100%;"
         >
           <div
             v-for="calificacion in calificaciones"
