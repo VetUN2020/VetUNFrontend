@@ -45,15 +45,36 @@
         <Button
           label="Iniciar sesión"
           class="p-button"
-          @click="login"
+          @click="sendCode"
           icon="pi pi-check"
         />
         <br />
+        <br />
+        <ProgressSpinner v-if="spinner" />
       </template>
     </Card>
     <Message severity="error" v-if="datosIncorrectos">{{
       datosIncorrectos
     }}</Message>
+    <Dialog
+      header="Verificación doble factor"
+      :visible="displayBasic"
+      :style="{ width: '50vw' }"
+    >
+      <p>
+        Ingrese el codigo de validación que fue enviado a su correo
+      </p>
+      <InputText
+        id="secret"
+        type="text"
+        v-model="userCode.secret"
+        v-on:keyup.enter="verifyCode"
+        style="width: 50%"
+      />
+      <template #footer>
+        <Button label="Yes" icon="pi pi-check" @click="verifyCode" autofocus />
+      </template>
+    </Dialog>
   </div>
 </template>
 
@@ -70,6 +91,12 @@ export default {
         password: null,
       },
       datosIncorrectos: null,
+      displayBasic: false,
+      userCode: {
+        username: null,
+        secret: null,
+      },
+      spinner: false,
     };
   },
   usuarioService: null,
@@ -80,6 +107,35 @@ export default {
     this.$store.dispatch("MenuBar/MenuBarDark");
   },
   methods: {
+    async sendCode() {
+      this.spinner = true;
+      this.usuarioService.sendTwoFactor(this.user).then((response) => {
+        if (response.status !== 202) {
+          this.spinner = false;
+          alert("Usuario no encontrado");
+        } else {
+          this.spinner = false;
+          this.displayBasic = true;
+          this.userCode.username = this.user.username;
+        }
+      });
+    },
+    async verifyCode() {
+      this.usuarioService
+        .verifyTwoFactor(this.userCode)
+        .then((response) => {
+          if (response.status !== 202) {
+            alert("Codigo no valido");
+          } else {
+            this.displayBasic = false;
+            this.login();
+          }
+        })
+        .catch((error) => {
+          console.log(error.response.status);
+          alert("Codigo no valido");
+        });
+    },
     async login() {
       this.usuarioService
         .login(this.user)

@@ -23,6 +23,7 @@ import InputSwitch from "primevue/inputswitch";
 import Listbox from "primevue/listbox";
 import Carousel from "primevue/carousel";
 import Rating from "primevue/rating";
+import ProgressSpinner from "primevue/progressspinner";
 
 import "@fullcalendar/daygrid/main.min.css";
 import "@fullcalendar/timegrid/main.min.css";
@@ -64,7 +65,7 @@ Vue.component("InputSwitch", InputSwitch);
 Vue.component("Listbox", Listbox);
 Vue.component("Carousel", Carousel);
 Vue.component("Rating", Rating);
-
+Vue.component("ProgressSpinner", ProgressSpinner);
 Vue.component("b-navbar", BNavbar);
 Vue.component("b-form", BForm);
 Vue.component("b-modal", BModal);
