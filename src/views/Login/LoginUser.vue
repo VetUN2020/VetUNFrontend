@@ -58,7 +58,8 @@
     }}</Message>
     <Dialog
       header="Verificación doble factor"
-      :visible="displayBasic"
+      :visible.sync="displayBasic"
+      closable="true"
       :style="{ width: '50vw' }"
     >
       <p>
