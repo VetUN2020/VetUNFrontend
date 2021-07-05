@@ -5,8 +5,8 @@ export default class MedicoService {
     return axios.get("medicos");
   }
 
-  agregarMedico(medico) {
-    return axios.post("registro/nuevo-medico/", medico);
+  agregarMedico(medico, response) {
+    return axios.post("registro/nuevo-medico/", medico, {params: {response: response}});
   }
 
   login(medico) {

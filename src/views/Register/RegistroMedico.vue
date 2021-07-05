@@ -1,3 +1,5 @@
+<script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" async defer>
+</script>
 <template>
   <div class="registroMedico fondo">
     <Message severity="error" :closable="false" v-if="error">{{
@@ -146,8 +148,21 @@
             <label for="contrasenia">Ingrese otra vez la contraseña</label>
           </span>
         </div>
+        <br>
+        <div>
+          <vue-recaptcha
+              ref="recaptcha"
+              @verify="onVerify"
+              @expired="onCaptchaExpired"
+              :loadRecaptchaScript="true"
+              sitekey="6LfutXIbAAAAALkzHNix-qqYKIW9ViSXGZmcV8jy"
+              class="captcha"
+            ></vue-recaptcha>
+        </div>
       </template>
       <template slot="footer">
+        <ProgressBar v-if="load" mode="indeterminate" style="height: .5em" />
+        <br v-if="load">
         <Button
           label="Registrarse"
           class="p-button-rounded p-button-success"
@@ -161,11 +176,14 @@
 <script>
 // @ is an alias to /src
 import MedicoService from "@/service/MedicoService";
+import VueRecaptcha from 'vue-recaptcha';
 
 export default {
   name: "registroMedico",
+  components: { "vue-recaptcha": VueRecaptcha },
   data() {
     return {
+      load: false,
       medico: {
         username: null,
         password: null,
@@ -176,6 +194,7 @@ export default {
         direccionMedico: null,
         telefonoMedico: null,
         matriculaProfesional: null,
+        token: false
       },
       pass: null,
       error: null,
@@ -190,6 +209,14 @@ export default {
     this.$store.dispatch("MenuBar/MenuBarDark");
   },
   methods: {
+    onVerify(response) {
+      if (response) {
+        this.medico.token = response;
+      }
+    },
+    onCaptchaExpired() {
+      this.$refs.recaptcha.reset();
+    },
     borrarErrores() {
       this.error = null;
       this.correoExistente = null;
@@ -208,35 +235,42 @@ export default {
         this.pass
       ) {
         if (this.medico.password === this.pass) {
-          this.medicoService
-            .agregarMedico(this.medico)
-            .then((data) => {
-              if (data.status === 201) {
-                this.medico = {
-                  cedulaMedico: null,
-                  nombreMedico: null,
-                  apellidoMedico: null,
-                  direccionResidencia: null,
-                  telefonoMedico: null,
-                  matriculaProfesional: null,
-                  correoMedico: null,
-                  contraseniaMedico: null,
-                };
-                this.$swal({
-                  position: "top-end",
-                  icon: "success",
-                  title: "Te has registrado correctamente",
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
-                this.$router.push("/loginUser");
-              }
-            })
-            .catch((error) => {
-              if (error.response.status === 400) {
-                this.correoExistente = "El correo ya existe";
-              }
-            });
+          if(this.medico.token){
+            this.load = true;
+            this.medicoService
+              .agregarMedico(this.medico, this.medico.token)
+              .then((data) => {
+                if (data.status === 201) {
+                  this.medico = {
+                    cedulaMedico: null,
+                    nombreMedico: null,
+                    apellidoMedico: null,
+                    direccionResidencia: null,
+                    telefonoMedico: null,
+                    matriculaProfesional: null,
+                    correoMedico: null,
+                    contraseniaMedico: null,
+                  };
+                  this.$swal({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Te has registrado correctamente",
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+                  this.load = false;
+                  this.$router.push("/loginUser");
+                }
+              })
+              .catch((error) => {
+                if (error.response.status === 400) {
+                  this.load = false;
+                  this.correoExistente = "El correo o cedula ya esta registrado o fallo la verificacion del catpcha";
+                }
+              });
+          }else{
+            this.error = "Verifica que no eres un robot por favor";
+          }
         } else {
           this.error = "Las contraseñas no coinciden";
         }
