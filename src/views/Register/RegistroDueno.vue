@@ -1,3 +1,5 @@
+<script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" async defer>
+</script>
 <template>
   <div class="registroDueno fondo">
     <!-- <br /><br /> -->
@@ -129,8 +131,21 @@
             >
           </span>
         </div>
+        <br>
+        <div>
+          <vue-recaptcha
+              ref="recaptcha"
+              @verify="onVerify"
+              @expired="onCaptchaExpired"
+              :loadRecaptchaScript="true"
+              sitekey="6LfutXIbAAAAALkzHNix-qqYKIW9ViSXGZmcV8jy"
+              class="captcha"
+            ></vue-recaptcha>
+        </div>
       </template>
       <template slot="footer">
+        <ProgressBar v-if="load" mode="indeterminate" style="height: .5em" />
+        <br v-if="load">
         <Button
           label="Registrarse"
           class="p-button-rounded p-button-success"
@@ -154,11 +169,14 @@
 <script>
 // @ is an alias to /src
 import DuenoService from "@/service/DuenoService";
+import VueRecaptcha from 'vue-recaptcha';
 
 export default {
   name: "RegistroDueno",
+  components: { "vue-recaptcha": VueRecaptcha },
   data() {
     return {
+      load: false,
       duenoPOJO: {
         username: null,
         password: null,
@@ -168,6 +186,7 @@ export default {
         apellidoDueno: null,
         telefonoDueno: null,
         direccionDueno: null,
+        token: false
       },
       pass: null,
       error: null,
@@ -182,6 +201,15 @@ export default {
     this.$store.dispatch("MenuBar/MenuBarDark");
   },
   methods: {
+    onVerify(response) {
+      if (response) {
+        console.log("el capthca ", response)
+        this.duenoPOJO.token = response;
+      }
+    },
+    onCaptchaExpired() {
+      this.$refs.recaptcha.reset();
+    },
     borrarErrores() {
       this.error = null;
       this.correoExistente = null;
@@ -198,33 +226,40 @@ export default {
         this.duenoPOJO.direccionDueno
       ) {
         if (this.duenoPOJO.password === this.pass) {
-          this.duenoService.agregarDueno(this.duenoPOJO).then((data) => {
-            if (data.status === 201) {
-              this.duenoPOJO = {
-                username: null,
-                password: null,
-                correoElectronico: null,
-                cedulaDueno: null,
-                nombreDueno: null,
-                apellidoDueno: null,
-                telefonoDueno: null,
-                direccionDueno: null,
-              };
-              this.$swal({
-                position: "top-end",
-                icon: "success",
-                title: "Te has registrado correctamente",
-                showConfirmButton: false,
-                timer: 1500,
-              });
-              this.$router.push("/loginUser");
-            }
-          })
-          .catch((error) => {
-              if (error.response.status === 400) {
-                this.correoExistente = "El correo ya existe";
+          if(this.duenoPOJO.token){
+            this.load = true;
+            this.duenoService.agregarDueno(this.duenoPOJO, this.duenoPOJO.token).then((data) => {
+              if (data.status === 201) {
+                this.duenoPOJO = {
+                  username: null,
+                  password: null,
+                  correoElectronico: null,
+                  cedulaDueno: null,
+                  nombreDueno: null,
+                  apellidoDueno: null,
+                  telefonoDueno: null,
+                  direccionDueno: null,
+                };
+                this.$swal({
+                  position: "top-end",
+                  icon: "success",
+                  title: "Te has registrado correctamente",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                this.load = false
+                this.$router.push("/loginUser");
               }
-            });
+            })
+            .catch((error) => {
+                if (error.response.status === 400) {
+                  this.load = false
+                  this.correoExistente = "El correo ya existe";
+                }
+              });
+          }else{
+            this.error = "El correo o cedula ya esta registrado o fallo la verificacion del catpcha";
+          }
         } else {
           this.error = "Las contraseñas no coinciden";
         }
