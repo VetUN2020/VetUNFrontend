@@ -22,6 +22,14 @@ export default class UsuarioService {
     );
   }
 
+  sendTwoFactor(user) {
+    return axios.post("sendtwofactor", user);
+  }
+
+  verifyTwoFactor(verification) {
+    return axios.post("verifytwofactor", verification);
+  }
+
   menuBarUser() {
     return axios.post("usuario", {
       params: {
